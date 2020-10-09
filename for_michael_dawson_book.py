@@ -172,75 +172,220 @@
 #          scores.sort(reverse=True)
 #     else: print('Wrong Input:', choise)
 
-# Pages 152-159
-voc_codes = {
-    '404': 'Page not found',
-    '502': 'Bad Gateway',
-    '200': 'OK',
-    '202': 'Accepted',
-    '301': 'Moved Permanently',
-    '302': 'Moved Temporarily',
-    '000': 'Prepare for unforeseen consequences...'
-}
-# # Two types of request to the voc_codes
-# if '404' in voc_codes: print(voc_codes['404'])
-# else: print('Wrong Code !')
-# This is much faster
+# # Pages 152-159
+# voc_codes = {
+#     '404': 'Page not found',
+#     '502': 'Bad Gateway',
+#     '200': 'OK',
+#     '202': 'Accepted',
+#     '301': 'Moved Permanently',
+#     '302': 'Moved Temporarily',
+#     '000': 'Prepare for unforeseen consequences...'
+# }
+# # # Two types of request to the voc_codes
+# # if '404' in voc_codes: print(voc_codes['404'])
+# # else: print('Wrong Code !')
+# # This is much faster
+#
+# choise = None
+# while choise != '0':
+#     print(
+#         '''
+#         Menu:
+#
+#         0 - Exit
+#         1 - Find Code explanation
+#         2 - Add Code
+#         3 - Change Explanation of Code
+#         4 - Delete Code
+#         '''
+#     )
+#     choise = input('What to do: ')
+#     # exit
+#     if choise == '0':
+#         print('End of Prog.')
+#
+#     # CRUD ops with voc
+#     # read
+#     elif choise == '1':
+#         user_code_read = input('Input ХХХ Code or 0 for Previous Menu: ')
+#         voc_answer = ''
+#         while user_code_read != '0' or voc_answer == 'Wrong Code !':
+#             voc_answer = voc_codes.get(user_code_read, 'Wrong Code !')
+#             print(voc_answer)
+#             voc_answer = ''
+#             user_code_read = input('Input ХХХ Code: ')
+#     # create
+#     elif choise == '2':
+#         user_code_add = input('Input New ХХХ Code: ')
+#         if user_code_add not in voc_codes:
+#             user_descr_add = input('Enter description for the Code: ')
+#             voc_codes[user_code_add] = user_descr_add
+#             print('Code', user_code_add, 'added to the vault.')
+#         else:
+#             print('Code', user_code_add, 'already exists.')
+#     # update
+#     elif choise == '3':
+#         user_code_upd = input('Input XXX Code for update: ')
+#         if user_code_upd in voc_codes:
+#             user_descr_upd = input('Input New description for the Code: ')
+#             voc_codes[user_code_upd] = user_descr_upd
+#             print('Description Update complete.')
+#         else:
+#             print('There is no Code', user_code_upd, 'at the Database.')
+#     # delete
+#     elif choise == '4':
+#         user_code_del = input('Enter the Code for Delete: ')
+#         if user_code_del in voc_codes:
+#             del voc_codes[user_code_del]
+#             print('Code', user_code_del, 'was Deleted from the Database.')
+#         else:
+#             print('There is no Code', user_code_del, 'at the Database.')
+#     else:
+#         print('Wrong Input !')
+#         input('Press Enter for Exit.')
+#
 
-choise = None
-while choise != '0':
-    print(
-        '''
-        Menu:
+# Page 159- 164
+# hangman game
+import random
+HANGMAN = (
+'''
+ ------
+ |    |
+ |
+ |
+ |
+ |
+ |
+ |
+ |
+----------
+''',
+'''
+ ------
+ |    |
+ |    O
+ |
+ |
+ |
+ |
+ |
+ |
+----------
+''',
+'''
+ ------
+ |    |
+ |    O
+ |   -+-
+ | 
+ |   
+ |   
+ |   
+ |   
+----------
+''',
+'''
+ ------
+ |    |
+ |    O
+ |  /-+-
+ |   
+ |   
+ |   
+ |   
+ |   
+----------
+''',
+'''
+ ------
+ |    |
+ |    O
+ |  /-+-/
+ |   
+ |   
+ |   
+ |   
+ |   
+----------
+''',
+'''
+ ------
+ |    |
+ |    O
+ |  /-+-/
+ |    |
+ |   
+ |   
+ |   
+ |   
+----------
+''',
+'''
+ ------
+ |    |
+ |    O
+ |  /-+-/
+ |    |
+ |    |
+ |   | 
+ |   | 
+ |   
+----------
+''',
+'''
+ ------
+ |    |
+ |    O
+ |  /-+-/
+ |    |
+ |    |
+ |   | |
+ |   | |
+ |  
+----------
+''')
+FAIL = len(HANGMAN) - 1
+WORDS = ('ubuntu', 'keyboard', 'microcontroller', 'pcb', 'sql')
+word = random.choice(WORDS)
+hidden_word = '#' * len(word)
+mistakes = 0
+user_used_letters = []
 
-        0 - Exit
-        1 - Find Code explanation
-        2 - Add Code
-        3 - Change Explanation of Code
-        4 - Delete Code
-        '''
-    )
-    choise = input('What to do: ')
-    # exit
-    if choise == '0':
-        print('End of Prog.')
+# Gameplay
+while mistakes < FAIL and hidden_word != word:
+    print(HANGMAN[mistakes])
+    print('You already checked letters: \n', user_used_letters)
+    print('\n Your current Word looks like: ', hidden_word)
 
-    # CRUD ops with voc
-    # read
-    elif choise == '1':
-        user_code_read = input('Input ХХХ Code or 0 for Previous Menu: ')
-        voc_answer = ''
-        while user_code_read != '0' or voc_answer == 'Wrong Code !':
-            voc_answer = voc_codes.get(user_code_read, 'Wrong Code !')
-            print(voc_answer)
-            voc_answer = ''
-            user_code_read = input('Input ХХХ Code: ')
-    # create
-    elif choise == '2':
-        user_code_add = input('Input New ХХХ Code: ')
-        if user_code_add not in voc_codes:
-            user_descr_add = input('Enter description for the Code: ')
-            voc_codes[user_code_add] = user_descr_add
-            print('Code', user_code_add, 'added to the vault.')
-        else:
-            print('Code', user_code_add, 'already exists.')
-    # update
-    elif choise == '3':
-        user_code_upd = input('Input XXX Code for update: ')
-        if user_code_upd in voc_codes:
-            user_descr_upd = input('Input New description for the Code: ')
-            voc_codes[user_code_upd] = user_descr_upd
-            print('Description Update complete.')
-        else:
-            print('There is no Code', user_code_upd, 'at the Database.')
-    # delete
-    elif choise == '4':
-        user_code_del = input('Enter the Code for Delete: ')
-        if user_code_del in voc_codes:
-            del voc_codes[user_code_del]
-            print('Code', user_code_del, 'was Deleted from the Database.')
-        else:
-            print('There is no Code', user_code_del, 'at the Database.')
+    # Letter Input check for repeat and store
+    user_letter = input('Enter Letter: ')
+    user_letter = user_letter.lower()
+    while user_letter in user_used_letters:
+        print('You used this letter before')
+        user_letter = input('Enter another Letter: ')
+        user_letter = user_letter.lower()
+    user_used_letters.append(user_letter)
+
+    # Letter check for contain in word
+    if user_letter in word:
+        print('Congrats ! Letter', user_letter, 'is in this Word.')
+        new = ''
+        for i in range(len(word)):
+            if user_letter == word[i]:
+                new += user_letter
+            else:
+                new += hidden_word[i]
+        hidden_word = new
     else:
-        print('Wrong Input !')
-        input('Press Enter for Exit.')
+        print('There is no letter', user_letter, 'in this word.')
+        mistakes += 1
+
+# END OF GAME
+if mistakes == FAIL:
+    print(HANGMAN[mistakes])
+    print('You were Hanged')
+else:
+    print('You have done ! Congrats !')
+input('Press Enter for Exit')
