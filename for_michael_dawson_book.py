@@ -126,46 +126,121 @@
 # del inventory[:2]
 # print(inventory)
 
-# Page 142
-scores = []
-choise = None
+# # Page 142
 
+
+# scores = []
+# choise = None
+#
+# while choise != '0':
+#     print(
+#     '''
+#     0 - Exit
+#     1 - Show All records
+#     2 - Show Top 5 records
+#     3 - Add record
+#     4 - Del Record
+#     5 - Sort all
+#     '''
+#     )
+#     choise = input('What you want to do: ')
+#     if choise == '0':
+#         print('See you later')
+#     elif choise == '1':
+#         print('All Records:')
+#         print('Name \t Score')
+#         for record in scores:
+#             score, name = record
+#             print(name,'\t',score)
+#     elif choise == '2':
+#         print('Top 5 Scores:')
+#         for record in scores[:5]:
+#             score, name = record
+#             print(name,'\t',score)
+#     elif choise == '3':
+#         name = input("Enter Name of the Player: ")
+#         score = int(input("Input Score: "))
+#         record = (score, name)
+#         scores.append(record)
+#     # still dont know how to del element of cell in list
+#     # elif choise =='4':
+#     #     score = int(input('Which record do you want to DEL: '))
+#     #     if score in scores:
+#     #         scores.remove(score)
+#     #     else: print('I cant find right score')
+#     elif choise == '5':
+#          scores.sort(reverse=True)
+#     else: print('Wrong Input:', choise)
+
+# Pages 152-159
+voc_codes = {
+    '404': 'Page not found',
+    '502': 'Bad Gateway',
+    '200': 'OK',
+    '202': 'Accepted',
+    '301': 'Moved Permanently',
+    '302': 'Moved Temporarily',
+    '000': 'Prepare for unforeseen consequences...'
+}
+# # Two types of request to the voc_codes
+# if '404' in voc_codes: print(voc_codes['404'])
+# else: print('Wrong Code !')
+# This is much faster
+
+choise = None
 while choise != '0':
     print(
-    '''
-    0 - Exit
-    1 - Show All records
-    2 - Show Top 5 records
-    3 - Add record
-    4 - Del Record
-    5 - Sort all
-    '''
+        '''
+        Menu:
+
+        0 - Exit
+        1 - Find Code explanation
+        2 - Add Code
+        3 - Change Explanation of Code
+        4 - Delete Code
+        '''
     )
-    choise = input('What you want to do: ')
+    choise = input('What to do: ')
+    # exit
     if choise == '0':
-        print('See you later')
+        print('End of Prog.')
+
+    # CRUD ops with voc
+    # read
     elif choise == '1':
-        print('All Records:')
-        print('Name \t Score')
-        for record in scores:
-            score, name = record
-            print(name,'\t',score)
+        user_code_read = input('Input ХХХ Code or 0 for Previous Menu: ')
+        voc_answer = ''
+        while user_code_read != '0' or voc_answer == 'Wrong Code !':
+            voc_answer = voc_codes.get(user_code_read, 'Wrong Code !')
+            print(voc_answer)
+            voc_answer = ''
+            user_code_read = input('Input ХХХ Code: ')
+    # create
     elif choise == '2':
-        print('Top 5 Scores:')
-        for record in scores[:5]:
-            score, name = record
-            print(name,'\t',score)
+        user_code_add = input('Input New ХХХ Code: ')
+        if user_code_add not in voc_codes:
+            user_descr_add = input('Enter description for the Code: ')
+            voc_codes[user_code_add] = user_descr_add
+            print('Code', user_code_add, 'added to the vault.')
+        else:
+            print('Code', user_code_add, 'already exists.')
+    # update
     elif choise == '3':
-        name = input("Enter Name of the Player: ")
-        score = int(input("Input Score: "))
-        record = (score, name)
-        scores.append(record)
-    # still dont know how to del element of cell in list
-    # elif choise =='4':
-    #     score = int(input('Which record do you want to DEL: '))
-    #     if score in scores:
-    #         scores.remove(score)
-    #     else: print('I cant find right score')
-    elif choise == '5':
-         scores.sort(reverse=True)
-    else: print('Wrong Input:', choise)
+        user_code_upd = input('Input XXX Code for update: ')
+        if user_code_upd in voc_codes:
+            user_descr_upd = input('Input New description for the Code: ')
+            voc_codes[user_code_upd] = user_descr_upd
+            print('Description Update complete.')
+        else:
+            print('There is no Code', user_code_upd, 'at the Database.')
+    # delete
+    elif choise == '4':
+        user_code_del = input('Enter the Code for Delete: ')
+        if user_code_del in voc_codes:
+            del voc_codes[user_code_del]
+            print('Code', user_code_del, 'was Deleted from the Database.')
+        else:
+            print('There is no Code', user_code_del, 'at the Database.')
+    else:
+        print('Wrong Input !')
+        input('Press Enter for Exit.')
