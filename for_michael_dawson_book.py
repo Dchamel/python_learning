@@ -248,144 +248,200 @@
 
 # Page 159- 164
 # hangman game
-import random
-HANGMAN = (
-'''
- ------
- |    |
- |
- |
- |
- |
- |
- |
- |
-----------
-''',
-'''
- ------
- |    |
- |    O
- |
- |
- |
- |
- |
- |
-----------
-''',
-'''
- ------
- |    |
- |    O
- |   -+-
- | 
- |   
- |   
- |   
- |   
-----------
-''',
-'''
- ------
- |    |
- |    O
- |  /-+-
- |   
- |   
- |   
- |   
- |   
-----------
-''',
-'''
- ------
- |    |
- |    O
- |  /-+-/
- |   
- |   
- |   
- |   
- |   
-----------
-''',
-'''
- ------
- |    |
- |    O
- |  /-+-/
- |    |
- |   
- |   
- |   
- |   
-----------
-''',
-'''
- ------
- |    |
- |    O
- |  /-+-/
- |    |
- |    |
- |   | 
- |   | 
- |   
-----------
-''',
-'''
- ------
- |    |
- |    O
- |  /-+-/
- |    |
- |    |
- |   | |
- |   | |
- |  
-----------
-''')
-FAIL = len(HANGMAN) - 1
-WORDS = ('ubuntu', 'keyboard', 'microcontroller', 'pcb', 'sql')
-word = random.choice(WORDS)
-hidden_word = '#' * len(word)
-mistakes = 0
-user_used_letters = []
+# import random
+# HANGMAN = (
+# '''
+#  ------
+#  |    |
+#  |
+#  |
+#  |
+#  |
+#  |
+#  |
+#  |
+# ----------
+# ''',
+# '''
+#  ------
+#  |    |
+#  |    O
+#  |
+#  |
+#  |
+#  |
+#  |
+#  |
+# ----------
+# ''',
+# '''
+#  ------
+#  |    |
+#  |    O
+#  |   -+-
+#  |
+#  |
+#  |
+#  |
+#  |
+# ----------
+# ''',
+# '''
+#  ------
+#  |    |
+#  |    O
+#  |  /-+-
+#  |
+#  |
+#  |
+#  |
+#  |
+# ----------
+# ''',
+# '''
+#  ------
+#  |    |
+#  |    O
+#  |  /-+-/
+#  |
+#  |
+#  |
+#  |
+#  |
+# ----------
+# ''',
+# '''
+#  ------
+#  |    |
+#  |    O
+#  |  /-+-/
+#  |    |
+#  |
+#  |
+#  |
+#  |
+# ----------
+# ''',
+# '''
+#  ------
+#  |    |
+#  |    O
+#  |  /-+-/
+#  |    |
+#  |    |
+#  |   |
+#  |   |
+#  |
+# ----------
+# ''',
+# '''
+#  ------
+#  |    |
+#  |    O
+#  |  /-+-/
+#  |    |
+#  |    |
+#  |   | |
+#  |   | |
+#  |
+# ----------
+# ''')
+# FAIL = len(HANGMAN) - 1
+# WORDS = ('ubuntu', 'keyboard', 'microcontroller', 'pcb', 'sql')
+# word = random.choice(WORDS)
+# hidden_word = '#' * len(word)
+# mistakes = 0
+# user_used_letters = []
+#
+# # Gameplay
+# while mistakes < FAIL and hidden_word != word:
+#     print(HANGMAN[mistakes])
+#     print('You already checked letters: \n', user_used_letters)
+#     print('\n Your current Word looks like: ', hidden_word)
+#
+#     # Letter Input check for repeat and store
+#     user_letter = input('Enter Letter: ')
+#     user_letter = user_letter.lower()
+#     while user_letter in user_used_letters:
+#         print('You used this letter before')
+#         user_letter = input('Enter another Letter: ')
+#         user_letter = user_letter.lower()
+#     user_used_letters.append(user_letter)
+#
+#     # Letter check for contain in word
+#     if user_letter in word:
+#         print('Congrats ! Letter', user_letter, 'is in this Word.')
+#         new = ''
+#         for i in range(len(word)):
+#             if user_letter == word[i]:
+#                 new += user_letter
+#             else:
+#                 new += hidden_word[i]
+#         hidden_word = new
+#     else:
+#         print('There is no letter', user_letter, 'in this word.')
+#         mistakes += 1
+#
+# # END OF GAME
+# if mistakes == FAIL:
+#     print(HANGMAN[mistakes])
+#     print('You were Hanged')
+# else:
+#     print('You have done ! Congrats !')
+# input('Press Enter for Exit')
 
-# Gameplay
-while mistakes < FAIL and hidden_word != word:
-    print(HANGMAN[mistakes])
-    print('You already checked letters: \n', user_used_letters)
-    print('\n Your current Word looks like: ', hidden_word)
+# Page 164 tasks
+# Task 1
 
-    # Letter Input check for repeat and store
-    user_letter = input('Enter Letter: ')
-    user_letter = user_letter.lower()
-    while user_letter in user_used_letters:
-        print('You used this letter before')
-        user_letter = input('Enter another Letter: ')
-        user_letter = user_letter.lower()
-    user_used_letters.append(user_letter)
+# import random
+# words = ['Life', 'kovid', 'Price', 'trance', 'yellow', 'headphones']
 
-    # Letter check for contain in word
-    if user_letter in word:
-        print('Congrats ! Letter', user_letter, 'is in this Word.')
-        new = ''
-        for i in range(len(word)):
-            if user_letter == word[i]:
-                new += user_letter
-            else:
-                new += hidden_word[i]
-        hidden_word = new
-    else:
-        print('There is no letter', user_letter, 'in this word.')
-        mistakes += 1
+# long ver the same
+# user_word_list = []
+# for _ in range(len(words)):
+#     chosen_word_index = random.randint(0, len(words)-1)
+#     user_word_list.append(words[chosen_word_index])
+#     del words[chosen_word_index]
+# print(user_word_list)
 
-# END OF GAME
-if mistakes == FAIL:
-    print(HANGMAN[mistakes])
-    print('You were Hanged')
-else:
-    print('You have done ! Congrats !')
-input('Press Enter for Exit')
+# shorter the same
+# for _ in range(len(words)):
+#     i = random.choice(words)
+#     print(i)
+#     words.remove(i)
+
+# the same with while
+# while words:
+#     i = random.choice(words)
+#     print(i)
+#     words.remove(i)
+
+# Character points selector for the RPG
+# Here i decided to filter Input and i found in Google some new things
+# for the exception handling. There is no this 'Try-Except' construction
+# before Page 164 and Functions too, but it`s does not matter
+# Google is not forbidden while you reading books ;)
+# P.S. don`t throw cats in me because of missing ValueError
+# I just don`t know what the point in this yet
+points = 30
+atributes = [['Strength',0],['Health',0],['Withdom',0],['Agility',0]]
+def getatribs():
+    print('Your free points:',points)
+    print('1.',atributes[0][0],' - ',atributes[0][1])
+    print('2.',atributes[1][0],' - ',atributes[1][1])
+    print('3.',atributes[2][0],' - ',atributes[2][1])
+    print('4.',atributes[3][0],' - ',atributes[3][1])
+getatribs()
+chosen_atr = ''
+while chosen_atr != 0:
+    try: chosen_atr = int(input('Input number of what do you want to chose or 0 for exit: '))
+    except: continue
+    if chosen_atr == 0:
+        break
+    while True:
+        try: points_added = int(input('How many Points do you want to spent: '))
+        except: continue
+        break
+    atributes[chosen_atr-1][1] = points_added
+    points -= points_added
+    getatribs()
