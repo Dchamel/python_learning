@@ -24,3 +24,6 @@ name = 'Shon'
 print(name)
 print('Hello,',name)
 
+#p59 Personal Hello
+name = input('What`s your name, bro ?')
+print('Hello,',name)
