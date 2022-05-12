@@ -12,7 +12,7 @@ while i < 10:
     print(i)
 
 # p87
-Battle Game
+# Battle Game
 health = 100
 trolls = 1
 damage = 7
