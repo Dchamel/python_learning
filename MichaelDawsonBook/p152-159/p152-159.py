@@ -52,7 +52,7 @@ while choice != '0':
                         codes[term] = descr
                         print(f'Code {term} has been changed')
                 else:
-                        print('There`s no such code in our DB')The deletion was completed successfully
+                        print('There`s no such code in our DB')
         elif choice == '4':
                 term = input('Enter Code for Change')
                 if term in codes:
