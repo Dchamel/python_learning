@@ -20,6 +20,7 @@ for i in newList:
     print(i)
 
 # task2
+# test for global dictionary
 characteristics = {'strength':0,'health':0,'wisdom':0,'agility':0}
 points = 30
 choice = None
