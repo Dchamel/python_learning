@@ -23,6 +23,23 @@ for i in newList:
 # test for global dictionary
 characteristics = {'strength':0,'health':0,'wisdom':0,'agility':0}
 points = 30
+
+menu1 = '''What do you want to do?
+0 - Exit
+1 - Change characteristics
+2 - Reset characteristics'''
+
+menu2 = '''What do you want to change ?
+1 - Strength
+2 - Health
+3 - Wisdom
+4 - Agility
+0 - Back'''
+
+menu3 = '''What do you want to do?
+1 - Add points
+2 - Del points
+0 - Back'''
 print ('\n========================= Welcome ! =========================')
 
 print(f'''Your Characteristics is:
@@ -32,9 +49,36 @@ Wisdom: {characteristics['wisdom']}
 Agility: {characteristics['agility']}
 ''')
 choice = '0'
-while choice != '0':
-    print('''What do you want to do?
-    0 - Exit
-    1 - Change characteristics
-    2 - Reset characteristics
-    ''')
+while choice == '0':
+    print(menu1)
+    choice = input('Enter choice: ')
+    if choice == '1':
+        choice2 = '0'
+        print(menu2)
+        choice2 = input('Enter choice: ')
+        if choice2 == '0':
+            break
+        elif choice2 == '1':
+            choice3 = '0'
+            print(menu3)
+            choice3 = input('Enter choice: ')
+
+
+        elif choice2 == '2':
+            choice3 = '0'
+            print(menu3)
+            choice3 = input('Enter choice: ')
+        elif choice2 == '3':
+            choice3 = '0'
+            print(menu3)
+            choice3 = input('Enter choice: ')
+        elif choice2 == '4':
+            choice3 = '0'
+            print(menu3)
+            choice3 = input('Enter choice: ')
+    elif choice == '2':
+        characteristics = {'strength':0,'health':0,'wisdom':0,'agility':0}
+    elif choice == '0':
+        break
+    else:
+        print('Wrong input.')
