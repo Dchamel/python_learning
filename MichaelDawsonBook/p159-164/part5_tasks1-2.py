@@ -62,8 +62,6 @@ while choice == '0':
             choice3 = '0'
             print(menu3)
             choice3 = input('Enter choice: ')
-
-
         elif choice2 == '2':
             choice3 = '0'
             print(menu3)
