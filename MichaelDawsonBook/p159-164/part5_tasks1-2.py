@@ -25,9 +25,9 @@ characteristics = {'strength':0,'health':0,'wisdom':0,'agility':0}
 points = 30
 
 menu1 = '''What do you want to do?
-0 - Exit
 1 - Change characteristics
-2 - Reset characteristics'''
+2 - Reset characteristics
+0 - Exit'''
 
 menu2 = '''What do you want to change ?
 1 - Strength
@@ -48,33 +48,44 @@ Health: {characteristics['health']}
 Wisdom: {characteristics['wisdom']}
 Agility: {characteristics['agility']}
 ''')
-choice = '0'
-while choice == '0':
+def changePoints (choice2, choice3, points, characteristics):
+    points
+    return points, characteristics
+
+choice = ''
+while choice != '0':
     print(menu1)
     choice = input('Enter choice: ')
     if choice == '1':
-        choice2 = '0'
-        print(menu2)
-        choice2 = input('Enter choice: ')
-        if choice2 == '0':
-
-            break
-        elif choice2 == '1':
-            choice3 = '0'
-            print(menu3)
-            choice3 = input('Enter choice: ')
-        elif choice2 == '2':
-            choice3 = '0'
-            print(menu3)
-            choice3 = input('Enter choice: ')
-        elif choice2 == '3':
-            choice3 = '0'
-            print(menu3)
-            choice3 = input('Enter choice: ')
-        elif choice2 == '4':
-            choice3 = '0'
-            print(menu3)
-            choice3 = input('Enter choice: ')
+        choice2 = ''
+        while choice2 != '0':
+            print(menu2)
+            choice2 = input('Enter choice: ')
+            if choice2 == '0':
+                continue
+            elif choice2 == '1':
+                choice3 = '0'
+                while choice3 != '0':
+                    print(menu3)
+                    choice3 = input('Enter choice: ')
+                    if choice3 == '0':
+                        continue
+                    elif choice3 == '1' or choice3 == '2':
+                        changePoints(choice2,choice3,points,characteristics)
+                    else:
+                        print('Wrong input.')
+            elif choice2 == '2':
+                choice3 = '0'
+                print(menu3)
+                choice3 = input('Enter choice: ')
+            elif choice2 == '3':
+                choice3 = '0'
+                print(menu3)
+                choice3 = input('Enter choice: ')
+            elif choice2 == '4':
+                choice3 = '0'
+                print(menu3)
+                choice3 = input('Enter choice: ')
     elif choice == '2':
         characteristics = {'strength':0,'health':0,'wisdom':0,'agility':0}
     elif choice == '0':
