@@ -42,15 +42,50 @@ menu3 = '''What do you want to do?
 0 - Back'''
 print ('\n========================= Welcome ! =========================')
 
-print(f'''Your Characteristics is:
-Strength: {characteristics['strength']}
-Health: {characteristics['health']}
-Wisdom: {characteristics['wisdom']}
-Agility: {characteristics['agility']}
-''')
-def changePoints (choice2, choice3, points, characteristics):
-    points
-    return points, characteristics
+# characteristicsShow =f'''Your Characteristics is:
+# Strength: {characteristics['strength']}
+# Health: {characteristics['health']}
+# Wisdom: {characteristics['wisdom']}
+# Agility: {characteristics['agility']}
+# '''
+def characteristicsShow():
+    print('')
+    print(f"Your Strength is: {characteristics['strength']}")
+    print(f"Your Health is: {characteristics['health']}")
+    print(f"Your Wisdom is: {characteristics['wisdom']}")
+    print(f"Your Agility is: {characteristics['agility']}")
+    print(f"Your Free points: {points}")
+    print('')
+
+def changePoints(choice2, choice3):
+    global points
+    userInputPoints = int(input(f'Input points to {"add" if int(choice3) == 1 else "del"}: '))
+    if choice3 == '1': #add
+        if choice2 == '1': #strength
+            characteristics['strength'] += userInputPoints
+            points -= userInputPoints
+        elif choice2 == '2': #health
+            characteristics['health'] += userInputPoints
+            points -= userInputPoints
+        elif choice2 == '3':  #wisdom
+            characteristics['wisdom'] += userInputPoints
+            points -= userInputPoints
+        elif choice2 == '4':  #agility
+            characteristics['agility'] += userInputPoints
+            points -= userInputPoints
+    elif choice3 == '2':  # del
+        if choice2 == '1':  # strength
+            characteristics['strength'] -= userInputPoints
+            points += userInputPoints
+        elif choice2 == '2':  # health
+            characteristics['health'] -= userInputPoints
+            points += userInputPoints
+        elif choice2 == '3':  # wisdom
+            characteristics['wisdom'] -= userInputPoints
+            points += userInputPoints
+        elif choice2 == '4':  # agility
+            characteristics['agility'] -= userInputPoints
+            points += userInputPoints
 
 choice = ''
 while choice != '0':
@@ -59,36 +94,61 @@ while choice != '0':
     if choice == '1':
         choice2 = ''
         while choice2 != '0':
+            characteristicsShow()
             print(menu2)
             choice2 = input('Enter choice: ')
             if choice2 == '0':
                 continue
             elif choice2 == '1':
-                choice3 = '0'
+                choice3 = ''
                 while choice3 != '0':
                     print(menu3)
                     choice3 = input('Enter choice: ')
                     if choice3 == '0':
                         continue
                     elif choice3 == '1' or choice3 == '2':
-                        changePoints(choice2,choice3,points,characteristics)
+                        changePoints(choice2,choice3)
                     else:
                         print('Wrong input.')
             elif choice2 == '2':
-                choice3 = '0'
-                print(menu3)
-                choice3 = input('Enter choice: ')
+                choice3 = ''
+                while choice3 != '0':
+                    print(menu3)
+                    choice3 = input('Enter choice: ')
+                    if choice3 == '0':
+                        continue
+                    elif choice3 == '1' or choice3 == '2':
+                        changePoints(choice2,choice3)
+                    else:
+                        print('Wrong input.')
             elif choice2 == '3':
-                choice3 = '0'
-                print(menu3)
-                choice3 = input('Enter choice: ')
+                choice3 = ''
+                while choice3 != '0':
+                    print(menu3)
+                    choice3 = input('Enter choice: ')
+                    if choice3 == '0':
+                        continue
+                    elif choice3 == '1' or choice3 == '2':
+                        changePoints(choice2, choice3)
+                    else:
+                        print('Wrong input.')
             elif choice2 == '4':
-                choice3 = '0'
-                print(menu3)
-                choice3 = input('Enter choice: ')
+                choice3 = ''
+                while choice3 != '0':
+                    print(menu3)
+                    choice3 = input('Enter choice: ')
+                    if choice3 == '0':
+                        continue
+                    elif choice3 == '1' or choice3 == '2':
+                        changePoints(choice2, choice3)
+                    else:
+                        print('Wrong input.')
     elif choice == '2':
         characteristics = {'strength':0,'health':0,'wisdom':0,'agility':0}
     elif choice == '0':
         break
     else:
         print('Wrong input.')
+
+characteristicsShow()
+print(points)
