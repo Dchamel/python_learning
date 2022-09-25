@@ -17,6 +17,7 @@ def openFile(fileName, mode):
 def nextLine(file):
     '''Read and prepare another string from the file'''
     line = file.readline()
+    line = line.replace('/', '\n')
     return line
 
 def nextBlock(file):
@@ -31,7 +32,7 @@ def nextBlock(file):
     return category, question, answers, correct, explanation
 
 def welcome(title):
-    '''Welcoms Player'''
+    '''Welcomes Player'''
     print('Welcome to the Trivia game\n')
     print(f'\t\t{title}\n')
 
@@ -40,6 +41,28 @@ def main():
     title = 'Let`s the battle begin!'
     welcome(title)
     score = 0
+    category, question, answers, correct, explanation = nextBlock(file)
+    while category:
+        print(category)
+        print(question)
+        for i in range(4):
+            print(f'\t{i+1} - {answers[i]}')
+        answer = input('Input your suggestion(Number): ')
+        print(type(answer), answer)
+        print(type(correct), correct)
+        if answer == correct:
+            print('You`re right !')
+            score += 1
+        else:
+            print('You`re wrong')
+        print(explanation)
+        print(f'Score: {score}\n')
+        category, question, answers, correct, explanation = nextBlock(file)
+    file.close()
+    print('It was the last question !')
+    print(f'Your total score: {score}')
 
+main()
+input('Press Enter for Exit')
 
 
