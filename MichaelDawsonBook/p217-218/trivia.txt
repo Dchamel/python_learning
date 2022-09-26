@@ -5,7 +5,7 @@ Mercury
 Earth
 Venus
 1
-12
+2
 Of course Mars ! Next step of the humanity ? Go Elon !
 Heaviest Elements
 The most heavy element of the Mendeleev periodic table in 2022 ?
@@ -14,7 +14,7 @@ Darmstadtium
 Oganesson
 Osmium
 3
-44
+4
 Oganesson is a synthetic chemical element with the symbol Og and atomic number 118. It was first synthesized in 2002 at the Joint Institute for Nuclear Research (JINR) in Dubna. It's cool that you've learned something new, right?
 Books
 How many books are in the Witcher series by Andrzej Sapkowski ?
@@ -23,5 +23,5 @@ Nine
 Eight
 Ten
 3
-1234
+3
 Eight!(p.s. Witcher is my favourite book) Season of Storms "Sezon burz"(in Polish) was the last one
