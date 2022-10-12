@@ -1,3 +1,6 @@
+from time import perf_counter
+t1 = perf_counter()
+
 #Cards v2.0
 class Card(object):
     '''One Card'''
@@ -88,3 +91,22 @@ print(yourHand)
 
 myHand.clear()
 print(myHand)
+
+deck1 = Deck()
+deck1.populate()
+deck1.shuffle()
+print(f'New Card Deck has been created:\n{deck1}')
+myHand = Hand()
+yourHand = Hand()
+hands = [myHand, yourHand]
+deck1.deal(hands, perHand=5)
+deck1.clear()
+print(deck1)
+print('All cards have been dealt')
+print(f'My Hand: {myHand}\nYour Hand: {yourHand}')
+
+
+
+t2 = perf_counter()
+print(f'{t2-t1:.5f} sec')
+
