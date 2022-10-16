@@ -1,7 +1,7 @@
 from time import perf_counter
 t1 = perf_counter()
 
-#Cards v2.0
+#Cards v3.0
 class Card(object):
     '''One Card'''
     RANKS = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
@@ -64,6 +64,13 @@ class UnprintableCard(Card):
     '''A Card that won't reveal its rank or suit when printed.'''
     def __str__(self):
         return 'Unprintable Card'
+
+class PositionableCard(Card):
+    '''A card that can be placed face up or down.'''
+    def __init__(self, rank, suit, faceUp = True):
+        super(PositionableCard ,self).__init__(rank, suit)
+        self.isFaceUp = faceUp
+
 
 
 qwe = UnprintableCard(rank='A', suit='c')
