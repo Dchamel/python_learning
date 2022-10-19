@@ -1,19 +1,24 @@
 import unittest
 from time import perf_counter
+
 t1 = perf_counter()
 
-#Cards v3.0
+
+# Cards v3.0
 class Card(object):
     '''One Card'''
-    RANKS = ['A','2','3','4','5','6','7','8','9','10','J','Q','K']
-    #c - clubs(крести),d - diamonds(буби), h - hearts(червы), s - spades(пики)
-    SUITS = ['c','d','h','s']
+    RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
+    # c - clubs(крести),d - diamonds(буби), h - hearts(червы), s - spades(пики)
+    SUITS = ['c', 'd', 'h', 's']
+
     def __init__(self, rank, suit):
         self.rank = rank
         self.suit = suit
+
     def __str__(self):
         rep = self.rank + self.suit
         return rep
+
 
 class Hand(object):
     '''Hand - the cards in player's hand that he/she is available to play '''
@@ -40,8 +45,10 @@ class Hand(object):
         self.cards.remove(card)
         otherHand.add(card)
 
+
 class Deck(Hand):
     '''Deck of playing cards'''
+
     def populate(self):
         self.cards = []
         for suit in Card.SUITS:
@@ -52,7 +59,7 @@ class Deck(Hand):
         import random
         random.shuffle(self.cards)
 
-    def deal(self, hands, perHand = 1):
+    def deal(self, hands, perHand=1):
         for rounds in range(perHand):
             for hand in hands:
                 if self.cards:
@@ -61,24 +68,24 @@ class Deck(Hand):
                 else:
                     print('Can\'t deal cards anymore. The cards are over.')
 
+
 class UnprintableCard(Card):
     '''A Card that won't reveal its rank or suit when printed.'''
+
     def __str__(self):
         return 'Unprintable Card'
 
+
 class PositionableCard(Card):
     '''A card that can be placed face up or down.'''
-    def __init__(self, rank, suit, faceUp = True):
-        super(PositionableCard ,self).__init__(rank, suit)
-        self.isFaceUp = faceUp
 
+    def __init__(self, rank, suit, faceUp=True):
+        super(PositionableCard, self).__init__(rank, suit)
+        self.isFaceUp = faceUp
 
 
 qwe = UnprintableCard(rank='A', suit='c')
 print(qwe)
-
-
-
 
 card1 = Card(rank='A', suit='c')
 print(card1)
@@ -117,8 +124,5 @@ print(deck1)
 print('All cards have been dealt')
 print(f'My Hand: {myHand}\nYour Hand: {yourHand}')
 
-
-
 t2 = perf_counter()
-print(f'{t2-t1:.5f} sec')
-
+print(f'{t2 - t1:.5f} sec')
