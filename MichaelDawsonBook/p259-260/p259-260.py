@@ -84,6 +84,28 @@ class PositionableCard(Card):
         self.isFaceUp = faceUp
 
 
+#Test Section
+class AllTestsCards(unittest.TestCase):
+
+    def setUp(self):
+        pass
+
+    def test_Card(self):
+        actual = Card(rank='A', suit='c')
+        expected = 'Ac'
+        self.assertEqual(actual.__str__(), expected)
+
+    def test_Hand(self):
+        card1 = Card(rank='A', suit='c')
+        card2 = Card(rank='2', suit='c')
+        hand_test = Hand()
+        hand_test.add(card1)
+        hand_test.add(card2)
+        actual = hand_test.__str__().strip()
+        expected = 'Ac 2c'
+        self.assertEqual(actual, expected)
+
+
 qwe = UnprintableCard(rank='A', suit='c')
 print(qwe)
 
