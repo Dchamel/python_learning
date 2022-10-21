@@ -88,7 +88,21 @@ class PositionableCard(Card):
 class AllTestsCards(unittest.TestCase):
 
     def setUp(self):
-        pass
+        #for test_Card
+        self.card1 = Card(rank='A', suit='c')
+        self.card2 = Card(rank='2', suit='c')
+
+        #for test_Hand
+        self.hand_test = Hand()
+        self.hand_test.add(card1)
+        self.hand_test.add(card2)
+
+        #for test_Deck
+        self.hand_test1 = Hand()
+        self.hand_test2 = Hand()
+        self.deck_test = Deck()
+        self.deck_test.populate()
+        self.hands_test = [self.hand_test1, self.hand_test2]
 
     def test_Card(self):
         actual = Card(rank='A', suit='c')
@@ -96,14 +110,25 @@ class AllTestsCards(unittest.TestCase):
         self.assertEqual(actual.__str__(), expected)
 
     def test_Hand(self):
-        card1 = Card(rank='A', suit='c')
-        card2 = Card(rank='2', suit='c')
-        hand_test = Hand()
-        hand_test.add(card1)
-        hand_test.add(card2)
-        actual = hand_test.__str__().strip()
+        actual = self.hand_test.__str__().strip()
         expected = 'Ac 2c'
         self.assertEqual(actual, expected)
+
+    def test_Deck_populate(self):
+        actual = len(self.deck_test.cards)
+        expected = 52
+        self.assertEqual(actual, expected)
+
+    def test_Deck_deal(self):
+        self.deck_test.deal(self.hands_test, perHand=4)
+        actual1 = self.hand_test1.__str__().strip()
+        expected1 = 'Ac 3c 5c 7c'
+        self.assertEqual(actual1, expected1)
+
+        actual2 = self.hand_test2.__str__().strip()
+        expected2 = '2c 4c 6c 8c'
+        self.assertEqual(actual2, expected2)
+
 
 
 qwe = UnprintableCard(rank='A', suit='c')
@@ -135,7 +160,7 @@ print(myHand)
 
 deck1 = Deck()
 deck1.populate()
-deck1.shuffle()
+# deck1.shuffle()
 print(f'New Card Deck has been created:\n{deck1}')
 myHand = Hand()
 yourHand = Hand()
