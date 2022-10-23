@@ -83,6 +83,16 @@ class PositionableCard(Card):
         super(PositionableCard, self).__init__(rank, suit)
         self.isFaceUp = faceUp
 
+    def __str__(self):
+        if self.isFaceUp:
+            rep = super(PositionableCard, self).__str__()
+        else:
+            rep = 'XX'
+        return rep
+
+    def flip(self):
+        self.isFaceUp = not self.isFaceUp
+
 
 #Test Section
 class AllTestsCards(unittest.TestCase):
