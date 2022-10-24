@@ -79,9 +79,9 @@ class UnprintableCard(Card):
 class PositionableCard(Card):
     '''A card that can be placed face up or down.'''
 
-    def __init__(self, rank, suit, faceUp=True):
+    def __init__(self, rank, suit, isfaceUp=True):
         super(PositionableCard, self).__init__(rank, suit)
-        self.isFaceUp = faceUp
+        self.isFaceUp = isfaceUp
 
     def __str__(self):
         if self.isFaceUp:
@@ -98,54 +98,56 @@ class PositionableCard(Card):
 class AllTestsCards(unittest.TestCase):
 
     def setUp(self):
-        #for test_Card
-        self.card1 = Card(rank='A', suit='c')
-        self.card2 = Card(rank='2', suit='c')
-
-        #for test_Hand
-        self.hand_test = Hand()
-        self.hand_test.add(card1)
-        self.hand_test.add(card2)
-
-        #for test_Deck
-        self.hand_test1 = Hand()
-        self.hand_test2 = Hand()
-        self.deck_test = Deck()
-        self.deck_test.populate()
-        self.hands_test = [self.hand_test1, self.hand_test2]
+        pass
 
     def test_Card(self):
         actual = Card(rank='A', suit='c')
-        expected = 'Ac'
-        self.assertEqual(actual.__str__(), expected)
+        self.assertEqual(actual.__str__(), 'Ac')
 
     def test_Hand(self):
-        actual = self.hand_test.__str__().strip()
-        expected = 'Ac 2c'
-        self.assertEqual(actual, expected)
+        hand_test = Hand()
+        hand_test.add(card1)
+        hand_test.add(card2)
+        actual = hand_test.__str__().strip()
+        self.assertEqual(actual, 'Ac 2c')
 
     def test_Deck_populate(self):
-        actual = len(self.deck_test.cards)
-        expected = 52
-        self.assertEqual(actual, expected)
+        deck_test = Deck()
+        deck_test.populate()
+        actual = len(deck_test.cards)
+        self.assertEqual(actual, 52)
 
     def test_Deck_deal(self):
-        self.deck_test.deal(self.hands_test, perHand=4)
-        actual1 = self.hand_test1.__str__().strip()
-        expected1 = 'Ac 3c 5c 7c'
-        self.assertEqual(actual1, expected1)
+        deck_test = Deck()
+        deck_test.populate()
+        hand_test1 = Hand()
+        hand_test2 = Hand()
+        hands_test = [hand_test1, hand_test2]
+        deck_test.deal(hands_test, perHand=4)
 
-        actual2 = self.hand_test2.__str__().strip()
-        expected2 = '2c 4c 6c 8c'
-        self.assertEqual(actual2, expected2)
+        actual1 = hand_test1.__str__().strip()
+        self.assertEqual(actual1, 'Ac 3c 5c 7c')
+
+        actual2 = hand_test2.__str__().strip()
+        self.assertEqual(actual2, '2c 4c 6c 8c')
+
+    def test_PositionableCard(self):
+        test_card = PositionableCard('Q','s')
+
+        self.assertEqual(test_card.__str__(), 'Qs')
+
+        test_card.isFaceUp = False
+        self.assertEqual(test_card.__str__(), 'XX')
 
 
+card1 = Card('A','c')
+card2 = UnprintableCard('A','d')
+card3 = PositionableCard('A','h')
+card3.isFaceUp = False
+print(card3)
 
-qwe = UnprintableCard(rank='A', suit='c')
-print(qwe)
 
 card1 = Card(rank='A', suit='c')
-print(card1)
 card2 = Card(rank='2', suit='c')
 card3 = Card(rank='3', suit='c')
 card4 = Card(rank='4', suit='c')
