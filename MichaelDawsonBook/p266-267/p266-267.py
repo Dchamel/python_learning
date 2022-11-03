@@ -1,4 +1,4 @@
-import unittest, random, games
+import unittest, random, cards
 from time import perf_counter
 t1 = perf_counter()
 
