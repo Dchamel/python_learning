@@ -1,9 +1,9 @@
-import unittest, random, cards
+import unittest, random, cards, games
 from time import perf_counter
 t1 = perf_counter()
 
-print('Welcome to the Black Jack v1.0')
-
+print('Welcome to the Black Jack game v1.0')
+#from 1 to 7 Players can play
 
 
 class BJ_Card(cards.Card):
@@ -22,7 +22,7 @@ class BJ_Dealer(BJ_Hand):
     pass
 
 class BJ_Game(object):
-
+    pass
 
 
 

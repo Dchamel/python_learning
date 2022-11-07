@@ -1,7 +1,7 @@
 # Cards Module
 # Basic classes for a game created from Classes and Methods before
 class Card(object):
-    """ A playing card. """
+    """Creating one card"""
 
     RANKS = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
     SUITS = ["c", "d", "h", "s"]
@@ -22,7 +22,7 @@ class Card(object):
         self.is_face_up = not self.is_face_up
 
 class Hand(object):
-    """ A hand of playing cards. """
+    """A hand of playing cards."""
 
     def __init__(self):
         self.cards = []
@@ -47,7 +47,7 @@ class Hand(object):
         other_hand.add(card)
 
 class Deck(Hand):
-    """ A deck of playing cards. """
+    """A deck of playing cards."""
 
     def populate(self):
         for suit in Card.SUITS:
