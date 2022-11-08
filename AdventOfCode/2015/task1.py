@@ -1,9 +1,11 @@
 import unittest
 
-def readData(path):
+
+def read_data(path):
     with open(path, 'r') as rawData:
         data = rawData.read()
     return data
+
 
 def task1(data):
     lvl = 0
@@ -14,9 +16,10 @@ def task1(data):
             lvl -= 1
     return lvl
 
+
 class AllTestsTask1(unittest.TestCase):
-    def test1_readData(self):
-        actual = readData('inputs/task1.txt')[1]
+    def test1_read_data(self):
+        actual = read_data('inputs/task1.txt')[1]
         expected = '('
         self.assertEqual(actual, expected)
 
@@ -50,6 +53,7 @@ class AllTestsTask1(unittest.TestCase):
         expected = -3
         self.assertIn(expected, actual)
 
+
 path = 'inputs/task1.txt'
-data = readData(path)
+data = read_data(path)
 print(task1(data))
