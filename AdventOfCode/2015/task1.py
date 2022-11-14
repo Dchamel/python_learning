@@ -7,13 +7,18 @@ def read_data(path):
     return data
 
 
+def move_up_down(each, lvl):
+    if each == '(':
+        lvl += 1
+    else:
+        lvl -= 1
+    return lvl
+
+
 def task1(data):
     lvl = 0
     for each in data:
-        if each == '(':
-            lvl += 1
-        else:
-            lvl -= 1
+        lvl = move_up_down(each, lvl)
     return lvl
 
 
@@ -54,6 +59,7 @@ class AllTestsTask1(unittest.TestCase):
         self.assertIn(expected, actual)
 
 
-path = 'inputs/task1.txt'
-data = read_data(path)
-print(task1(data))
+if __name__ == '__main__':
+    path = 'inputs/task1.txt'
+    data = read_data(path)
+    print(task1(data))
