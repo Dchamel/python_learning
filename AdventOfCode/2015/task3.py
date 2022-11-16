@@ -1,0 +1,71 @@
+import unittest
+from time import perf_counter
+
+t1 = perf_counter()
+
+
+def read_data(path):
+    with open(path, 'r') as rawData:
+        data = rawData.read()
+    return data
+
+
+def santa_step(direction, x, y):
+    if direction == '>':
+        x += 1
+    elif direction == '<':
+        x -= 1
+    elif direction == '^':
+        y += 1
+    elif direction == 'v':
+        y -= 1
+    return x, y
+
+
+def delivered_presents(data):
+    x = 0
+    y = 0
+    coord = [(x, y)]
+    santa_path = set(coord)
+    for direction in data:
+        x, y = santa_step(direction, x, y)
+        coord = (x, y)
+        santa_path.add(coord)
+    return len(santa_path)
+
+
+# tests
+class AllTestsTask3(unittest.TestCase):
+
+    def test1_read_data(self):
+        expected = 'v'
+        actual = read_data('inputs/task3.txt')[3]
+        self.assertEqual(expected, actual)
+
+    def test2_santa_step(self):
+        expected = (1, 0)
+        actual = santa_step('>', 0, 0)
+        self.assertEqual(expected, actual)
+
+    def test3_delivered_presents1(self):
+        expected = 2
+        actual = delivered_presents('>')
+        self.assertEqual(expected, actual)
+
+    def test3_delivered_presents2(self):
+        expected = 4
+        actual = delivered_presents('^>v<')
+        self.assertEqual(expected, actual)
+
+    def test3_delivered_presents3(self):
+        expected = 2
+        actual = delivered_presents('^v^v^v^v^v')
+        self.assertEqual(expected, actual)
+
+
+path = 'inputs/task3.txt'
+data = read_data(path)
+print(f'Delivered presents: {delivered_presents(data)}')
+
+t2 = perf_counter()
+print(f'{t2 - t1:.5f} sec')
