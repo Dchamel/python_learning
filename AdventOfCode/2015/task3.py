@@ -22,16 +22,39 @@ def santa_step(direction, x, y):
     return x, y
 
 
-def delivered_presents(data):
+def delivery_path(data: str) -> set:
     x = 0
     y = 0
     coord = [(x, y)]
-    santa_path = set(coord)
+    delivery_path = set(coord)
     for direction in data:
         x, y = santa_step(direction, x, y)
         coord = (x, y)
-        santa_path.add(coord)
-    return len(santa_path)
+        delivery_path.add(coord)
+
+    print(delivery_path)
+    return delivery_path
+
+def delivered_presents(delivery_path):
+    return len(delivery_path)
+
+
+def two_ways(data):
+    data_santa = ''
+    data_robo_santa = ''
+    for index, direction in enumerate(data, start=0):
+        if index == 0:
+            data_santa += direction
+            data_robo_santa += direction
+            print(f'Santa (Index0/Data): {index, data_santa}')
+            print(f'Robo Santa (Index0/Data): {index, data_robo_santa}')
+        elif index % 2 != 0: #odd
+            data_santa += direction
+            print(f'Santa (Index/Data): {index, data_santa}')
+        else: #even
+            data_robo_santa += direction
+            print(f'Robo Santa (Index/Data): {index, data_robo_santa}')
+    return data_santa, data_robo_santa
 
 
 # tests
@@ -64,8 +87,28 @@ class AllTestsTask3(unittest.TestCase):
 
 
 path = 'inputs/task3.txt'
-data = read_data(path)
-print(f'Delivered presents: {delivered_presents(data)}')
+# data = read_data(path)
+data = '^v'
+data_santa, data_robo_santa = two_ways(data)
+print(data_santa)
+print(data_robo_santa)
+
+delivery_path_santa = delivery_path(data_santa)
+delivery_path_robo_santa = delivery_path(data_robo_santa)
+
+new_path = delivery_path_santa.union(delivery_path_robo_santa)
+print(new_path)
+print(len(new_path))
+
+
+
+# delivery_path = delivery_path(data)
+# q = delivered_presents(data_santa)
+# w = delivered_presents(data_robo_santa)
+# c = delivered_presents('^v')
+# print(f'Test: {c}')
+# print(f'Santa:{q} Robo Santa: {w}')
+# print(f'Delivered presents: {q+w}')
 
 t2 = perf_counter()
 print(f'{t2 - t1:.5f} sec')
