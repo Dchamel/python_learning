@@ -14,24 +14,10 @@ def md5hex(data) -> str:
     return hashlib.md5(data.encode()).hexdigest()
 
 
-def md5str_check_5zeroes(checking_string) -> bool:
-    if checking_string[0:5] != '00000':
-        return True
-    else:
-        return False
-
-
-def md5str_check_6zeroes(checking_string) -> bool:
-    if checking_string[0:6] != '000000':
-        return True
-    else:
-        return False
-
-
 def find_5zeroes(data):
     i = 0
     new_string_md5 = ''
-    while md5str_check_5zeroes(new_string_md5):
+    while not new_string_md5.startswith('00000'):
         i += 1
         new_string = data + str(i)
         new_string_md5 = md5hex(new_string)
@@ -41,7 +27,7 @@ def find_5zeroes(data):
 def find_6zeroes(data):
     i = 0
     new_string_md5 = ''
-    while md5str_check_6zeroes(new_string_md5):
+    while not new_string_md5.startswith('000000'):
         i += 1
         new_string = data + str(i)
         new_string_md5 = md5hex(new_string)
@@ -60,16 +46,6 @@ class AllTestsTask4(unittest.TestCase):
     def test2_md5hex(self):
         expected = '96f0f08c0188ba04898ce8cc465c19c4'
         actual = md5hex('asdqwe')
-        self.assertEqual(expected, actual)
-
-    def test3_md5str_check_5zeroes(self):
-        expected = True
-        actual = md5str_check_5zeroes('abcdef609043')
-        self.assertEqual(expected, actual)
-
-    def test4_md5str_check_6zeroes(self):
-        expected = True
-        actual = md5str_check_5zeroes('ckczppom3938038')
         self.assertEqual(expected, actual)
 
     def test5_find_5zeroes_1(self):
