@@ -44,7 +44,12 @@ def two_ways(data):
             data_robo_santa += direction
     return data_santa, data_robo_santa
 
-
+def delivery_path_santa_n_robo(data):
+    data_santa, data_robo_santa = two_ways(data)
+    delivery_path_santa = delivery_path(data_santa)
+    delivery_path_robo_santa = delivery_path(data_robo_santa)
+    new_path = delivery_path_santa.union(delivery_path_robo_santa)
+    return new_path
 # tests
 class AllTestsTask3(unittest.TestCase):
 
@@ -77,35 +82,26 @@ class AllTestsTask3(unittest.TestCase):
     # tests for part2
     def test4_delivered_presents_santa_and_robo1(self):
         expected = 3
-        data_santa, data_robo_santa = two_ways('^v')
-        actual = len(delivery_path(data_santa).union(delivery_path(data_robo_santa)))
+        actual = len(delivery_path_santa_n_robo('^v'))
         self.assertEqual(expected, actual)
 
     def test4_delivered_presents_santa_and_robo2(self):
         expected = 3
-        data_santa, data_robo_santa = two_ways('^>v<')
-        actual = len(delivery_path(data_santa).union(delivery_path(data_robo_santa)))
+        actual = len(delivery_path_santa_n_robo('^>v<'))
         self.assertEqual(expected, actual)
 
     def test4_delivered_presents_santa_and_robo3(self):
         expected = 11
-        data_santa, data_robo_santa = two_ways('^v^v^v^v^v')
-        actual = len(delivery_path(data_santa).union(delivery_path(data_robo_santa)))
+        actual = len(delivery_path_santa_n_robo('^v^v^v^v^v'))
         self.assertEqual(expected, actual)
 
 
 path = 'inputs/task3.txt'
 data = read_data(path)
-
 # part1
 print(f'Delivered presents by Santa: {len(delivery_path(data))}')
-
 # part2
-data_santa, data_robo_santa = two_ways(data)
-delivery_path_santa = delivery_path(data_santa)
-delivery_path_robo_santa = delivery_path(data_robo_santa)
-new_path = delivery_path_santa.union(delivery_path_robo_santa)
-print(f'Delivered presents by Santa and his Robo: {len(new_path)}')
+print(f'Delivered presents by Santa and his Robo: {len(delivery_path_santa_n_robo(data))}')
 
 t2 = perf_counter()
 print(f'{t2 - t1:.5f} sec')
