@@ -6,8 +6,7 @@ t1 = perf_counter()
 
 def read_data(path):
     with open(path, 'r') as rawData:
-        data = rawData.read()
-    return data
+        return rawData.read()
 
 
 def check_3_vowels(string4check: str) -> bool:
@@ -51,6 +50,24 @@ def nice_string(data):
         if check1 and check2 and check3:
             index += 1
     return index
+
+
+# part2
+def check_4_2letters_not_overlapping(string4check):
+    for index, letter in enumerate(string4check, start=0):
+        if string4check.count(letter) >= 2:
+
+            try:
+                letter_from_string4check = string4check[index + 1]
+            except:
+                return False
+
+            check_substr = letter + letter_from_string4check
+
+            final_check = string4check.count(check_substr)
+            if final_check >= 2:
+                return True
+    return False
 
 
 # tests
@@ -106,6 +123,19 @@ class AllTestsTask5(unittest.TestCase):
 path = 'inputs/task5.txt'
 data = read_data(path)
 print(nice_string(data))
+
+# string4check = 'aaaabcddefbcbscddgaa'
+string4check = 'uurcxstgmygtbstg'
+
+print(check_4_2letters_not_overlapping(string4check))
+
+
+def check_double_letter_between_letter(string4check):
+
+
+# q1 = 'aaaacdcaadacaf'
+# q2 = 'aa'
+# print(q1.count(q2))
 
 t2 = perf_counter()
 print(f'{t2 - t1:.5f} sec')
