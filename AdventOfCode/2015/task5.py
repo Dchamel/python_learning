@@ -1,4 +1,4 @@
-import unittest
+import unittest, re
 from time import perf_counter
 
 t1 = perf_counter()
@@ -70,72 +70,99 @@ def check_4_2letters_not_overlapping(string4check):
     return False
 
 
+def check_double_letter_between_letter(string4check):
+    for letter in string4check:
+        if string4check.count(letter) >= 2:
+            positions = []
+            for i in re.finditer(letter, string4check):
+                positions.append(i.start())
+            for i in range(1, len(positions)):
+                if positions[i] - positions[i - 1] == 2:
+                    return True
+    return False
+
+
+def nice_string2(data):
+    index = 0
+    for string4check in data.splitlines():
+        check1 = check_4_2letters_not_overlapping(string4check)
+        check2 = check_double_letter_between_letter(string4check)
+        if check1 and check2:
+            index += 1
+    return index
+
+
 # tests
 class AllTestsTask5(unittest.TestCase):
 
     # tests for part1
-    def test1_read_data(self):
+    def test01_read_data(self):
         expected = 'u'
         actual = read_data('inputs/task5.txt')[4]
         self.assertEqual(expected, actual)
 
-    def test2_check_3_vowels(self):
-        expected = True
+    def test02_check_3_vowels(self):
         actual = check_3_vowels('ugknbfddgicrmopn')
-        self.assertEqual(expected, actual)
+        self.assertTrue(actual)
 
-    def test3_check_double_letter(self):
-        expected = True
+    def test03_check_double_letter(self):
         actual = check_double_letter('ugknbfddgicrmopn')
-        self.assertEqual(expected, actual)
+        self.assertTrue(actual)
 
-    def test4_heck_string_4_twoletters(self):
-        expected = True
+    def test04_heck_string_4_twoletters(self):
         actual = check_double_letter('ugknbfddgicrmopn')
-        self.assertEqual(expected, actual)
+        self.assertTrue(actual)
 
-    def test5_nice_string1(self):
+    def test05_nice_string1(self):
         expected = 1
         actual = nice_string('ugknbfddgicrmopn')
         self.assertEqual(expected, actual)
 
-    def test6_nice_string2(self):
+    def test06_nice_string2(self):
         expected = 1
         actual = nice_string('aaa')
         self.assertEqual(expected, actual)
 
-    def test7_nice_string3(self):
+    def test07_nice_string3(self):
         expected = 0
         actual = nice_string('jchzalrnumimnmhp')
         self.assertEqual(expected, actual)
 
-    def test8_nice_string4(self):
+    def test08_nice_string4(self):
         expected = 0
         actual = nice_string('haegwjzuvuyypxyu')
         self.assertEqual(expected, actual)
 
-    def test9_nice_string5(self):
+    def test09_nice_string5(self):
         expected = 0
         actual = nice_string('dvszwmarrgswjxmb')
+        self.assertEqual(expected, actual)
+
+    def test10_nice_string2_1(self):
+        expected = 1
+        actual = nice_string2('qjhvhtzxzqqjkmpb')
+        self.assertEqual(expected, actual)
+
+    def test11_nice_string2_2(self):
+        expected = 1
+        actual = nice_string2('xxyxx')
+        self.assertEqual(expected, actual)
+
+    def test12_nice_string2_3(self):
+        expected = 0
+        actual = nice_string2('uurcxstgmygtbstg')
+        self.assertEqual(expected, actual)
+
+    def test13_nice_string2_4(self):
+        expected = 0
+        actual = nice_string2('ieodomkazucvgmuy')
         self.assertEqual(expected, actual)
 
 
 path = 'inputs/task5.txt'
 data = read_data(path)
-print(nice_string(data))
-
-# string4check = 'aaaabcddefbcbscddgaa'
-string4check = 'uurcxstgmygtbstg'
-
-print(check_4_2letters_not_overlapping(string4check))
-
-
-def check_double_letter_between_letter(string4check):
-
-
-# q1 = 'aaaacdcaadacaf'
-# q2 = 'aa'
-# print(q1.count(q2))
+print(f'Part1 result: {nice_string(data)}')
+print(f'Part2 result: {nice_string2(data)}')
 
 t2 = perf_counter()
 print(f'{t2 - t1:.5f} sec')
