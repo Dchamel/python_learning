@@ -10,7 +10,7 @@ def read_data(path):
 
 
 def coord_from_line(data_line):
-    nums = re.findall(r'\d,\d', data_line)
+    nums = re.findall(r'\d+,\d+', data_line)
     nums_parsed = []
     for each in nums:
         nums_parsed += each.split(',')
@@ -61,6 +61,20 @@ def action(data_line, matrix):
     return matrix
 
 
+def main_prog(data):
+    matrix = create_matrix(1000, 1000)
+
+    for data_line in data.splitlines():
+        matrix = action(data_line, matrix)
+
+    total_lights = 0
+    for row in matrix:
+        for value in row:
+            if value == 1:
+                total_lights += 1
+    return total_lights
+
+
 # tests
 class AllTestsTask5(unittest.TestCase):
 
@@ -70,23 +84,25 @@ class AllTestsTask5(unittest.TestCase):
         actual = read_data('inputs/task6.txt')[8]
         self.assertEqual(expected, actual)
 
+    def test02_coord_from_line(self):
+        expected = 808
+        actual = coord_from_line('turn off 735,808 through 917,910')[1]
+        self.assertEqual(expected, actual)
+
+    def test03_main_prog(self):
+        expected = 1000000
+        actual = main_prog('turn on 0,0 through 999,999')
+        self.assertEqual(expected, actual)
+
+    def test04_main_prog(self):
+        expected = 1000
+        actual = main_prog('toggle 0,0 through 999,0')
+        self.assertEqual(expected, actual)
+
 
 path = 'inputs/task6.txt'
 data = read_data(path)
-
-matrix = create_matrix(1000, 1000)
-
-for data_line in data.splitlines():
-    matrix = action(data_line, matrix)
-
-print(matrix)
-total_lights = 0
-for row in matrix:
-    for value in matrix:
-        if value == 1:
-            total_lights += 1
-
-print(total_lights)
+print(main_prog(data))
 
 t2 = perf_counter()
 print(f'{t2 - t1:.5f} sec')
