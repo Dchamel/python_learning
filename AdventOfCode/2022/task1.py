@@ -19,6 +19,16 @@ def list_summ_cal(data):
     return elves_data
 
 
+def part_two(data):
+    list_of_all = list_summ_cal(data)
+    top3 = 0
+    for _ in range(3):
+        top = max(list_of_all)
+        top3 += top
+        list_of_all.remove(top)
+    return top3
+
+
 # tests
 class AllTests2022Task1(unittest.TestCase):
 
@@ -63,10 +73,16 @@ class AllTests2022Task1(unittest.TestCase):
         actual = max(list_summ_cal(self.data))
         self.assertEqual(expected, actual)
 
+    def test07_part_two(self):
+        expected = 45000
+        actual = part_two(self.data)
+        self.assertEqual(expected, actual)
+
 
 path = 'inputs/task1.txt'
 data = read_data(path)
 print(max(list_summ_cal(data)))
+print(part_two(data))
 
 t2 = perf_counter()
 print(f'{t2 - t1:.5f} sec')
