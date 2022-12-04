@@ -41,6 +41,25 @@ def part_one(data):
     return property_summ
 
 
+def common_value_list(data):
+    common_value_list = []
+    data_lines = data.splitlines()
+    while data_lines:
+        elf1, elf2, elf3 = data_lines[0:3]
+        del data_lines[0:3]
+        common_value = set(elf1) & set(elf2) & set(elf3)
+        common_value_list += common_value
+
+    return common_value_list
+
+
+def part_two(data):
+    priority_summ = 0
+    for each in common_value_list(data):
+        priority_summ += all_let().index(each) + 1
+    return priority_summ
+
+
 # tests
 class AllTests2022Task2(unittest.TestCase):
 
@@ -61,8 +80,8 @@ class AllTests2022Task2(unittest.TestCase):
 
 path = 'inputs/task3.txt'
 data = read_data(path)
-
 print(part_one(data))
+print(part_two(data))
 
 t2 = perf_counter()
 print(f'{t2 - t1:.5f} sec')
