@@ -34,6 +34,15 @@ def part_one(data):
     return count
 
 
+def part_two(data):
+    counter = 0
+    for data_line in data.splitlines():
+        elf1, elf2 = elf_section_list_all(data_line)
+        if set(elf1).intersection(set(elf2)):
+            counter += 1
+    return counter
+
+
 # tests
 class AllTests2022Task2(unittest.TestCase):
 
@@ -50,6 +59,7 @@ class AllTests2022Task2(unittest.TestCase):
 path = 'inputs/task4.txt'
 data = read_data(path)
 print(part_one(data))
+print(part_two(data))
 
 t2 = perf_counter()
 print(f'{t2 - t1:.5f} sec')
