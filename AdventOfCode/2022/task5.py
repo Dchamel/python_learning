@@ -95,11 +95,27 @@ amount_of_stacks = given_stacks[len(given_stacks) - 1].strip().replace(' ', '')
 stack_string = amount_of_stacks
 amount_of_stacks = int(amount_of_stacks[len(amount_of_stacks) - 1])
 input_cargo = construct_strings(stacks_vars(stack_string, item_list, given_stacks))
+input_cargo2 = input_cargo.copy()
 
 print(last_create(elfs_job(input_cargo, task_list)))
 
-# print(task_list)
-# print(input_cargo)
+
+def part_two(input_cargo2, task_list):
+    ic = input_cargo2
+    for tl in task_list:
+        print(tl, ic)
+        ic[tl[2] - 1] += ic[tl[1] - 1][len(ic[tl[1] - 1]) - tl[0]:len(ic[tl[1] - 1])]
+        ic[tl[1] - 1] = ic[tl[1] - 1][:len(ic[tl[1] - 1]) - tl[0]]
+    return ic
+
+
+print(last_create(part_two(input_cargo2, task_list)))
+
+# q = 'PZND'
+# n = ''
+# n = q[len(q) - 3:len(q)]
+# q = q[:len(q) - 3]
+# print(n, q)
 
 t2 = perf_counter()
 print(f'{t2 - t1:.5f} sec')
