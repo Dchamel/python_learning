@@ -35,7 +35,7 @@ for data_line in data:
             path_list.append('/')
         case '$ ls':
             continue
-        case 'dir':
+        case 'dir' if 'dir' in data_line:
             dir_name = data_line.replace('dir ')
             path_list.append(path_list[-1] + dir_name)
 
