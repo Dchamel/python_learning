@@ -34,30 +34,6 @@ def first_part(data):
     return total_points
 
 
-# tests
-class AllTests2022Task2(unittest.TestCase):
-
-    def setUp(self) -> None:
-        self.path = path
-        self.data = 'A Y\nB X\nC Z'
-
-    def test01_read_data(self):
-        expected = 'X'
-        actual = read_data(self.path)[2]
-        self.assertEqual(expected, actual)
-
-    def test02_first_part1(self):
-        expected = 15
-        actual = first_part(self.data)
-        self.assertEqual(expected, actual)
-
-
-path = 'inputs/task2.txt'
-data = read_data(path)
-
-print(first_part(data))
-
-
 def second_part(data):
     total_points = 0
     for data_line in data.splitlines():
@@ -90,6 +66,33 @@ def second_part(data):
     return total_points
 
 
+# tests
+class AllTests2022Task2(unittest.TestCase):
+
+    def setUp(self) -> None:
+        self.path = path
+        self.data = 'A Y\nB X\nC Z'
+
+    def test01_read_data(self):
+        expected = 'X'
+        actual = read_data(self.path)[2]
+        self.assertEqual(expected, actual)
+
+    def test02_first_part(self):
+        expected = 15
+        actual = first_part(self.data)
+        self.assertEqual(expected, actual)
+
+    def test03_second_part(self):
+        expected = 12
+        actual = second_part(self.data)
+        self.assertEqual(expected, actual)
+
+
+path = 'inputs/task2.txt'
+data = read_data(path)
+
+print(first_part(data))
 print(second_part(data))
 
 t2 = perf_counter()
