@@ -44,15 +44,25 @@ def part_two(data):
 
 
 # tests
-class AllTests2022Task2(unittest.TestCase):
+class AllTests2022Task4(unittest.TestCase):
 
     def setUp(self) -> None:
         self.path = path
-        self.data = ''
+        self.data = '2-4,6-8\n2-3,4-5\n5-7,7-9\n2-8,3-7\n6-6,4-6\n2-6,4-8'
 
     def test01_read_data(self):
-        expected = 's'
+        expected = '9'
         actual = read_data(self.path)[3]
+        self.assertEqual(expected, actual)
+
+    def test02_part_one(self):
+        expected = 2
+        actual = part_one(self.data)
+        self.assertEqual(expected, actual)
+
+    def test03_part_two(self):
+        expected = 4
+        actual = part_two(self.data)
         self.assertEqual(expected, actual)
 
 
