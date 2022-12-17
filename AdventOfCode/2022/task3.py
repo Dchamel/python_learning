@@ -10,6 +10,7 @@ def read_data(path):
 
 
 def all_let():
+    '''Alphabet in lower/upper case'''
     low_let = []
     for i in string.ascii_lowercase:
         low_let.append(i)
@@ -61,7 +62,7 @@ def part_two(data):
 
 
 # tests
-class AllTests2022Task2(unittest.TestCase):
+class AllTests2022Task3(unittest.TestCase):
 
     def setUp(self) -> None:
         self.path = path
@@ -76,6 +77,51 @@ class AllTests2022Task2(unittest.TestCase):
         expected = 's'
         actual = read_data(self.path)[3]
         self.assertEqual(expected, actual)
+
+    def test02_wrong_item(self):
+        expect = 'p'
+        reality = wrong_item(self.data.splitlines()[0])
+        self.assertEqual(expect, reality)
+
+    def test03_wrong_item(self):
+        expect = 'L'
+        reality = wrong_item(self.data.splitlines()[1])
+        self.assertEqual(expect, reality)
+
+    def test04_wrong_item(self):
+        expect = 'P'
+        reality = wrong_item(self.data.splitlines()[2])
+        self.assertEqual(expect, reality)
+
+    def test05_wrong_item(self):
+        expect = 'v'
+        reality = wrong_item(self.data.splitlines()[3])
+        self.assertEqual(expect, reality)
+
+    def test06_wrong_item(self):
+        expect = 't'
+        reality = wrong_item(self.data.splitlines()[4])
+        self.assertEqual(expect, reality)
+
+    def test07_wrong_item(self):
+        expect = 's'
+        reality = wrong_item(self.data.splitlines()[5])
+        self.assertEqual(expect, reality)
+
+    def test08_part_one(self):
+        expect = 157
+        reality = part_one(self.data)
+        self.assertEqual(expect, reality)
+
+    def test09_common_value_list(self):
+        expect = ['r', 'Z']
+        reality = common_value_list(self.data)
+        self.assertEqual(expect, reality)
+
+    def test10_part_two(self):
+        expect = 70
+        reality = part_two(self.data)
+        self.assertEqual(expect, reality)
 
 
 path = 'inputs/task3.txt'
