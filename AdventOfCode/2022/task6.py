@@ -21,7 +21,7 @@ def part_two(data):
             return i + 14
 
 
-# tests - not implemented
+# tests
 class AllTests2022Task6(unittest.TestCase):
 
     def setUp(self) -> None:
