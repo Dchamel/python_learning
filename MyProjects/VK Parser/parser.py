@@ -31,12 +31,18 @@ def get_all_from_wall(groupid):
     from_id_list = []
     for each in data_vk['items']:
         from_id_list.append(str(each['from_id']))
+
+        # deleting links, trash-info and other photos
+        for each1 in each['attachments']:
+            if each1['type'] == 'link':
+                continue
+            elif each1['type'] == 'photo':
+                print(each1['link'])
+
     from_id_string = ','.join(from_id_list)
     data_vk_from_id = vk_api.users.get(user_ids=from_id_string, v=auth_keys.api_ver)
     # print(data_vk_from_id)
     print(data_vk_from_id)
-
-    # deleting links, trash-info and other photos
 
     return data_vk
 
