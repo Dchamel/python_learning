@@ -26,23 +26,23 @@ def read_data(path):
 
 
 def get_all_from_wall(groupid):
-    data_vk = vk_api.wall.get(domain=groupid, count=5, v=auth_keys.api_ver)
+    data_vk = vk_api.wall.get(domain=groupid, count=3, v=auth_keys.api_ver)
+
     # get all users id and filter attachments
     from_id_list = []
-    for each in data_vk['items']:
+    for index, each in enumerate(data_vk['items']):
         from_id_list.append(str(each['from_id']))
 
         # deleting links, trash-info and other photos
-        for attach in each['attachments']:
-            if attach['type'] == 'link':
-                continue
-            elif attach['type'] == 'photo':
-                print(attach['photo'])
-
+        try:
+            data_vk['items'][index]['attachments'] = each['attachments'][0]['photo']['sizes'][-1]['url']
+        except:
+            continue
+    print(data_vk)
     from_id_string = ','.join(from_id_list)
     data_vk_from_id = vk_api.users.get(user_ids=from_id_string, v=auth_keys.api_ver)
     # print(data_vk_from_id)
-    print(data_vk_from_id)
+    # print(data_vk_from_id)
 
     return data_vk
 
@@ -65,7 +65,9 @@ all_data_from_wall = get_all_from_wall(auth_keys.group_name)
 write_data(auth_keys.path, all_data_from_wall)
 
 rawData = read_data(auth_keys.path)
-print(rawData)
+
+
+# print(rawData)
 
 
 # tests - not implemented
