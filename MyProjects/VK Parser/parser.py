@@ -17,17 +17,13 @@ t1 = perf_counter()
 # print(response.json())
 
 
-def read_data(path):
-    file_name = auth_keys.group_name
-    current_date = date.today().strftime('%d%m%Y')
-    with open(path + file_name + current_date + '.csv', 'r', encoding='utf-8') as file:
-        data = list(csv.reader(file))
-    return data
-
-
 def get_all_from_wall(groupid):
-    data_vk = vk_api.wall.get(domain=groupid, count=20, v=auth_keys.api_ver)
+    data_vk = vk_api.wall.get(domain=groupid, count=10000, v=auth_keys.api_ver)
 
+    return data_vk
+
+
+def data_proc(data_vk):
     # get all users id and filter attachments
     from_id_list = []
     for index, each in enumerate(data_vk['items']):
@@ -38,14 +34,15 @@ def get_all_from_wall(groupid):
             data_vk['items'][index]['attachments'] = each['attachments'][0]['photo']['sizes'][-1]['url']
         except:
             continue
-    # print(data_vk)
+
     from_id_list = list(set(from_id_list))
     from_id_string = ','.join(from_id_list)
-    data_vk_from_id = vk_api.users.get(user_ids=from_id_string, v=auth_keys.api_ver, lang=auth_keys.lang)
-    # print(from_id_list)
-    # print(data_vk_from_id)
 
-    # iteration data_vk again just for change 'id' to 'names'
+    # get user names & surnames from id
+    data_vk_from_id = vk_api.users.get(user_ids=from_id_string, v=auth_keys.api_ver, lang=auth_keys.lang)
+
+    # processing data_vk again just for change 'id' to 'names'
+    # and change UNIX-date to humanfriendly
     for index, each in enumerate(data_vk['items']):
 
         # work with names
@@ -66,21 +63,35 @@ def get_all_from_wall(groupid):
 
 
 def write_data(path, all_data_from_wall):
+    try:
+        file_name = auth_keys.group_name
+        current_date = date.today().strftime('%d%m%Y')
+        with open(path + file_name + current_date + '.csv', 'w', encoding='utf-8', newline='') as file:
+            csvwriter = csv.writer(file)
+            csvwriter.writerow(('post_id', 'from_user', 'date', 'text', 'attachment'))
+            for linedata in all_data_from_wall['items']:
+                linedata['from_id'] = linedata['from_id']
+                csvwriter.writerow((linedata['id'], linedata['from_id'], linedata['date'], linedata['text'],
+                                    linedata['attachments']))
+        return True
+    except:
+        return False
+
+
+def read_data(path):
     file_name = auth_keys.group_name
     current_date = date.today().strftime('%d%m%Y')
-    with open(path + file_name + current_date + '.csv', 'w', encoding='utf-8', newline='') as file:
-        csvwriter = csv.writer(file)
-        csvwriter.writerow(('post_id', 'from_user', 'date', 'text', 'attachment'))
-        for linedata in all_data_from_wall['items']:
-            linedata['from_id'] = linedata['from_id']
-            csvwriter.writerow((linedata['id'], linedata['from_id'], linedata['date'], linedata['text'],
-                                linedata['attachments']))
+    with open(path + file_name + current_date + '.csv', 'r', encoding='utf-8') as file:
+        data = list(csv.reader(file))
+    return data
 
 
 vk_api = vk.API(access_token=auth_keys.api_token)
 
-all_data_from_wall = get_all_from_wall(auth_keys.group_name)
-write_data(auth_keys.path, all_data_from_wall)
+raw_data = get_all_from_wall(auth_keys.group_name)
+processed_data = data_proc(raw_data)
+
+write_data(auth_keys.path, processed_data)
 
 rawData = read_data(auth_keys.path)
 
