@@ -1,6 +1,6 @@
 import vk, auth_keys, unittest, csv
 from time import perf_counter
-from datetime import date
+from datetime import date, datetime
 
 t1 = perf_counter()
 
@@ -26,7 +26,7 @@ def read_data(path):
 
 
 def get_all_from_wall(groupid):
-    data_vk = vk_api.wall.get(domain=groupid, count=10, v=auth_keys.api_ver)
+    data_vk = vk_api.wall.get(domain=groupid, count=20, v=auth_keys.api_ver)
 
     # get all users id and filter attachments
     from_id_list = []
@@ -47,6 +47,8 @@ def get_all_from_wall(groupid):
 
     # iteration data_vk again just for change 'id' to 'names'
     for index, each in enumerate(data_vk['items']):
+
+        # work with names
         if str(each['from_id']) == auth_keys.group_id:
             data_vk['items'][index]['from_id'] = auth_keys.group_name_ru
         else:
@@ -55,6 +57,10 @@ def get_all_from_wall(groupid):
                 if each_user_name['id'] == each['from_id']:
                     full_name = each_user_name['first_name'] + ' ' + each_user_name['last_name']
                     data_vk['items'][index]['from_id'] = full_name
+
+        # work with date
+        data_vk['items'][index]['date'] = str(datetime.fromtimestamp(each['date']))
+
     print(data_vk)
     return data_vk
 
