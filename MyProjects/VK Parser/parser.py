@@ -1,4 +1,4 @@
-import vk, auth_keys, unittest, csv
+import vk, auth_keys, unittest, csv, time
 from time import perf_counter
 from datetime import date, datetime
 
@@ -17,10 +17,26 @@ t1 = perf_counter()
 # print(response.json())
 
 
-def get_all_from_wall(groupid):
-    data_vk = vk_api.wall.get(domain=groupid, count=10000, v=auth_keys.api_ver)
+def get_some_from_wall(groupid, offset):
+    data_vk = vk_api.wall.get(domain=groupid, count=100, offset=offset, v=auth_keys.api_ver)
 
     return data_vk
+
+
+def get_all_from_wall(groupid):
+    time.sleep(0.35)
+    wall_count = vk_api.wall.get(domain=groupid, count=1, v=auth_keys.api_ver)['count']
+    print(wall_count)
+    steps = wall_count // 100 + 1
+    offset = 0
+    raw_data = []
+    for counter in range(2):
+        time.sleep(0.35)
+        raw_data.append(get_some_from_wall(groupid, offset))
+        offset += 100
+        print(f'Number of steps: {steps}. Now is - {counter}')
+    
+    return raw_data
 
 
 def data_proc(data_vk):
@@ -35,10 +51,12 @@ def data_proc(data_vk):
         except:
             continue
 
+    # deleting duplicates
     from_id_list = list(set(from_id_list))
     from_id_string = ','.join(from_id_list)
 
     # get user names & surnames from id
+    time.sleep(0.35)
     data_vk_from_id = vk_api.users.get(user_ids=from_id_string, v=auth_keys.api_ver, lang=auth_keys.lang)
 
     # processing data_vk again just for change 'id' to 'names'
@@ -91,7 +109,10 @@ vk_api = vk.API(access_token=auth_keys.api_token)
 raw_data = get_all_from_wall(auth_keys.group_name)
 processed_data = data_proc(raw_data)
 
-write_data(auth_keys.path, processed_data)
+# get_all_from_wall(auth_keys.group_name)
+
+result_write_file = write_data(auth_keys.path, processed_data)
+print(result_write_file)
 
 rawData = read_data(auth_keys.path)
 
