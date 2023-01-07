@@ -30,13 +30,19 @@ def get_all_from_wall(groupid):
     steps = wall_count // 100 + 1
     offset = 0
     raw_data = []
-    for counter in range(2):
+    for counter in range(steps):
         time.sleep(0.35)
         raw_data.append(get_some_from_wall(groupid, offset))
         offset += 100
         print(f'Number of steps: {steps}. Now is - {counter}')
-    
-    return raw_data
+
+    raw_data1 = {'items': []}
+    for each in raw_data:
+        raw_data1['items'] += (each['items'])
+
+    print(raw_data)
+
+    return raw_data1
 
 
 def data_proc(data_vk):
