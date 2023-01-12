@@ -1,0 +1,80 @@
+body {
+    background: #2c2c2c;
+}
+
+div.asidelogo  {
+    text-align: center;
+}
+
+aside {
+    float: left;
+    background: #181818;
+    width: 20%;
+    padding: 2.5%;
+    height: 100vh;
+    color: #fff;
+    border-right: 5px solid #4d4d4d;
+    display: block;
+}
+aside img {
+    margin: auto;
+}
+
+aside .logo {
+    font-size: 12px ;
+    /*font-weight: bold;*/
+    position: relative;
+    top: -20px;
+
+}
+
+aside h3 {
+    margin-top: 10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+aside ul {
+    margin-top: 20px;
+    padding: 0;
+}
+
+aside ul a {
+    text-decoration: none;
+}
+
+aside li {
+    margin-top: 10px;
+    list-style-type: none;
+    color: #fff;
+    font-size: 17px;
+    transition: transform .3s ease;
+}
+
+aside li:hover {
+    /*font-size: 18px ;*/
+    color: #eb5959;
+    transform: scale(1.05);
+}
+
+aside li i {
+    margin-right: 5px;
+}
+
+main .features {
+    float: left;
+    color: #fff;
+    margin-top: 100px;
+    /*margin-left: 30px;*/
+    text-align: center;
+    width: 75%;
+}
+
+main .features h1 {
+    font-size: 50px;
+}
+
+main .features p {
+    max-width: 500px;
+    margin: 20px auto;
+}
