@@ -76,5 +76,12 @@ main .features h1 {
 
 main .features p {
     max-width: 500px;
+    margin: 5px auto;
+}
+
+.alert-warning {
+    width: 400px;
     margin: 20px auto;
+    padding: 2px;
+    text-align: center;
 }
