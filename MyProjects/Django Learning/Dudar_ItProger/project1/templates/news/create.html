@@ -1,0 +1,28 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}Send article{% endblock title %}
+
+{% block content %}
+<div class="features">
+    <h1>Send article</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.title }}<br>
+        {{ form.preview }}<br>
+        {{ form.full_text}}<br>
+        {{ form.date }}<br>
+        <span>{{ error }}</span>
+
+{#        <input type="text" placeholder="Title" class="form-control"><br>#}
+{#        <input type="text" placeholder="Preview" class="form-control"><br>#}
+{#        <textarea class="form-control" placeholder="Input your text"></textarea><br>#}
+{#        <input type="date" class="form-control"><br>#}
+{#        <input type="time" class="form-control"><br>#}
+        <button class="btn btn-success" type="submit">Send</button>
+    </form>
+</div>
+
+{% endblock content %}
+
+
+
