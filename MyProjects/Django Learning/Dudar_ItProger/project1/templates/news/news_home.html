@@ -7,14 +7,16 @@
     <h1>News</h1>
     <p>All news about our team below</p>
     {% if news %}
-    {% for article in news %}
-    <div class="alert alert-warning">
-        <h3>{{ article.title }}</h3>
-        <p>{{ article.preview }}</p>
-    </div>
-    {% endfor %}
-    {% else %}
-    <p>There is no News right now</p>
+        {% for article in news %}
+            <div class="alert alert-warning">
+                <h3>{{ article.title }}</h3>
+                <p>{{ article.preview }}</p>
+                <a href="{% url 'news-detail' article.id %}" class="btn btn-warning">Read more...</a>
+            </div>
+        {% endfor %}
+
+        {% else %}
+        <p>There is no News right now</p>
     {% endif %}
 
 
