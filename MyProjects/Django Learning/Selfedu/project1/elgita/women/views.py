@@ -3,23 +3,34 @@ from django.http import HttpResponse, HttpResponseNotFound, Http404
 
 from .models import *
 
-menu = ['About', 'Add Article', 'Feedback', 'Sign in']
+menu = [{'title': "About", 'url_name': 'about'},
+        {'title': "Add Article", 'url_name': 'add_page'},
+        {'title': "Feedback", 'url_name': 'contact'},
+        {'title': "Login", 'url_name': 'login'}
+]
 def index(request):
     posts = Women.objects.all()
-    return render(request, 'women/index.html', {'posts': posts, 'menu': menu, 'title': 'Main page'})
+    context = {
+        'posts': posts,
+        'menu': menu,
+        'title': 'Main page'
+    }
+    return render(request, 'women/index.html', context=context)
 
 def about(request):
     return render(request, 'women/about.html', {'menu': menu, 'title': 'About us'})
 
-def categories(request, catid):
-    if request.GET:
-        print(request.GET)
-    return HttpResponse(f'<h1>Pages by Categories</h1><p>{catid}</p>')
+def addpage(request):
+    return HttpResponse('Add Page')
 
-def archive(request, year):
-    if int(year) > 2024:
-        return redirect('home', permanent=True)
-    return HttpResponse(f'<h1>Archive by years</h1><p>{year}</p>')
+def contact(request):
+    return HttpResponse('Feedback')
+
+def login(request):
+    return HttpResponse('Login')
+
+def show_post(request, post_id):
+    return HttpResponse(f'Showing an Article with id: {post_id}')
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound('<h1>page not found</h1>')
