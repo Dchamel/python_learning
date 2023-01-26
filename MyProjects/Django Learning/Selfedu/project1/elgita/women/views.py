@@ -13,7 +13,6 @@ def index(request):
 
     context = {
         'posts': posts,
-        'menu': menu,
         'title': 'Main page',
         'cat_selected': 0,
     }
@@ -43,7 +42,6 @@ def show_category(request, cat_id):
 
     context = {
         'posts': posts,
-        'menu': menu,
         'title': 'All Categories',
         'cat_selected': cat_id,
     }
