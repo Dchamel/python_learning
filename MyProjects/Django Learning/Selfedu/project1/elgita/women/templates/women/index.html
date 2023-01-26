@@ -9,13 +9,19 @@
                 <p class="last">Date: {{ p.time_update|date:'d-m-Y H:i:s' }}</p>
             </div>
         </li>
-			<li><h2>{{p.title}}</h2>
-	{% autoescape on %}
-	{{p.content|linebreaks|truncatewords:20}}
-	{% endautoescape %}
+
+        {% if p.photo %}
+            <p><img class="img-article-left thumb" src="{{ p.photo.url }}" alt="{{ p.title }}"></p>
+        {% endif %}
+
+        <li>
+            <h2>{{p.title}}</h2>
+            {% autoescape on %}
+            {{p.content|linebreaks|truncatewords:20}}
+            {% endautoescape %}
 			<div class="clear"></div>
 			<p class="link-read-post"><a href="{{ p.get_absolute_url }}">Read more</a></p>
-			</li>
+        </li>
 	{% endfor %}
 </ul>
 {% endblock %}
