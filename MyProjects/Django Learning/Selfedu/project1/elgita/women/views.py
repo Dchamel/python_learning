@@ -43,7 +43,8 @@ def show_post(request, post_slug):
     return render(request, 'women/post.html', context=context)
 
 def show_category(request, cat_slug):
-    posts = Women.objects.filter(slug=cat_slug)
+    cat_id = get_object_or_404(Category, slug=cat_slug).id
+    posts = Women.objects.filter(cat_id=cat_id)
 
     if len(posts) == 0:
         raise Http404()
