@@ -3,7 +3,7 @@ from django.urls import reverse
 
 
 class Women(models.Model):
-    title = models.CharField(max_length=25, verbose_name='Title')
+    title = models.CharField(max_length=100, verbose_name='Title')
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name='URL')
     content = models.TextField(blank=True)
     photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
