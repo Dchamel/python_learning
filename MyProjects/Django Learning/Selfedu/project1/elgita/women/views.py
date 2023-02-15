@@ -123,3 +123,6 @@ class WomenCategory(ListView):
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound('<h1>page not found</h1>')
+
+def ormlearning(request):
+    return render(request, 'women/ormlearning.html')
