@@ -12,6 +12,6 @@ urlpatterns = [
     path('post/<slug:post_slug>/', ShowPost.as_view(), name='post'),
     path('category/<slug:cat_slug>/', WomenCategory.as_view(), name='category'),
 
-    path('/ormlearning', ormlearning, name='ormlearnong')
+    path('ormlearning', ormlearning, name='ormlearning')
 
 ]

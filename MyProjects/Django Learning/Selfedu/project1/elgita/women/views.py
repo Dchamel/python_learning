@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
+from django.db.models import Q
 
 from .forms import *
 from .models import *
@@ -125,4 +126,92 @@ def pageNotFound(request, exception):
     return HttpResponseNotFound('<h1>page not found</h1>')
 
 def ormlearning(request):
-    return render(request, 'women/ormlearning.html')
+    data = []
+    data += Women.objects.all()
+    data += '-'
+    data += Women.objects.all()[:2]
+    data += '-'
+    data += Women.objects.order_by('-pk')[:2]
+    data += '-'
+    # the same
+    data += Women.objects.order_by('pk').reverse()[:2]
+    data += '-'
+    data += Women.objects.filter(pk__lte=2)
+    data += '-'
+    data.append(Women.objects.get(pk=1))
+    data += '-'
+    data.append(Women.objects.get(pk=1).cat)
+    data += '-'
+    data.append(Women.objects.get(pk=1).cat.slug)
+    data += '-'
+    data.append(Category.objects.get(pk=1).women_set.all())
+    data += '-'
+    data.append(Women.objects.filter(pk__gte=2))
+    data += '-'
+    data.append(Women.objects.filter(title__contains='av'))
+    data += '-'
+    data.append(Women.objects.filter(pk__in=[1,3,4]))
+    data += '-'
+    try:
+        data.append(Women.objects.filter(pk__in=[1, 3, 4]), is_published=False)
+    except:
+        data.append('None')
+    data += '-'
+    data.append(Women.objects.filter(cat__in=[1,2]))
+    data += '-'
+    data.append(Women.objects.filter(cat__in=Category.objects.all()))
+    data += '-'
+    data.append(Women.objects.filter(pk__lt=3, cat_id=1))
+    data += '-'
+    # or by Q
+    data.append(Women.objects.filter(Q(pk__lt=3) | Q(cat_id=1)))
+    data += '-'
+    # and by Q
+    data.append(Women.objects.filter(Q(pk__lt=3) & Q(cat_id=1)))
+    data += '-'
+    # not by Q
+    data.append(Women.objects.filter(~Q(pk__lt=3) & Q(cat_id=1)))
+    data += '-'
+    data.append(Women.objects.first())
+    data += '-'
+    data.append(Women.objects.order_by('-pk').first())
+    data += '-'
+    data.append(Women.objects.last())
+    data += '-'
+    data.append(Women.objects.latest('time_create'))
+    data += '-'
+    data.append(Women.objects.order_by('-time_create'))
+    data += '-'
+    data.append(Women.objects.earliest('time_create'))
+    data += '-'
+    data.append(Women.objects.get(pk=4).get_previous_by_time_update())
+    data += '-'
+    data.append(Women.objects.get(pk=4).get_previous_by_time_update(pk__lte=2))
+    data += '-'
+    data.append(Category.objects.get(pk=3).women_set.exists())
+    data += '-'
+    data.append(Category.objects.get(pk=1).women_set.count())
+    data += '-'
+    data.append(Women.objects.filter(pk__gte=2).count())
+    data += '-'
+    data.append(Women.objects.filter(cat__slug='actors'))
+    data += '-'
+    data += '-'
+    data += '-'
+    data += '-'
+    data += '-'
+    data += '-'
+    data += '-'
+    data += '-'
+    data += '-'
+    data += '-'
+    data += '-'
+    data += '-'
+    data += '-'
+    data += '-'
+    data += '-'
+    data += '-'
+    data += '-'
+
+
+    return render(request, 'women/ormlearning.html',{'data':data})
