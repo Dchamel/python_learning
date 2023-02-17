@@ -196,6 +196,7 @@ def ormlearning(request):
     data += '-'
     data.append(Women.objects.filter(cat__slug='actors'))
     data += '-'
+    data.append(Women.objects.filter(cat__in=[2]))
     data += '-'
     data += '-'
     data += '-'
