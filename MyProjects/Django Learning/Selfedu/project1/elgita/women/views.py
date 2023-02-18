@@ -198,7 +198,9 @@ def ormlearning(request):
     data += '-'
     data.append(Women.objects.filter(cat__in=[2]))
     data += '-'
+    data.append(Women.objects.filter(cat__name__contains='ct'))
     data += '-'
+    data.append(Category.objects.filter(women__title__contains='ma'))
     data += '-'
     data += '-'
     data += '-'
