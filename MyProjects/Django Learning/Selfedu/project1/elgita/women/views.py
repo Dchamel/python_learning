@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
-from django.db.models import Q
+from django.db.models import *
 
 from .forms import *
 from .models import *
@@ -202,12 +202,19 @@ def ormlearning(request):
     data += '-'
     data.append(Category.objects.filter(women__title__contains='ma'))
     data += '-'
+    data.append(Women.objects.count())
     data += '-'
+    data.append(Women.objects.aggregate(Min('cat_id')))
     data += '-'
+    data.append(Women.objects.aggregate(Min('cat_id'), Max('cat_id')))
     data += '-'
+    data.append(Women.objects.aggregate(min=Min('cat_id'), max=Max('cat_id')))
     data += '-'
+    data.append(Women.objects.aggregate(res=Min('id') - Max('id')))
     data += '-'
+    data.append(Women.objects.aggregate(res=Avg("id")))
     data += '-'
+    data.append(Women.objects.filter(pk__gt=4).aggregate(res=Avg('id')))
     data += '-'
     data += '-'
     data += '-'
