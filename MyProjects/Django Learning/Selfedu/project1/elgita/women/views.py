@@ -1,3 +1,4 @@
+from django.db.models.functions import Length
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from django.urls import reverse_lazy
@@ -216,11 +217,34 @@ def ormlearning(request):
     data += '-'
     data.append(Women.objects.filter(pk__gt=4).aggregate(res=Avg('id')))
     data += '-'
+    data.append(Women.objects.values('title', 'cat_id').get(pk=1))
     data += '-'
+    data.append(Women.objects.values('title', 'cat__name').get(pk=1))
     data += '-'
+    #Group By
+    data.append(Women.objects.values(category=F('cat_id')).annotate(count=Count('id')))
     data += '-'
+    data.append(Category.objects.annotate(total=Count('women')).filter(total__gte=4))
     data += '-'
+    data.append(Women.objects.filter(pk__gt=F('cat_id')))
     data += '-'
+    len11 = Women.objects.annotate(len=Length('title'))
+    data += (item.title +' '+ str(item.len) for item in len11)
+    data += '-'
+    q01 = Women.objects.raw('SELECT id, title from women_women')
+    data += (str(each.id)+' '+each.title for each in q01)
+    data += '-'
+    q02 = Women.objects.raw('SELECT id, title FROM women_women WHERE slug="halle-berry"')
+    data += q02
+    data += '-'
+    #WARNING right way to sql-injections
+    slug01 = 'pink'
+    q03 = Women.objects.raw(f'SELECT id, title FROM women_women WHERE slug="{slug01}"')
+    data += q03
+    data += '-'
+    #Simple protection against sql-injections
+    q04 = Women.objects.raw('SELECT id, title FROM women_women WHERE slug=%s', [slug01])
+    data += q04
     data += '-'
 
 
