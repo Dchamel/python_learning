@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from django.db.models.functions import Length
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse, HttpResponseNotFound, Http404
@@ -18,6 +19,8 @@ class WomenHome(DataMixin, ListView):
     # model = Women
     template_name = 'women/index.html'
     context_object_name = 'posts'
+
+    paginate_by = 3
 
     def get_queryset(self):
         return Women.objects.filter(is_published=True)
@@ -39,7 +42,13 @@ class WomenHome(DataMixin, ListView):
 
 # @login_required
 def about(request):
-    return render(request, 'women/about.html', {'menu': menu, 'title': 'About us'})
+    contact_list = Women.objects.all()
+    paginator = Paginator(contact_list, 3)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'women/about.html', {'page_obj': page_obj, 'menu': menu, 'title': 'About us'})
 
 class AddPage(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddPostForm
@@ -104,6 +113,7 @@ class WomenCategory(DataMixin, ListView):
     template_name = 'women/index.html'
     context_object_name = 'posts'
     allow_empty = False
+
 
     def get_queryset(self):
         return Women.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True)
