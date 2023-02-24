@@ -20,8 +20,6 @@ class WomenHome(DataMixin, ListView):
     template_name = 'women/index.html'
     context_object_name = 'posts'
 
-    paginate_by = 3
-
     def get_queryset(self):
         return Women.objects.filter(is_published=True)
 
