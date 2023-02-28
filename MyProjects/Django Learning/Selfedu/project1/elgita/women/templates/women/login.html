@@ -1,0 +1,36 @@
+{% extends 'women/base.html' %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {#{{ form.as_p }}#}
+
+        <div class="form-error">{{ form.non_field_errors }}</div>
+
+        <table>
+            {% for f in form %}
+                <tr>
+                    <td>
+                        <label for="{{ f.id_for_label }}" style="margin-right: 10px">
+                            {{ f.label }}
+                        </label>
+                    </td>
+                    <td>{{ f }}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-error">
+                            {{ f.errors }}
+                        </div>
+                    </td>
+                </tr>
+
+            {% endfor %}
+        </table>
+
+        <button type="submit">Login</button>
+    </form>
+
+{% endblock %}

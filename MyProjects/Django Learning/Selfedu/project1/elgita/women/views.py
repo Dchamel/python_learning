@@ -1,4 +1,7 @@
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import logout, login
+from django.contrib.auth.views import LoginView
 from django.core.paginator import Paginator
 from django.db.models.functions import Length
 from django.shortcuts import render, redirect, get_object_or_404
@@ -14,7 +17,6 @@ from .utils import *
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-
 class WomenHome(DataMixin, ListView):
     # model = Women
     template_name = 'women/index.html'
@@ -26,7 +28,8 @@ class WomenHome(DataMixin, ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Main Page')
-        return dict(list(context.items())+ list(c_def.items()))
+        return dict(list(context.items()) + list(c_def.items()))
+
 
 # def index(request):
 #     posts = Women.objects.all()
@@ -48,6 +51,7 @@ def about(request):
 
     return render(request, 'women/about.html', {'page_obj': page_obj, 'menu': menu, 'title': 'About us'})
 
+
 class AddPage(LoginRequiredMixin, DataMixin, CreateView):
     form_class = AddPostForm
     template_name = 'women/addpage.html'
@@ -59,6 +63,7 @@ class AddPage(LoginRequiredMixin, DataMixin, CreateView):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Add Article')
         return dict(list(context.items()) + list(c_def.items()))
+
 
 # def addpage(request):
 #     if request.method == 'POST':
@@ -79,8 +84,9 @@ class AddPage(LoginRequiredMixin, DataMixin, CreateView):
 def contact(request):
     return HttpResponse('Feedback')
 
-def login(request):
-    return HttpResponse('Login')
+
+# def login(request):
+#     return HttpResponse('Login')
 
 class ShowPost(DataMixin, DetailView):
     model = Women
@@ -112,14 +118,15 @@ class WomenCategory(DataMixin, ListView):
     context_object_name = 'posts'
     allow_empty = False
 
-
     def get_queryset(self):
         return Women.objects.filter(cat__slug=self.kwargs['cat_slug'], is_published=True)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title='Category- ' + str(context['posts'][0].cat), cat_selected=context['posts'][0].cat_id)
+        c_def = self.get_user_context(title='Category- ' + str(context['posts'][0].cat),
+                                      cat_selected=context['posts'][0].cat_id)
         return dict(list(context.items()) + list(c_def.items()))
+
 
 # def show_category(request, cat_slug):
 #     cat_id = get_object_or_404(Category, slug=cat_slug).id
@@ -137,6 +144,7 @@ class WomenCategory(DataMixin, ListView):
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound('<h1>page not found</h1>')
+
 
 def ormlearning(request):
     data = []
@@ -163,14 +171,14 @@ def ormlearning(request):
     data += '-'
     data.append(Women.objects.filter(title__contains='av'))
     data += '-'
-    data.append(Women.objects.filter(pk__in=[1,3,4]))
+    data.append(Women.objects.filter(pk__in=[1, 3, 4]))
     data += '-'
     try:
         data.append(Women.objects.filter(pk__in=[1, 3, 4]), is_published=False)
     except:
         data.append('None')
     data += '-'
-    data.append(Women.objects.filter(cat__in=[1,2]))
+    data.append(Women.objects.filter(cat__in=[1, 2]))
     data += '-'
     data.append(Women.objects.filter(cat__in=Category.objects.all()))
     data += '-'
@@ -233,7 +241,7 @@ def ormlearning(request):
     data += '-'
     data.append(Women.objects.values('title', 'cat__name').get(pk=1))
     data += '-'
-    #Group By
+    # Group By
     data.append(Women.objects.values(category=F('cat_id')).annotate(count=Count('id')))
     data += '-'
     data.append(Category.objects.annotate(total=Count('women')).filter(total__gte=4))
@@ -241,26 +249,26 @@ def ormlearning(request):
     data.append(Women.objects.filter(pk__gt=F('cat_id')))
     data += '-'
     len11 = Women.objects.annotate(len=Length('title'))
-    data += (item.title +' '+ str(item.len) for item in len11)
+    data += (item.title + ' ' + str(item.len) for item in len11)
     data += '-'
     q01 = Women.objects.raw('SELECT id, title from women_women')
-    data += (str(each.id)+' '+each.title for each in q01)
+    data += (str(each.id) + ' ' + each.title for each in q01)
     data += '-'
     q02 = Women.objects.raw('SELECT id, title FROM women_women WHERE slug="halle-berry"')
     data += q02
     data += '-'
-    #WARNING right way to sql-injections
+    # WARNING right way to sql-injections
     slug01 = 'pink'
     q03 = Women.objects.raw(f'SELECT id, title FROM women_women WHERE slug="{slug01}"')
     data += q03
     data += '-'
-    #Simple protection against sql-injections
+    # Simple protection against sql-injections
     q04 = Women.objects.raw('SELECT id, title FROM women_women WHERE slug=%s', [slug01])
     data += q04
     data += '-'
 
+    return render(request, 'women/ormlearning.html', {'data': data})
 
-    return render(request, 'women/ormlearning.html',{'data':data})
 
 class RegisterUser(DataMixin, CreateView):
     form_class = RegisterUserForm
@@ -271,3 +279,26 @@ class RegisterUser(DataMixin, CreateView):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_context(title='Register')
         return dict(list(context.items()) + list(c_def.items()))
+
+    def form_valid(self, form):
+        user = form.save()
+        login(self.request, user)
+        return redirect('home')
+
+
+class LoginUser(DataMixin, LoginView):
+    form_class = LoginUserForm
+    template_name = 'women/login.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title='Login')
+        return dict(list(context.items()) + list(c_def.items()))
+
+    def get_success_url(self):
+        return reverse_lazy('home')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('home')
