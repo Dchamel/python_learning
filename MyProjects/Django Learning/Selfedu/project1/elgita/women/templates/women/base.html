@@ -41,29 +41,33 @@
                 <div class="clear"></div>
             </div>
 
+            {#sidebar#}
             <table class="table-content" border=0 cellpadding="0" cellspacing="0">
                 <tr>
                     <!-- Sidebar слева -->
+                    {% load cache %}
                     <td valign="top" class="left-chapters">
 
                         <ul id="leftchapters">
-                            {% if cat_selected == 0 %}
-                                <li class="selected">All Categories</li>
-                            {% else %}
-                                <li><a href="{% url 'home' %}">All Categories</a></li>
-                            {% endif %}
-
-                            {#{% show_categories 'name' cat_selected %}#}
-
-                            {% for c in cats %}
-                                {% if c.women__count > 0 %}
-                                    {% if c.pk == cat_selected %}
-                                        <li class="selected">{{ c.name }}</li>
-                                    {% else %}
-                                        <li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
-                                    {% endif %}
+                            {% cache 60 sidebar %}
+                                {% if cat_selected == 0 %}
+                                    <li class="selected">All Categories</li>
+                                {% else %}
+                                    <li><a href="{% url 'home' %}">All Categories</a></li>
                                 {% endif %}
-                            {% endfor %}
+
+                                {#{% show_categories 'name' cat_selected %}#}
+
+                                {% for c in cats %}
+                                    {% if c.women__count > 0 %}
+                                        {% if c.pk == cat_selected %}
+                                            <li class="selected">{{ c.name }}</li>
+                                        {% else %}
+                                            <li><a href="{{ c.get_absolute_url }}">{{ c.name }}</a></li>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endcache %}
 
                             <li class="share">
                                 <p>Channel of the lesson author:</p>
@@ -74,6 +78,7 @@
                         </ul>
                     </td>
                     <!-- Конец Sidebar'а -->
+
                     <td valign="top" class="content">
                         <!-- Хлебные крошки -->
                         {% block breadcrumbs %}
