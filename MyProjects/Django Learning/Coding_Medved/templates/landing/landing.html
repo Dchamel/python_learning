@@ -10,22 +10,36 @@
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>Document</title>
+
+    <style>
+        html, body {
+            height: 100%;
+            max-height: 100%;
+        }
+
+        .top-container {
+            margin-top: 10%;
+
+        }
+    </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <h2 class="text-center">Our store will be opened soon</h2>
-            <h3 class="text-center">Write down your email below<br>and we will notice you</h3>
-            <div>
-                <form action="" method="post">
-                    {% csrf_token %}
-                    {{ form.as_p }}
-                    <div>
-                        <button type="submit" class="btn btn-primary">Send</button>
-                    </div>
-                </form>
+<div class="general-container">
+    <div class="container top-container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h2 class="text-center">Our store will be opened soon</h2>
+                <h3 class="text-center">Write down your email below<br>and we will notice you</h3>
+                <div>
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <div>
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
