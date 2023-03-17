@@ -17,6 +17,8 @@ class Order(models.Model):
 
 
 class ProductInOrder(models.Model):
+    order = models
+
     customer_name = models.CharField(max_length=50, blank=True, null=True, default=None)
     customer_email = models.EmailField(blank=True, null=True, default=None)
     customer_phone = models.CharField(max_length=48, blank=True, null=True, default=None)
