@@ -9,7 +9,7 @@ class Products(models.Model):
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
-        return '%s' % self.id
+        return '%s' % self.name
 
     class Meta:
         verbose_name = 'Product'
