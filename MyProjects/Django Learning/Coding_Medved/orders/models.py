@@ -35,6 +35,9 @@ class Orders(models.Model):
         verbose_name = 'Order'
         verbose_name_plural = 'Orders'
 
+    def save(self, *args, **kwargs):
+        super(Orders, self).save(*args, **kwargs)
+
 
 class ProductInOrder(models.Model):
     order = models.ForeignKey(Orders, blank=True, null=True, default=None, on_delete=models.CASCADE)
@@ -50,5 +53,22 @@ class ProductInOrder(models.Model):
         return '%s' % self.product.name
 
     class Meta:
-        verbose_name = 'Product'
-        verbose_name_plural = 'Products'
+        verbose_name = 'Product in order'
+        verbose_name_plural = 'Products in order'
+
+    def save(self, *args, **kwargs):
+        self.price_per_item = self.product.price
+        self.total_price = self.number * self.price_per_item
+
+        super(ProductInOrder, self).save(*args, **kwargs)
+
+    def product_in_order_post_save(self):
+        order = self.order
+        all_products_in_order = ProductInOrder.objects.filter(order=order, is_active=True)
+
+        order_total_price = 0
+        for item in all_products_in_order:
+            order_total_price += item.total_price
+
+        self.order.total_price = order_total_price
+        self.order.save(force_update=True)
