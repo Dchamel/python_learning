@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="section-top">
+        <img src="{% static 'img/slider0.jpg' %}" class="img-responsive" alt="">
+    </div>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                {% for product in products %}
+                    <div class="col-lg-3">
+                        <div class="product-item">
+                            <div>
+                                <img src="/" alt="" class="img-responsive">
+                            </div>
+                            <h4>{{ product.name }}</h4>
+                            <p>{{ product.description | truncatechars:100 }}</p>
+                            <button class="btn btn-success">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
