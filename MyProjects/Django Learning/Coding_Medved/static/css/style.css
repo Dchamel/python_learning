@@ -10,12 +10,26 @@ html, body {
 }
 
 .product-item {
-    height: 200px;
+    height: 460px;
     background-color: white;
     border: 1px solid lightgrey;
     position: relative;
     padding: 5px;
     text-align: center;
+}
+
+.add-to-cart-btn {
+    position: absolute;
+    bottom: 10px;
+    left: 0px;
+    right: 0px;
+}
+
+.price {
+    position: absolute;
+    bottom: 52px;
+    left: 0px;
+    right: 0px;
 }
 
 

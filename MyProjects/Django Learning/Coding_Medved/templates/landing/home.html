@@ -8,17 +8,26 @@
     <div class="section">
         <div class="container">
             <div class="row">
-                {% for product in products %}
+                {% for product_image in products_images|slice:':4' %}
                     <div class="col-lg-3">
                         <div class="product-item">
-                            <div>
-                                <img src="/" alt="" class="img-responsive">
+                            <div class="img">
+                                <img src="{{ product_image.image.url }}" alt="" class="img-responsive">
                             </div>
-                            <h4>{{ product.name }}</h4>
-                            <p>{{ product.description | truncatechars:100 }}</p>
-                            <button class="btn btn-success">
-                                Add to Cart
-                            </button>
+
+                            <h4>{{ product_image.product.name }}</h4>
+                            {#<p>{{ product.description | truncatechars:100 }}</p>#}
+                            <p>{{ product_image.product.short_description }}</p>
+
+                            <div class="price">
+                                {{ product_image.product.price }} mon
+                            </div>
+
+                            <div class="add-to-cart-btn">
+                                <button class="btn btn-success">
+                                    Add to cart
+                                </button>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
