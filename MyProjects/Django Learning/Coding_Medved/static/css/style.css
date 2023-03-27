@@ -5,6 +5,10 @@ html, body {
     background-color: #eeeeee;
 }
 
+.navbar {
+    margin-bottom: 0;
+}
+
 .section-top {
     margin: 20px;
 }
