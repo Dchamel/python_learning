@@ -14,12 +14,23 @@ html, body {
 }
 
 .product-item {
-    height: 460px;
+    height: 520px;
     background-color: white;
     border: 1px solid lightgrey;
     position: relative;
     padding: 5px;
     text-align: center;
+}
+
+.discount-container {
+    position: absolute;
+    top: 10%;
+    background-color: blue;
+    width: 35%;
+    height: 8%;
+    color: floralwhite;
+    font-size: xx-large;
+    text-shadow: 1px 2px 4px aqua;
 }
 
 .add-to-cart-btn {

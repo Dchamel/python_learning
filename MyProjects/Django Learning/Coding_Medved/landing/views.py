@@ -13,7 +13,7 @@ def landing(request):
 
 
 def home(request):
-    products_images = ProductImage.objects.filter(is_active=True)
-    products_images_phones = products_images.filter()
-    products_images_laptops = products_images.filter()
+    products_images = ProductImage.objects.filter(is_active=True, product__is_active=True).order_by('?')
+    products_images_phones = products_images.filter(product__category__name__contains='Phones')
+    products_images_laptops = products_images.filter(product__category__name__contains='Laptops')
     return render(request, 'landing/home.html', locals())
