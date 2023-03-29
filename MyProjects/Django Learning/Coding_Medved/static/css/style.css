@@ -47,4 +47,10 @@ html, body {
     right: 0px;
 }
 
+.section-delivery {
+    height: 300px;
+    background-color: lightgrey;
+    padding-top: 10px;
+}
+
 
