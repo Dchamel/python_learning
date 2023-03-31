@@ -53,4 +53,20 @@ html, body {
     padding-top: 10px;
 }
 
+.wrapper {
+    min-height: 100%;
+    padding-bottom: 180px;
+}
+
+.wrapper-content {
+    overflow: auto;
+}
+
+.footer {
+    position: relative;
+    margin-top: -180px;
+    height: 180px;
+    clear: both;
+    background-color: lightgrey;
+}
 

@@ -20,15 +20,17 @@
 <body>
 
 <div class="wrapper">
+    <div class="wrapper-content">
+        {% include 'navbar.html' %}
 
-    {% include 'navbar.html' %}
-
-    {% block content %}
-    {% endblock %}
-
-    {% include 'footer.html' %}
+        {% block content %}
+        {% endblock %}
+    </div>
 
 </div>
+
+{% include 'footer.html' %}
+
 
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>

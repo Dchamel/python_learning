@@ -2,6 +2,25 @@
 {% load static %}
 
 {% block content %}
-    <h3>Test</h3>
-    {{ product.name }}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                {% for image in product.productimage_set.all %}
+                    <img src="{{ image.image.url }}" alt="{{ product.name }}" class="img-rounded">
+                {% endfor %}
+            </div>
+            <div class="col-lg-6">
+                <h1 class="text-center">
+                    {{ product.name }}
+                </h1>
+                <div>
+                    <p>Price: {{ product.price }}</p>
+                </div>
+                <div>
+                    <p>{{ product.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
