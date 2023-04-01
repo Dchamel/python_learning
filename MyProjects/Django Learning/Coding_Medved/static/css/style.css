@@ -70,3 +70,11 @@ html, body {
     background-color: lightgrey;
 }
 
+.one-product-content-text {
+    margin-top: 20px;
+}
+
+.product-image-item {
+    padding: 5px;
+    margin-bottom: 5px;
+}
