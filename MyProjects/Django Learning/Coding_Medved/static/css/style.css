@@ -78,3 +78,8 @@ html, body {
     padding: 5px;
     margin-bottom: 5px;
 }
+
+.navbar-top {
+    height: 10px;
+    background-color: green;
+}
