@@ -11,11 +11,11 @@ $(document).ready(function () {
         var product_name = submit_btn.data('product-name')
         var product_price = submit_btn.data('product-price')
         console.log(product_id, product_name, product_price * num)
-        $('.cart-items ul').append('<li>' + product_name + ' Quantity: ' + num + '</li>')
+        $('.cart-items ul').append('<li>' + product_name + '<br />Quantity: ' + num + ' Price: ' + product_price + ' mon <a class="delete-item" href="#">x</a></li>')
     })
 
     function showingCart() {
-        $('.cart-items').toggleClass('hidden')
+        $('.cart-items').removeClass('hidden')
     }
 
     $('.cart-container').on('click', function (e) {
@@ -26,8 +26,13 @@ $(document).ready(function () {
         showingCart()
     })
 
-    $('.cart-container').mouseout(function () {
-        showingCart()
+    // $('.cart-container').mouseout(function () {
+    //     showingCart()
+    // })
+
+    $(document).on('click', '.delete-item', function (e) {
+        e.preventDefault()
+        $(this).closest('li').remove()
     })
 
 })
