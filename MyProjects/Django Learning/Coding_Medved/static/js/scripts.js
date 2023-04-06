@@ -11,6 +11,29 @@ $(document).ready(function () {
         var product_name = submit_btn.data('product-name')
         var product_price = submit_btn.data('product-price')
         console.log(product_id, product_name, product_price * num)
+
+        var data = {}
+        data.product_id = product_id
+        data.num = num
+        var csrf_token = $('#form_ordering_product [name="csrfmiddlewaretoken"]').val();
+        data["csrfmiddlewaretoken"] = csrf_token;
+        var url = form.attr('action')
+
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            cache: true,
+            success: function (data) {
+                console.log("OK")
+            },
+            error: function () {
+                console.log("error")
+            }
+        })
+
+
         $('.cart-items ul').append('<li>' + product_name + '<br />Quantity: ' + num + ' Price: ' + product_price + ' mon <a class="delete-item" href="#">x</a></li>')
     })
 
