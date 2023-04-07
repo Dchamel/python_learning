@@ -26,7 +26,7 @@ $(document).ready(function () {
             data: data,
             cache: true,
             success: function (data) {
-                console.log("OK")
+                console.log("OKi")
             },
             error: function () {
                 console.log("error")

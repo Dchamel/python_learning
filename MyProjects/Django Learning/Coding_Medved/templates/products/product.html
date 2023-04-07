@@ -57,7 +57,7 @@
                 </div>
 
                 <div>
-                    <form action="{% %}" id="form_ordering_product" class="form-inline">
+                    <form action="{% url 'basket_adding' %}" id="form_ordering_product" class="form-inline">
                         {% csrf_token %}
                         <input type="number" class="form-control" value="1" id="number">
                         <button type="submit" class="btn btn-success" id="submit_btn"
