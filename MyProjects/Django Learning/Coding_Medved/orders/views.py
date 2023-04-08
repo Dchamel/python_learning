@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from .models import ProductInBasket
 
 
 def basket_adding(request):
@@ -6,5 +7,7 @@ def basket_adding(request):
 
     session_key = request.session.session_key
     print(request.POST)
+
+    ProductInBasket.objects.get(session_key=session_key)
 
     return JsonResponse(return_dict)
