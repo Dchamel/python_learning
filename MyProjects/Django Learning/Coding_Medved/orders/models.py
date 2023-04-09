@@ -96,3 +96,9 @@ class ProductInBasket(models.Model):
     class Meta:
         verbose_name = 'Product in Cart'
         verbose_name_plural = 'Products in Cart'
+
+    def save(self, *args, **kwargs):
+        self.price_per_item = self.product.price
+        self.total_price = int(self.number) * self.price_per_item
+
+        super(ProductInBasket, self).save(*args, **kwargs)

@@ -28,6 +28,10 @@ $(document).ready(function () {
             cache: true,
             success: function (data) {
                 console.log("OKi")
+                console.log(data.products_total_numb)
+                if (data.products_total_numb) {
+                    $('#cart_total_numb').text('(' + data.products_total_numb + ' goods)')
+                }
             },
             error: function () {
                 console.log("error")
