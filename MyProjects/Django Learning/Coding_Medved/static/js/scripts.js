@@ -30,7 +30,12 @@ $(document).ready(function () {
                 console.log("OKi")
                 console.log(data.products_total_numb)
                 if (data.products_total_numb) {
-                    $('#cart_total_numb').text('(' + data.products_total_numb + ' goods)')
+                    $('#cart_total_numb').text('(' + data.products_total_numb + ')')
+                    console.log(data.products)
+                    $('.cart-items ul').html('')
+                    $.each(data.products, function (k, v) {
+                        $('.cart-items ul').append('<li>' + v.name + '<br /> x ' + v.num + ' Total ' + v.price_per_item * num + ' mon</li>')
+                    })
                 }
             },
             error: function () {
@@ -39,7 +44,7 @@ $(document).ready(function () {
         })
 
 
-        $('.cart-items ul').append('<li>' + product_name + '<br />Quantity: ' + num + ' Price: ' + product_price + ' mon <a class="delete-item" href="#">x</a></li>')
+        $('.cart-items ul').append('<li>' + product_name + '<br /> x ' + num + ' Total ' + product_price * num + ' mon</li>')
     })
 
     function showingCart() {
