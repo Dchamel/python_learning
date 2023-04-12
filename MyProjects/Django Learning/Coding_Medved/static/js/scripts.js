@@ -1,17 +1,8 @@
 $(document).ready(function () {
     var form = $('#form_ordering_product')
     console.log(form)
-    form.on('submit', function (e) {
-        e.preventDefault()
-        console.log('123')
-        var num = $('#number').val()
-        console.log(num)
-        var submit_btn = $('#submit_btn')
-        var product_id = submit_btn.data('product-id')
-        var product_name = submit_btn.data('product-name')
-        var product_price = submit_btn.data('product-price')
-        console.log(product_id, product_name, product_price * num)
 
+    function basketUpdating(product_id, num, is_delete) {
         var data = {}
         data.product_id = product_id
         data.num = num
@@ -34,7 +25,7 @@ $(document).ready(function () {
                     console.log(data.products)
                     $('.cart-items ul').html('')
                     $.each(data.products, function (k, v) {
-                        $('.cart-items ul').append('<li>' + v.name + '<br /> x ' + v.num + ' Total ' + v.price_per_item * num + ' mon</li>')
+                        $('.cart-items ul').append('<li>' + v.name + '<br /> x ' + v.num + ' Total: ' + v.price_per_item * num + ' mon <a class="delete-item" data-product_id="' + v.id + '" href="">x</a></li>')
                     })
                 }
             },
@@ -42,6 +33,20 @@ $(document).ready(function () {
                 console.log("error")
             }
         })
+    }
+
+    form.on('submit', function (e) {
+        e.preventDefault()
+        console.log('123')
+        var num = $('#number').val()
+        console.log(num)
+        var submit_btn = $('#submit_btn')
+        var product_id = submit_btn.data('product-id')
+        var product_name = submit_btn.data('product-name')
+        var product_price = submit_btn.data('product-price')
+        console.log(product_id, product_name, product_price * num)
+
+        basketUpdating(product_id, num, is_delete = false)
 
 
         $('.cart-items ul').append('<li>' + product_name + '<br /> x ' + num + ' Total ' + product_price * num + ' mon</li>')
@@ -65,7 +70,9 @@ $(document).ready(function () {
 
     $(document).on('click', '.delete-item', function (e) {
         e.preventDefault()
-        $(this).closest('li').remove()
+        product_id = $(this).data('product_id')
+        num = 0
+        basketUpdating(product_id, num, is_delete = true)
     })
 
 })

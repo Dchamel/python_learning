@@ -50,8 +50,9 @@
                                 {% if products_in_basket %}
                                     {% for product_in_basket in products_in_basket %}
                                         <li>
-                                            {{ product_in_basket.product.name }} * {{ product_in_basket.number }}
-                                            = {{ product_in_basket.total_price }} mon
+                                            {{ product_in_basket.product.name }} x{{ product_in_basket.number }}
+                                            Total: {{ product_in_basket.total_price }} mon
+                                            <a class="delete-item" data-product_id='{{ product_in_basket.id }}' href="">x</a>
                                         </li>
                                     {% endfor %}
                                 {% endif %}
