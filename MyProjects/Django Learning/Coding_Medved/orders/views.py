@@ -10,10 +10,11 @@ def basket_adding(request):
     num = data.get('num')
     is_delete = data.get('is_delete')
 
-    if is_delete:
-        ProductInBasket.objects.filter(id=product_id).update(is_delete=False)
+    if is_delete == 'true':
+        ProductInBasket.objects.filter(id=product_id).update(is_active=False)
     else:
         new_product, created = ProductInBasket.objects.get_or_create(session_key=session_key, product_id=product_id,
+                                                                     is_active=True,
                                                                      defaults={'number': num})
         if not created:
             new_product.number += int(num)

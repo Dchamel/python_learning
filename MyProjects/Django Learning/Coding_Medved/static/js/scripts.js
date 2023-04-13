@@ -8,6 +8,11 @@ $(document).ready(function () {
         data.num = num
         var csrf_token = $('#form_ordering_product [name="csrfmiddlewaretoken"]').val();
         data["csrfmiddlewaretoken"] = csrf_token;
+
+        if (is_delete) {
+            data['is_delete'] = true
+        }
+
         var url = form.attr('action')
 
         console.log(data)
@@ -20,7 +25,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log("OKi")
                 console.log(data.products_total_numb)
-                if (data.products_total_numb) {
+                if (data.products_total_numb || data.products_total_numb == 0) {
                     $('#cart_total_numb').text('(' + data.products_total_numb + ')')
                     console.log(data.products)
                     $('.cart-items ul').html('')
