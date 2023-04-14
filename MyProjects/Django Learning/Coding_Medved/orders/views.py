@@ -1,4 +1,6 @@
 from django.http import JsonResponse
+from django.shortcuts import render
+
 from .models import ProductInBasket
 
 
@@ -33,3 +35,7 @@ def basket_adding(request):
         return_dict['products'].append(products_dict)
 
     return JsonResponse(return_dict)
+
+
+def checkout(request):
+    return render(request, 'orders/checkout.html', locals())
