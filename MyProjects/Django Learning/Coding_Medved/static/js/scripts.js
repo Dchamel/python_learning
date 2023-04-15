@@ -80,4 +80,7 @@ $(document).ready(function () {
         basketUpdating(product_id, num, is_delete = true)
     })
 
+    function calculatingBasketAmount() {
+        if
+            }
 })
