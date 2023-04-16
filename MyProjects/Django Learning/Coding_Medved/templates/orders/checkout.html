@@ -21,16 +21,18 @@
                         {% for product_in_cart in products_in_cart %}
                             <tr>
                                 <td>{{ product_in_cart.product.name }}</td>
-                                <td><input value="{{ product_in_cart.number }}" type="number"></td>
-                                <td>{{ product_in_cart.price_per_item }}</td>
-                                <td>{{ product_in_cart.total_price }}</td>
+                                <td><input value="{{ product_in_cart.number }}" type="number"
+                                           class="product_number_in_cart"></td>
+                                <td><span class="product_price_in_cart">{{ product_in_cart.price_per_item }}</span></td>
+                                <td><span class="total_product_price_in_cart">{{ product_in_cart.total_price }}</span>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
                     </table>
                     <div class="text-right">
                         <hr class="checkout-total-price">
-                        <h3>Order total Price: <span id="total_order_amount">1231</span></h3>
+                        <h3>Order total Price: <span id="total_order_amount"></span></h3>
                         <br>
                     </div>
                     <div class="text-right">

@@ -81,6 +81,23 @@ $(document).ready(function () {
     })
 
     function calculatingBasketAmount() {
-        if
-            }
+        var total_order_amount = 0
+        $('.total_product_price_in_cart').each(function () {
+            total_order_amount += parseFloat($(this).text())
+        })
+        total_order_amount = total_order_amount.toFixed(2)
+        $('#total_order_amount').text(total_order_amount)
+    }
+
+    $(document).on('change', '.product_number_in_cart', function () {
+        var current_num = $(this).val()
+        var current_tr = $(this).closest('tr')
+        var current_price = parseFloat(current_tr.find('.product_price_in_cart').text())
+        var total_price = (current_price * current_num).toFixed(2)
+        current_tr.find('.total_product_price_in_cart').text(total_price)
+
+        calculatingBasketAmount()
+    })
+
+    calculatingBasketAmount()
 })
