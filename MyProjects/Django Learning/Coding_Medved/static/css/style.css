@@ -104,3 +104,7 @@ html, body {
     width: 70%;
     border-top: 1px solid #F1E
 }
+
+.form-error {
+    color: red;
+}
