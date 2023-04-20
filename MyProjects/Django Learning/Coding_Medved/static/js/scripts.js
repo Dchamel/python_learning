@@ -61,11 +61,12 @@ $(document).ready(function () {
         $('.cart-items').removeClass('hidden')
     }
 
-    $('.cart-container').on('click', function (e) {
+    // $('.cart-container').on('click', function (e) {
+    //     e.preventDefault()
+    //     showingCart()
+    // })
+    $('.cart-container').mouseover(function (e) {
         e.preventDefault()
-        showingCart()
-    })
-    $('.cart-container').mouseover(function () {
         showingCart()
     })
 
