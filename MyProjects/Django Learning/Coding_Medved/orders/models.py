@@ -27,12 +27,15 @@ class Orders(models.Model):
     customer_phone = models.CharField(max_length=48, blank=True, null=True, default=None)
     customer_address = models.CharField(max_length=128, blank=True, null=True, default=None)
     comments = models.TextField(blank=True, null=True, default=None)
-    status = models.ForeignKey(Status, on_delete=models.CASCADE, blank=True)
+    status = models.ForeignKey(Status, on_delete=models.CASCADE, null=True)
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
     def __str__(self):
-        return 'Order %s %s' % (self.id, self.status.name)
+        if self.status is not None:
+            return 'Order %s %s' % (self.id, self.status.name)
+        else:
+            return 'Order %s' % (self.id)
 
     class Meta:
         verbose_name = 'Order'
