@@ -86,8 +86,7 @@ $(document).ready(function () {
         $('.total_product_price_in_cart').each(function () {
             total_order_amount += parseFloat($(this).text())
         })
-        total_order_amount = total_order_amount.toFixed(2)
-        $('#total_order_amount').text(total_order_amount)
+        $('#total_order_amount').text(total_order_amount.toFixed(2));
     }
 
     $(document).on('change', '.product_number_in_cart', function () {
