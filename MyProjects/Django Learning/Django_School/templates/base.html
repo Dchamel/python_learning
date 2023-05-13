@@ -3,7 +3,7 @@
 <html lang="ru">
 <head>
     <!-- //Meta tag Keywords -->
-    <title>Clack Website Template</title>
+    <title>{% block title %}{% endblock %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- //Meta tag Keywords -->
@@ -24,8 +24,23 @@
 </head>
 <body>
 <div id="page" class="page">
-    {% include 'include/header.html' %}
-    {% include 'include/sidebar.html' %}
+
+    <div class="main-banner bg {% block header %}{% endblock %}" id="home">
+        {% include 'include/header.html' %}
+    </div>
+
+    <!--breadcrumb-->
+    <ol class="breadcrumb editContent">
+        <li class="breadcrumb-item">
+            <a href="index.html" class="editContent"
+               style="outline: none; cursor: inherit;">Home</a>
+        </li>
+        <li class="breadcrumb-item active editContent" style="outline: none; cursor: inherit;">
+            Single
+        </li>
+    </ol>
+    <!--//breadcrumb-->
+
     {% block content %}
 
     {% endblock %}
