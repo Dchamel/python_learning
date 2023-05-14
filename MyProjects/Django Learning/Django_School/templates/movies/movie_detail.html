@@ -141,8 +141,9 @@
                                     <span class="sub-tittle editContent"
                                           style="outline: none; cursor: inherit;">02</span>Оставить
                         отзыв</h3>
-                    <form action="{% url 'add_review' movie.id %}" method="post" class="mt-4">
+                    <form action="{% url 'add_review' movie.id %}" method="post" class="mt-4" id="formReview">
                         {% csrf_token %}
+                        <input type="hidden" name="parent" id="contactparent" value="">
                         <div class="form-group editContent">
                             <label for="contactcomment" class="editContent">
                                 Ваш комментарий*
