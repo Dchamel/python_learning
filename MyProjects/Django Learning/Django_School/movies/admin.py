@@ -26,6 +26,8 @@ class MovieAdmin(admin.ModelAdmin):
 
     save_as = True
 
+    list_editable = ('draft',)
+
 
 @admin.register(Reviews)
 class ReviewAdmin(admin.ModelAdmin):
