@@ -1,7 +1,19 @@
 from django.contrib import admin
+from django import forms
+
 from django.utils.safestring import mark_safe
+from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
 from .models import *
+
+
+class MovieAdminForm(forms.ModelForm):
+    # here we put field from our Model where do we need to see the editor
+    description = forms.CharField(label='Description CKEditor', widget=CKEditorUploadingWidget())
+
+    class Meta:
+        model = Movie
+        fields = '__all__'
 
 
 @admin.register(Category)
@@ -36,14 +48,11 @@ class MovieAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'url', 'draft')
     list_filter = ('category', 'year')
     search_fields = ('title', 'category__name')
-
     inlines = [MovieShotsInLine, ReviewInline]
-
     save_on_top = True
-
     save_as = True
-
     list_editable = ('draft',)
+    form = MovieAdminForm
     # fields = (('actors', 'directors', 'genres'),)
     fieldsets = (
         (None, {
