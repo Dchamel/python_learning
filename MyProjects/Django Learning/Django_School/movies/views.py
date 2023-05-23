@@ -2,18 +2,26 @@ from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import ListView, DetailView
 
-from .models import Movie, Category, Actor
+from .models import Movie, Category, Actor, Genre
 from .forms import ReviewForm
 
 
-class MoviesView(ListView):
+class GenreYear:
+    def get_genres(self):
+        return Genre.objects.all()
+
+    def get_years(self):
+        return Movie.objects.filter(draft=False)
+
+
+class MoviesView(GenreYear, ListView):
     '''All Films'''
     model = Movie
     queryset = Movie.objects.filter(draft=False)
     # template_name = 'movies/movie_list.html'
 
 
-class MovieDetailView(DetailView):
+class MovieDetailView(GenreYear, DetailView):
     '''One Film'''
     model = Movie
     slug_field = 'url'
