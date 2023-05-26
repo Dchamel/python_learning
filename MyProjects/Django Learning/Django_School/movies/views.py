@@ -1,9 +1,10 @@
 from django.db.models import Q
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.generic import ListView, DetailView
 
-from .models import Movie, Category, Actor, Genre
+from .models import Movie, Category, Actor, Genre, Rating
 from .forms import ReviewForm, RatingForm
 
 
