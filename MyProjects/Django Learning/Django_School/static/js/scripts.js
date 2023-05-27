@@ -2,7 +2,7 @@ const rating = document.querySelector('form[name=rating]')
 
 rating.addEventListener('change', function (e) {
     let data = new FormData(this)
-    fetch('${this.action}', {
+    fetch(`${this.action}`, {
         method: 'POST',
         body: data
     })
