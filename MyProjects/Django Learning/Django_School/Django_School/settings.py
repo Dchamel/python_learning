@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor',
     'ckeditor_uploader',
+    'snowpenguin.django.recaptcha3',
 
     'movies',
 ]
@@ -209,3 +210,4 @@ RECAPTCHA_PUBLIC_KEY = os.environ['RECAPTCHA_PUBLIC_KEY']
 RECAPTCHA_PRIVATE_KEY = os.environ['RECAPTCHA_PRIVATE_KEY']
 RECAPTCHA_DEFAULT_ACTION = os.environ['RECAPTCHA_DEFAULT_ACTION']
 RECAPTCHA_SCORE_THRESHOLD = os.environ['RECAPTCHA_SCORE_THRESHOLD']
+RECAPTCHA_LANGUAGE = 'en'

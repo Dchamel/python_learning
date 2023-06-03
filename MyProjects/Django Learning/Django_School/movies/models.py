@@ -2,6 +2,7 @@ from datetime import date
 
 from django.db import models
 from django.urls import reverse
+from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 
 
 class Category(models.Model):

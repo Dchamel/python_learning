@@ -1,13 +1,27 @@
 from django import forms
 from .models import Reviews, Rating, RatingStar
+from django.utils.translation import gettext_lazy as _
+from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 
 
 class ReviewForm(forms.ModelForm):
     '''Review Form'''
+    captcha = ReCaptchaField()
 
     class Meta:
         model = Reviews
-        fields = ('name', 'email', 'text')
+        fields = ('name', 'email', 'text', 'captcha')
+
+        widgets = {
+            "name": forms.TextInput(attrs={"class": "form-control border"}),
+            "email": forms.EmailInput(attrs={"class": "form-control border"}),
+            "text": forms.Textarea(attrs={"class": "form-control border"})
+        }
+
+    def validate(self, attrs):
+        attrs.pop("recaptcha")
+        ...
+        return attrs
 
 
 class RatingForm(forms.ModelForm):
