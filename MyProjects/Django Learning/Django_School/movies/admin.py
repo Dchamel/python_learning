@@ -1,6 +1,9 @@
 from django.contrib import admin
 from django import forms
 
+from django.contrib.flatpages.admin import FlatPageAdmin
+from django.contrib.flatpages.models import FlatPage
+
 from django.utils.safestring import mark_safe
 from ckeditor_uploader.widgets import CKEditorUploadingWidget
 
@@ -156,3 +159,13 @@ admin.site.register(RatingStar)
 
 admin.site.site_title = 'Django Movies'
 admin.site.site_header = 'Django Movies'
+
+
+class FlatPagesAdminCustom(FlatPageAdmin):
+    formfield_overrides = {
+        models.TextField: {'widget': CKEditorUploadingWidget}
+    }
+
+
+admin.site.unregister(FlatPage)
+admin.site.register(FlatPage, FlatPagesAdminCustom)

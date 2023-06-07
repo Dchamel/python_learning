@@ -18,11 +18,6 @@ class ReviewForm(forms.ModelForm):
             "text": forms.Textarea(attrs={"class": "form-control border"})
         }
 
-    def validate(self, attrs):
-        attrs.pop("recaptcha")
-        ...
-        return attrs
-
 
 class RatingForm(forms.ModelForm):
     '''Rating Add Form'''
