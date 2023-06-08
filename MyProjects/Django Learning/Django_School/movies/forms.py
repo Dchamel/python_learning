@@ -1,6 +1,5 @@
 from django import forms
 from .models import Reviews, Rating, RatingStar
-from django.utils.translation import gettext_lazy as _
 from snowpenguin.django.recaptcha3.fields import ReCaptchaField
 
 

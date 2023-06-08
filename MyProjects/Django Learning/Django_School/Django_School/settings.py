@@ -42,9 +42,10 @@ INSTALLED_APPS = [
     'django.contrib.flatpages',
     'ckeditor',
     'ckeditor_uploader',
-    'snowpenguin.django.recaptcha3',
 
     'movies',
+    'contact',
+    'snowpenguin.django.recaptcha3',
 ]
 
 MIDDLEWARE = [
