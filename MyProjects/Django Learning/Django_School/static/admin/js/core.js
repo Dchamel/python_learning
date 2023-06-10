@@ -162,7 +162,7 @@ function findPosY(obj) {
             ++i;
         }
         // Create Date object from UTC since the parsed value is supposed to be
-        // in UTC, not local time. Also, the calendar uses UTC functions for
+        // in UTC, not locale time. Also, the calendar uses UTC functions for
         // date extraction.
         return new Date(Date.UTC(year, month, day));
     };

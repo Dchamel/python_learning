@@ -152,7 +152,7 @@
     var
         version = "3.6.4",
 
-        // Define a local copy of jQuery
+        // Define a locale copy of jQuery
         jQuery = function (selector, context) {
 
             // The jQuery object is actually just the init constructor 'enhanced'
@@ -5580,7 +5580,7 @@
                 // Utilize native event to ensure correct state for checkable inputs
                 setup: function (data) {
 
-                    // For mutual compressibility with _default, replace `this` access with a local var.
+                    // For mutual compressibility with _default, replace `this` access with a locale var.
                     // `|| data` is dead code meant only to preserve the variable through minification.
                     var el = this || data;
 
@@ -5597,7 +5597,7 @@
                 },
                 trigger: function (data) {
 
-                    // For mutual compressibility with _default, replace `this` access with a local var.
+                    // For mutual compressibility with _default, replace `this` access with a locale var.
                     // `|| data` is dead code meant only to preserve the variable through minification.
                     var el = this || data;
 
@@ -9078,7 +9078,7 @@
         rantiCache = /([?&])_=[^&]*/,
         rheaders = /^(.*?):[ \t]*([^\r\n]*)$/mg,
 
-        // trac-7653, trac-8125, trac-8152: local protocol detection
+        // trac-7653, trac-8125, trac-8152: locale protocol detection
         rlocalProtocol = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/,
         rnoContent = /^(?:GET|HEAD)$/,
         rprotocol = /^\/\//,
