@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-10 22:27+0400\n"
+"POT-Creation-Date: 2020-03-17 15:10+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,146 +17,55 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: .\templates\movies\movie_detail.html:25
+
+#: templates/movies/movie_detail.html:25
 msgid "Год"
-msgstr ""
+msgstr "Year"
 
-#: .\templates\movies\movie_detail.html:27
+#: templates/movies/movie_detail.html:27
 msgid "Страна"
-msgstr ""
+msgstr "Country"
 
-#: .\templates\movies\movie_detail.html:30
+#: templates/movies/movie_detail.html:30
 msgid "Слоган"
-msgstr ""
+msgstr "Tagline"
 
-#: .\templates\movies\movie_detail.html:33
+#: templates/movies/movie_detail.html:33
 msgid "Режиссер"
-msgstr ""
+msgstr "Director"
 
-#: .\templates\movies\movie_detail.html:41
+#: templates/movies/movie_detail.html:41
 msgid "Актеры"
-msgstr ""
+msgstr "Actors"
 
-#: .\templates\movies\movie_detail.html:49
+#: templates/movies/movie_detail.html:49
 msgid "Жанр"
-msgstr ""
+msgstr "Genre"
 
-#: .\templates\movies\movie_detail.html:56
+#: templates/movies/movie_detail.html:56
 msgid "Премьера в мире"
-msgstr ""
+msgstr "World premiere"
 
-#: .\templates\movies\movie_detail.html:59
+#: templates/movies/movie_detail.html:59
 msgid "Бюджет"
-msgstr ""
+msgstr "Budget"
 
-#: .\templates\movies\movie_detail.html:61
+#: templates/movies/movie_detail.html:61
 msgid "Сборы в США"
-msgstr ""
+msgstr "Fees in USA"
 
-#: .\templates\movies\movie_detail.html:63
+#: templates/movies/movie_detail.html:63
 msgid "Сборы в мире"
-msgstr ""
+msgstr "Fess in world"
 
-#: .\templates\movies\movie_detail.html:67
+#: templates/movies/movie_detail.html:67
 msgid "Рейтинг"
-msgstr ""
+msgstr "Rating"
 
-#: .\templates\movies\movie_detail.html:111
+#: templates/movies/movie_detail.html:111
 msgid "О фильме"
-msgstr ""
+msgstr "About the film"
 
-#: .\templates\movies\movie_detail.html:130
+#: templates/movies/movie_detail.html:130
 msgid "Оставить отзыв "
-msgstr ""
-
-#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:5
-msgid "Select an image to embed"
-msgstr ""
-
-#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:27
-msgid "Browse for the image you want, then click 'Embed Image' to continue..."
-msgstr ""
-
-#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:29
-msgid ""
-"No images found. Upload images using the 'Image Button' dialog's 'Upload' "
-"tab."
-msgstr ""
-
-#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:50
-msgid "Images in: "
-msgstr ""
-
-#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:62
-#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:80
-msgid "Embed Image"
-msgstr ""
-
-#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:146
-msgid "Play Slideshow"
-msgstr ""
-
-#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:147
-msgid "Pause Slideshow"
-msgstr ""
-
-#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:148
-msgid "&lsaquo; Previous Photo"
-msgstr ""
-
-#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:149
-msgid "Next Photo &rsaquo;"
-msgstr ""
-
-#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:150
-msgid "Next &rsaquo;"
-msgstr ""
-
-#: .\venv\Lib\site-packages\ckeditor_uploader\templates\ckeditor\browse.html:151
-msgid "&lsaquo; Prev"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:7
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:221
-msgid "The install worked successfully! Congratulations!"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:207
-#, python-format
-msgid ""
-"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
-"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:222
-#, python-format
-msgid ""
-"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
-"%(version)s/ref/settings/#debug\" target=\"_blank\" rel=\"noopener"
-"\">DEBUG=True</a> is in your settings file and you have not configured any "
-"URLs."
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:230
-msgid "Django Documentation"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:231
-msgid "Topics, references, &amp; how-to’s"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:239
-msgid "Tutorial: A Polling App"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:240
-msgid "Get started with Django"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:248
-msgid "Django Community"
-msgstr ""
-
-#: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:249
-msgid "Connect, get help, or contribute"
-msgstr ""
+msgstr "Leave feedback"
