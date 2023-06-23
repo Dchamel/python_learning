@@ -7,37 +7,27 @@ t1 = perf_counter()
 def romanToInt(s: str) -> int:
     romint = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
     int_s = 0
-    for index, each in enumerate(s):
-        try:
-            if each == 'I' and s[index + 1] == 'V':
-                int_s += 4
-                s = s[index + 2:]
-                print('1')
-            elif each == 'I' and s[index + 1] == 'X':
-                int_s += 9
-                s = s[index + 2:]
-            elif each == 'X' and s[index + 1] == 'L':
-                int_s += 40
-                s = s[index + 2:]
-            elif each == 'X' and s[index + 1] == 'C':
-                int_s += 80
-                s = s[index + 2:]
-            elif each == 'C' and s[index + 1] == 'D':
-                int_s += 400
-                s = s[index + 2:]
-            elif each == 'C' and s[index + 1] == 'M':
-                int_s += 900
-                s = s[index + 2:]
-            else:
-                int_s += romint[each]
+    vrem = ''
 
+    for i in range(len(s)):
+        try:
+            next_val = romint[s[i + 1]]
         except:
-            pass
+            next_val = 0
+        if romint[s[i]] >= next_val:
+            if vrem:
+                int_s += romint[s[i]] - romint[vrem]
+                vrem = ''
+            else:
+                int_s += romint[s[i]]
+        else:
+            vrem = s[i]
+            continue
 
     return int_s
 
 
-print(romanToInt("IV"))
+print(romanToInt("LVIII"))
 
 
 # tests
@@ -48,19 +38,19 @@ class AllTestsEasy13(unittest.TestCase):
 
     # tests
     def test01_romanToInt(self):
-        expected = 4
-        actual = romanToInt("IV")
+        expected = 3
+        actual = romanToInt("III")
         self.assertEqual(expected, actual)
 
     def test02_romanToInt(self):
-        expected = 9
-        actual = romanToInt("IX")
+        expected = 58
+        actual = romanToInt("LVIII")
         self.assertEqual(expected, actual)
 
-    # def test03_romanToInt(self):
-    #     expected = 1994
-    #     actual = romanToInt("MCMXCIV")
-    #     self.assertEqual(expected, actual)
+    def test03_romanToInt(self):
+        expected = 1994
+        actual = romanToInt("MCMXCIV")
+        self.assertEqual(expected, actual)
 
 
 t2 = perf_counter()
