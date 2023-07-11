@@ -6,15 +6,17 @@ t1 = perf_counter()
 
 def maxDepth(s: str) -> int:
     q = 0
-    list_q = []
-    for sym in s:
-        if sym == '(':
-            q += 1
-        elif sym == ')':
-            q -= 1
-        list_q.append(q)
 
-    return max(list_q)
+    def counter(i: str) -> int:
+        nonlocal q
+        if i == '(':
+            q += 1
+        elif i == ')':
+            q -= 1
+        return q
+
+    q_list = max([counter(i) for i in s])
+    return q_list
 
 
 # (1(2(3)2)1(2(3(4(5)4)3(4)3)2)1)
