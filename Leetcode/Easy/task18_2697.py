@@ -25,16 +25,25 @@ def sm_palindrome(s: str) -> str:
             if str1[i] == str2[i]:
                 continue
             else:
-                str2 = list(str2)
-                str2[i] = str1[i]
-                str2 = ''.join(str2)
-                step += 1
-        str2 = ''.join(str1)[::-1]
+                if str1[i] >= str2[i]:
+                    str1 = list(str1)
+                    str1[i] = str2[i]
+                    str1 = ''.join(str1)
+                    step += 1
+                else:
+                    str2 = list(str2)
+                    str2[i] = str1[i]
+                    str2 = ''.join(str2)
+                    step += 1
 
-        palindrome_str = str1 + s[index] + str2
+        if str1 >= str2:
+            str2 = ''.join(str1)[::-1]
+            palindrome_str = str1 + s[index] + str2
+        else:
+            str1 = ''.join(str2)[::-1]
+            palindrome_str = str2 + s[index] + str1
 
     else:
-        print(index)
         str1 = s[0:index]
         str2 = s[-1:index - 1:-1]
         step = 0
@@ -42,18 +51,25 @@ def sm_palindrome(s: str) -> str:
             if str1[i] == str2[i]:
                 continue
             else:
-                str2 = list(str2)
-                str2[i] = str1[i]
-                str2 = ''.join(str2)
-                step += 1
-        str2 = ''.join(str1)[::-1]
+                if str1[i] >= str2[i]:
+                    str1 = list(str1)
+                    str1[i] = str2[i]
+                    str1 = ''.join(str1)
+                    step += 1
+                else:
+                    str2 = list(str2)
+                    str2[i] = str1[i]
+                    str2 = ''.join(str2)
+                    step += 1
 
-        palindrome_str = str1 + str2
+        if str1 <= str2:
+            str2 = ''.join(str1)[::-1]
+            palindrome_str = str1 + str2
+        else:
+            str1 = ''.join(str2)[::-1]
+            palindrome_str = str2 + str1
 
-    return palindrome_str, step
-
-
-print(sm_palindrome(s="seven"))
+    return palindrome_str
 
 
 # tests
@@ -76,6 +92,11 @@ class AllTests(unittest.TestCase):
     def test03_sm_palindrome(self):
         expected = "neven"
         actual = sm_palindrome(s="seven")
+        self.assertEqual(expected, actual)
+
+    def test04_sm_palindrome(self):
+        expected = "caac"
+        actual = sm_palindrome(s="cauc")
         self.assertEqual(expected, actual)
 
 
