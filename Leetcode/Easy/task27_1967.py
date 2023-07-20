@@ -5,11 +5,7 @@ t1 = perf_counter()
 
 
 def numOfStrings(patterns: list[str], word: str) -> int:
-    count_el = 0
-    for el in patterns:
-        if el in word:
-            count_el += 1
-    return count_el
+    return len([el for el in patterns if el in word])
 
 
 print(numOfStrings(patterns=["a", "abc", "bc", "d"], word="abc"))
