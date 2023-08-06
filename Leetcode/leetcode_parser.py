@@ -59,10 +59,17 @@ with open("tmp.html", "r", encoding='utf-8') as f:
     task_content_unescape = html.unescape(task_content)
     task_content_unescape = task_content_unescape.replace('<code>', '<')
     task_content_unescape = task_content_unescape.replace('</code>', '>')
-    q = parse_html(task_content_unescape)
-    print(task_num)
-    print(task_title)
-    print(q)
+    elem2 = BeautifulSoup(task_content_unescape, features="html.parser")
+    q = elem2.find_all('pre')
+    q1 = q[0].text
+    example_input = q1.split('\n')
+    print(example_input[1])
+
+    # q = parse_html(task_content_unescape)
+    # print(task_num)
+    # print(task_title)
+    # print(task_content_unescape)
+    # print(q)
 
 # soup = BeautifulSoup(html, "html.parser")
 # script = soup.find('script', {'id': '__NEXT_DATA__'})
