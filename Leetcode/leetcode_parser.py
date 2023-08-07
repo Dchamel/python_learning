@@ -63,7 +63,9 @@ with open("tmp.html", "r", encoding='utf-8') as f:
     q = elem2.find_all('pre')
     q1 = q[0].text
     example_input = q1.split('\n')
-    print(example_input[1])
+    print(example_input[1].replace('Input: ', ''))
+    print(example_input[2].replace('Output: ', ''))
+    print(example_input[3].replace('Explanation: ', ''))
 
     # q = parse_html(task_content_unescape)
     # print(task_num)
