@@ -96,7 +96,7 @@ def main_text_split(task_content: str) -> str:
     # print(examples_list_4_vars)
     main_text_finished = task_content_unescape
     # print(main_text_finished)
-    return main_text_finished
+    return main_text_finished, examples_list_4_vars
 
 
 main_text_split(task_content)
