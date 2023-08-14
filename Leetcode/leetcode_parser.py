@@ -68,7 +68,7 @@ def main_text_split(task_content: str) -> str:
     elem = BeautifulSoup(task_content_unescape, features="html.parser")
     examples = elem.find_all('pre')
     # print(examples)
-    for s in elem.select('pre'):
+    for s in elem.select('div', {'class': 'example'}):
         s.extract()
     print(elem)
 
