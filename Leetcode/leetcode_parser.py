@@ -30,7 +30,9 @@ URL = 'https://leetcode.com/problems/sort-the-people'
 
 # Parse data from RAW html
 
-def parse_html(html):
+def parse_html(html: str) -> str:
+    """Converting HTML -> Text"""
+
     elem = BeautifulSoup(html, features="html.parser")
     text = ''
     for e in elem.descendants:
@@ -40,6 +42,10 @@ def parse_html(html):
             text += '\n'
         elif e.name == 'li':
             text += '\n- '
+        elif e.name == 'code':
+            text += ''
+        elif e.name == '/code':
+            text += ')'
     return text
 
 
@@ -60,23 +66,34 @@ task_title = data['props']['pageProps']['dehydratedState']['queries'][0]['state'
 task_content = data['props']['pageProps']['dehydratedState']['queries'][6]['state']['data']['question']['content']
 
 
-def main_text_split(task_content: str) -> str:
-    main_text_finished = ''
+def main_text_split(task_content: str) -> tuple:
+    """Split content to two lists
+    main_text - commented text at the beginning
+    examples_list_4_vars - examples list with vars for Task"""
+
+    # print(task_content)
     task_content_unescape = html.unescape(task_content)
-    task_content_unescape = task_content_unescape.replace('<code>', '<')
-    task_content_unescape = task_content_unescape.replace('</code>', '>')
-    elem = BeautifulSoup(task_content_unescape, features="html.parser")
-    examples = elem.find_all('pre')
-    # print(examples)
-    for s in elem.select('div', {'class': 'example'}):
+    # task_content_unescape = task_content_unescape.replace('<code>', '<')
+    # task_content_unescape = task_content_unescape.replace('</code>', '>')
+
+    main_text = BeautifulSoup(task_content_unescape, features="html.parser")
+    examples = main_text.find_all('pre')
+
+    for s in main_text.select('strong.example'):
         s.extract()
-    print(elem)
+    for s in main_text.select('pre'):
+        s.extract()
+    for s in main_text.select('p'):
+        if len(s.text.strip()) == 0:
+            s.extract()
+
+    main_text = parse_html(str(main_text))
+    print(main_text)
 
     # Preparing all examples for split
     raw_examples_list = []
     for raw_example in examples:
         raw_examples_list.append(raw_example.text)
-    # print(raw_examples_list)
 
     # Splitting Examples and putting them to final list
     examples_list_splitted = []
@@ -93,10 +110,8 @@ def main_text_split(task_content: str) -> str:
                 case string if string.startswith('Output: '):
                     example_str_list2.append(string.replace('Output: ', ''))
         examples_list_4_vars.append(example_str_list2)
-    # print(examples_list_4_vars)
-    main_text_finished = task_content_unescape
-    # print(main_text_finished)
-    return main_text_finished, examples_list_4_vars
+
+    return main_text, examples_list_4_vars
 
 
 main_text_split(task_content)
