@@ -42,10 +42,8 @@ def parse_html(html: str) -> str:
             text += '\n'
         elif e.name == 'li':
             text += '\n- '
-        elif e.name == 'code':
-            text += ''
-        elif e.name == '/code':
-            text += ')'
+        elif e.name == 'sup':
+            text += '^'
     return text
 
 
@@ -73,10 +71,14 @@ def main_text_split(task_content: str) -> tuple:
 
     # print(task_content)
     task_content_unescape = html.unescape(task_content)
-    # task_content_unescape = task_content_unescape.replace('<code>', '<')
-    # task_content_unescape = task_content_unescape.replace('</code>', '>')
+    task_content_unescape = task_content_unescape.replace('<code>', '{')
+    task_content_unescape = task_content_unescape.replace('</code>', '}')
+    # task_content_unescape = task_content_unescape.replace('<strong>', ' ')
+    # task_content_unescape = task_content_unescape.replace('</strong>', ' ')
+    # print(task_content_unescape)
 
     main_text = BeautifulSoup(task_content_unescape, features="html.parser")
+
     examples = main_text.find_all('pre')
 
     for s in main_text.select('strong.example'):
@@ -87,8 +89,11 @@ def main_text_split(task_content: str) -> tuple:
         if len(s.text.strip()) == 0:
             s.extract()
 
+    for s in main_text.select('strong'):
+        s.unwrap()
+
     main_text = parse_html(str(main_text))
-    print(main_text)
+    # print(main_text)
 
     # Preparing all examples for split
     raw_examples_list = []
@@ -114,16 +119,49 @@ def main_text_split(task_content: str) -> tuple:
     return main_text, examples_list_4_vars
 
 
-main_text_split(task_content)
-# print(example_input[1].replace('Input: ', ''))
-# print(example_input[2].replace('Output: ', ''))
-# print(example_input[3].replace('Explanation: ', ''))
+main_text, examples_list_4_vars = main_text_split(task_content)
 
-# q = parse_html(task_content_unescape)
-# print(task_num)
-# print(task_title)
-# print(task_content_unescape)
-# print(q)
+template = f'''import unittest
+from time import perf_counter
+
+t1 = perf_counter()
+
+"""
+{task_num}
+{main_text}
+"""
+
+
+def numOfStrings(patterns: list[str], word: str) -> int:
+    return len([el for el in patterns if el in word])
+
+
+print(numOfStrings(patterns=["a", "abc", "bc", "d"], word="abc"))
+
+
+# tests
+class AllTests(unittest.TestCase):
+
+    def setUp(self) -> None:
+        pass
+
+    # tests'''
+
+for i, example in enumerate(examples_list_4_vars):
+    template += f'''
+    def test0{i}_xxxxx(self):
+        expected = {example[1]}
+        actual = xxxxx({example[0]})
+        self.assertEqual(expected, actual)
+    '''
+
+template += '''
+t2 = perf_counter()
+print(f'{{t2 - t1:.5f}} sec')
+'''
+
+with open(f'task00_{task_num}.py', 'w') as f:
+    f.write(template)
 
 # soup = BeautifulSoup(html, "html.parser")
 # script = soup.find('script', {'id': '__NEXT_DATA__'})
