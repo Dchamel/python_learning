@@ -10,26 +10,38 @@ import codecs
 import html
 from re import search
 
-# URL = 'https://leetcode.com/problems/decrypt-string-from-alphabet-to-integer-mapping/'
-URL = 'https://leetcode.com/problems/sort-the-people'
+URL = 'https://leetcode.com/problems/decrypt-string-from-alphabet-to-integer-mapping/'
 
+# Run Scrapper
+service = Service(executable_path=r'C:\Chrome\chromedriver.exe')
+options = webdriver.ChromeOptions()
+options.add_argument("headless")
+driver = webdriver.Chrome(service=service, options=options)
+driver.get(URL)
+html_raw = driver.page_source
 
-# # Run Scrapper
-# service = Service(executable_path=r'C:\Chrome\chromedriver.exe')
-# options = webdriver.ChromeOptions()
-# options.add_argument("headless")
-# driver = webdriver.Chrome(service=service, options=options)
-# driver.get(URL)
-# html = driver.page_source
-#
 # completeName = os.path.join('', 'tmp.html')
 # file_object = codecs.open(completeName, "w", "utf-8")
 # file_object.write(html)
-#
-# driver.quit()
+
+driver.quit()
+
+soup = BeautifulSoup(html_raw, "html.parser")
+script = soup.find('script', {'id': '__NEXT_DATA__'})
+data = json.loads(script.get_text(strip=True))
+
+# Write it to the file
+with open("tmp.json", "w") as f:
+    json.dump(data, f)
+
+with open('tmp.json', 'r') as f:
+    x = json.load(f)
+
+
+# print(x)
+
 
 # Parse data from RAW html
-
 def parse_html(html: str) -> str:
     """Converting HTML -> Text"""
 
@@ -57,11 +69,20 @@ data = json.loads(script)
 # with open('tmp.json', 'w') as f:
 # json.dump(data, f)
 
+# /props/pageProps/dehydratedState/queries/0/state/data/question/questionFrontendId
+# /props/pageProps/dehydratedState/queries/0/state/data/question/questionFrontendId
 task_num = data['props']['pageProps']['dehydratedState']['queries'][0]['state']['data']['question'][
     'questionFrontendId']
+# /props/pageProps/dehydratedState/queries/0/state/data/question/title
+# /props/pageProps/dehydratedState/queries/0/state/data/question/title
 task_title = data['props']['pageProps']['dehydratedState']['queries'][0]['state']['data']['question'][
     'title']
+# /props/pageProps/dehydratedState/queries/6/state/data/question/content
+# /props/pageProps/dehydratedState/queries/6/state/data/question/content
 task_content = data['props']['pageProps']['dehydratedState']['queries'][6]['state']['data']['question']['content']
+
+# /props/pageProps/dehydratedState/queries/10/state/data/question/codeSnippets/3/code
+# /props/pageProps/dehydratedState/queries/10/state/data/question/codeSnippets/3/code
 task_code_func = data['props']['pageProps']['dehydratedState']['queries'][10]['state']['data']['question'][
     'codeSnippets'][3]['code']
 task_code_func = task_code_func[task_code_func.index('def'):].strip()
@@ -168,16 +189,3 @@ print(f'{{t2 - t1:.5f}} sec')
 
 with open(f'task00_{task_num}.py', 'w') as f:
     f.write(template)
-
-# soup = BeautifulSoup(html, "html.parser")
-# script = soup.find('script', {'id': '__NEXT_DATA__'})
-# data = json.loads(script.get_text(strip=True))
-
-# # Write it to the file
-# with open("tmp.json", "w") as f:
-#     json.dump(data, f)
-
-# with open('tmp.json', 'r') as f:
-#     x = json.load(f)
-#
-# print(x)
