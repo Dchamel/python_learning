@@ -8,7 +8,7 @@ from selenium.webdriver.chrome.service import Service
 from bs4 import BeautifulSoup
 import codecs
 import html
-import re
+from re import search
 
 # URL = 'https://leetcode.com/problems/decrypt-string-from-alphabet-to-integer-mapping/'
 URL = 'https://leetcode.com/problems/sort-the-people'
@@ -62,6 +62,10 @@ task_num = data['props']['pageProps']['dehydratedState']['queries'][0]['state'][
 task_title = data['props']['pageProps']['dehydratedState']['queries'][0]['state']['data']['question'][
     'title']
 task_content = data['props']['pageProps']['dehydratedState']['queries'][6]['state']['data']['question']['content']
+task_code_func = data['props']['pageProps']['dehydratedState']['queries'][10]['state']['data']['question'][
+    'codeSnippets'][3]['code']
+task_code_func = task_code_func[task_code_func.index('def'):].strip()
+task_code_func_name = search(r'\s([a-zA-Z0-9]*)\(', task_code_func).groups()[0]
 
 
 def main_text_split(task_content: str) -> tuple:
@@ -90,6 +94,8 @@ def main_text_split(task_content: str) -> tuple:
             s.extract()
 
     for s in main_text.select('strong'):
+        s.unwrap()
+    for s in main_text.select('em'):
         s.unwrap()
 
     main_text = parse_html(str(main_text))
@@ -132,11 +138,11 @@ t1 = perf_counter()
 """
 
 
-def numOfStrings(patterns: list[str], word: str) -> int:
-    return len([el for el in patterns if el in word])
+{task_code_func}
+    return
 
 
-print(numOfStrings(patterns=["a", "abc", "bc", "d"], word="abc"))
+print({task_code_func_name}({examples_list_4_vars[0][0]})
 
 
 # tests
@@ -149,9 +155,9 @@ class AllTests(unittest.TestCase):
 
 for i, example in enumerate(examples_list_4_vars):
     template += f'''
-    def test0{i}_xxxxx(self):
+    def test0{i}_{task_code_func_name}(self):
         expected = {example[1]}
-        actual = xxxxx({example[0]})
+        actual = {task_code_func_name}({example[0]})
         self.assertEqual(expected, actual)
     '''
 
