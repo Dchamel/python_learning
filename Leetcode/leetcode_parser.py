@@ -1,4 +1,9 @@
-# 'https://leetcode.com/problems/decrypt-string-from-alphabet-to-integer-mapping/'
+# This prog creates a Ready-made template
+# for solving problems from leetcode.com for Python3
+# It consists of:
+# leetcode Scrapper
+# leetcode Parser
+
 
 import json
 import os
@@ -10,35 +15,41 @@ import codecs
 import html
 from re import search
 
+# INPUT LEETCODE TASK URL BELOW
 URL = 'https://leetcode.com/problems/decrypt-string-from-alphabet-to-integer-mapping/'
 
 # Run Scrapper
+# You need to download and unpack ChromeDriver
+# https://chromedriver.chromium.org/downloads
+# and change executable_path to the path where your driver lies
+
 service = Service(executable_path=r'C:\Chrome\chromedriver.exe')
+
 options = webdriver.ChromeOptions()
 options.add_argument("headless")
 driver = webdriver.Chrome(service=service, options=options)
 driver.get(URL)
 html_raw = driver.page_source
 
-# completeName = os.path.join('', 'tmp.html')
-# file_object = codecs.open(completeName, "w", "utf-8")
-# file_object.write(html)
+# Save to HTML
+completeName = os.path.join('', 'tmp.html')
+file_object = codecs.open(completeName, "w", "utf-8")
+file_object.write(html_raw)
 
 driver.quit()
 
-soup = BeautifulSoup(html_raw, "html.parser")
-script = soup.find('script', {'id': '__NEXT_DATA__'})
-data = json.loads(script.get_text(strip=True))
 
-# Write it to the file
-with open("tmp.json", "w") as f:
-    json.dump(data, f)
-
-with open('tmp.json', 'r') as f:
-    x = json.load(f)
-
-
-# print(x)
+# FOR DEL
+# soup = BeautifulSoup(html_raw, "html.parser")
+# script = soup.find('script', {'id': '__NEXT_DATA__'})
+# data = json.loads(script.get_text(strip=True))
+#
+# # Write it to the file
+# with open("tmp.json", "w") as f:
+#     json.dump(data, f)
+#
+# with open('tmp.json', 'r') as f:
+#     x = json.load(f)
 
 
 # Parse data from RAW html
@@ -69,20 +80,12 @@ data = json.loads(script)
 # with open('tmp.json', 'w') as f:
 # json.dump(data, f)
 
-# /props/pageProps/dehydratedState/queries/0/state/data/question/questionFrontendId
-# /props/pageProps/dehydratedState/queries/0/state/data/question/questionFrontendId
 task_num = data['props']['pageProps']['dehydratedState']['queries'][0]['state']['data']['question'][
     'questionFrontendId']
-# /props/pageProps/dehydratedState/queries/0/state/data/question/title
-# /props/pageProps/dehydratedState/queries/0/state/data/question/title
+
 task_title = data['props']['pageProps']['dehydratedState']['queries'][0]['state']['data']['question'][
     'title']
-# /props/pageProps/dehydratedState/queries/6/state/data/question/content
-# /props/pageProps/dehydratedState/queries/6/state/data/question/content
 task_content = data['props']['pageProps']['dehydratedState']['queries'][6]['state']['data']['question']['content']
-
-# /props/pageProps/dehydratedState/queries/10/state/data/question/codeSnippets/3/code
-# /props/pageProps/dehydratedState/queries/10/state/data/question/codeSnippets/3/code
 task_code_func = data['props']['pageProps']['dehydratedState']['queries'][10]['state']['data']['question'][
     'codeSnippets'][3]['code']
 task_code_func = task_code_func[task_code_func.index('def'):].strip()
@@ -94,13 +97,9 @@ def main_text_split(task_content: str) -> tuple:
     main_text - commented text at the beginning
     examples_list_4_vars - examples list with vars for Task"""
 
-    # print(task_content)
     task_content_unescape = html.unescape(task_content)
     task_content_unescape = task_content_unescape.replace('<code>', '{')
     task_content_unescape = task_content_unescape.replace('</code>', '}')
-    # task_content_unescape = task_content_unescape.replace('<strong>', ' ')
-    # task_content_unescape = task_content_unescape.replace('</strong>', ' ')
-    # print(task_content_unescape)
 
     main_text = BeautifulSoup(task_content_unescape, features="html.parser")
 
@@ -163,7 +162,7 @@ t1 = perf_counter()
     return
 
 
-print({task_code_func_name}({examples_list_4_vars[0][0]})
+print({task_code_func_name}({examples_list_4_vars[0][0]}))
 
 
 # tests
