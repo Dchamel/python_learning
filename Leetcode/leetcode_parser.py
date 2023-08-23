@@ -92,10 +92,11 @@ task_code_func = task_code_func[task_code_func.index('def'):].strip()
 task_code_func_name = search(r'\s([a-zA-Z0-9]*)\(', task_code_func).groups()[0]
 
 
-def main_text_split(task_content: str) -> tuple:
-    """Split content onto two parts
-    main_text: str - commented text at the beginning
-    examples_list_4_vars: list - examples list with vars for Task
+def main_text_split(task_content: str) -> tuple[str, list[list[str]]]:
+    """Split content onto two item:
+    Returned element is a tuple of two items.
+    First item: commented text at the beginning.
+    Second item: examples list with vars for Task
     """
 
     task_content_unescape = html.unescape(task_content)
@@ -147,6 +148,8 @@ def main_text_split(task_content: str) -> tuple:
 
 
 main_text, examples_list_4_vars = main_text_split(task_content)
+print(main_text)
+print(examples_list_4_vars)
 
 template = f'''import unittest
 from time import perf_counter
