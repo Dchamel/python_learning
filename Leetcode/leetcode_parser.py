@@ -93,9 +93,10 @@ task_code_func_name = search(r'\s([a-zA-Z0-9]*)\(', task_code_func).groups()[0]
 
 
 def main_text_split(task_content: str) -> tuple:
-    """Split content to two lists
-    main_text - commented text at the beginning
-    examples_list_4_vars - examples list with vars for Task"""
+    """Split content onto two parts
+    main_text: str - commented text at the beginning
+    examples_list_4_vars: list - examples list with vars for Task
+    """
 
     task_content_unescape = html.unescape(task_content)
     task_content_unescape = task_content_unescape.replace('<code>', '{')
