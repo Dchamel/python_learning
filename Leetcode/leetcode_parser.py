@@ -22,7 +22,6 @@ URL = 'https://leetcode.com/problems/decrypt-string-from-alphabet-to-integer-map
 # You need to download and unpack ChromeDriver
 # https://chromedriver.chromium.org/downloads
 # and change executable_path to the path where your driver lies
-
 service = Service(executable_path=r'C:\Chrome\chromedriver.exe')
 
 options = webdriver.ChromeOptions()
@@ -76,6 +75,7 @@ with open("tmp.html", "r", encoding='utf-8') as f:
 soup = BeautifulSoup(html_data, "lxml")
 script = soup.find('script', {'id': '__NEXT_DATA__'}).text
 data = json.loads(script)
+
 # data = json.dumps(data, indent=4, sort_keys=True)
 # with open('tmp.json', 'w') as f:
 # json.dump(data, f)
@@ -121,7 +121,6 @@ def main_text_split(task_content: str) -> tuple[str, list[list[str]]]:
         s.unwrap()
 
     main_text = parse_html(str(main_text))
-    # print(main_text)
 
     # Preparing all examples for split
     raw_examples_list = []
@@ -148,8 +147,6 @@ def main_text_split(task_content: str) -> tuple[str, list[list[str]]]:
 
 
 main_text, examples_list_4_vars = main_text_split(task_content)
-print(main_text)
-print(examples_list_4_vars)
 
 template = f'''import unittest
 from time import perf_counter
