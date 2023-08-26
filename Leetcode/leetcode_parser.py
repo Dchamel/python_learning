@@ -16,7 +16,9 @@ import html
 from re import search
 
 # INPUT LEETCODE TASK URL BELOW
-URL = 'https://leetcode.com/problems/decrypt-string-from-alphabet-to-integer-mapping/'
+URL = 'https://leetcode.com/problems/reverse-prefix-of-word/'
+# input Your NEXT Number of the file in folder
+file_num = 28
 
 # Run Scrapper
 # You need to download and unpack ChromeDriver
@@ -187,5 +189,5 @@ t2 = perf_counter()
 print(f'{{t2 - t1:.5f}} sec')
 '''
 
-with open(f'task00_{task_num}.py', 'w') as f:
+with open(f'task{file_num}_{task_num}.py', 'w') as f:
     f.write(template)
