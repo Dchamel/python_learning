@@ -16,9 +16,9 @@ import html
 from re import search
 
 # INPUT LEETCODE TASK URL BELOW
-URL = 'https://leetcode.com/problems/reverse-prefix-of-word/'
+URL = 'https://leetcode.com/problems/find-first-palindromic-string-in-the-array/'
 # input Your NEXT Number of the file in folder
-file_num = 28
+file_num = 29
 
 # Run Scrapper
 # You need to download and unpack ChromeDriver
@@ -186,7 +186,7 @@ for i, example in enumerate(examples_list_4_vars):
 
 template += '''
 t2 = perf_counter()
-print(f'{{t2 - t1:.5f}} sec')
+print(f'{t2 - t1:.5f} sec')
 '''
 
 with open(f'task{file_num}_{task_num}.py', 'w') as f:
