@@ -170,11 +170,7 @@ print({task_code_func_name}({examples_list_4_vars[0][0]}))
 
 # tests
 class AllTests(unittest.TestCase):
-
-    def setUp(self) -> None:
-        pass
-
-    # tests'''
+'''
 
 for i, example in enumerate(examples_list_4_vars):
     template += f'''
