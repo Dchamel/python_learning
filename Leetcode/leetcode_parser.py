@@ -16,9 +16,9 @@ import html
 from re import search
 
 # INPUT LEETCODE TASK URL BELOW
-URL = 'https://leetcode.com/problems/find-first-palindromic-string-in-the-array/'
+URL = 'https://leetcode.com/problems/remove-trailing-zeros-from-a-string/'
 # input Your NEXT Number of the file in folder
-file_num = 29
+file_num = 30
 
 # Run Scrapper
 # You need to download and unpack ChromeDriver
