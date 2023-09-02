@@ -16,12 +16,13 @@ import html
 from re import search
 
 # INPUT LEETCODE TASK URL BELOW
-URL = 'https://leetcode.com/problems/remove-trailing-zeros-from-a-string/'
+URL = 'https://leetcode.com/problems/determine-color-of-a-chessboard-square/'
 # input Your NEXT Number of the file in folder
-file_num = 30
+file_num = 31
 
 # Run Scrapper
-# You need to download and unpack ChromeDriver
+# You need to download and unpack compatible ChromeDriver
+# for your Google Chrome web browser
 # https://chromedriver.chromium.org/downloads
 # and change executable_path to the path where your driver lies
 service = Service(executable_path=r'C:\Chrome\chromedriver.exe')
