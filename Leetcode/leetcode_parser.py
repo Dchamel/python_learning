@@ -16,9 +16,9 @@ import html
 from re import search
 
 # INPUT LEETCODE TASK URL BELOW
-URL = 'https://leetcode.com/problems/determine-if-string-halves-are-alike/'
+URL = 'https://leetcode.com/problems/reverse-string/'
 # input Your NEXT Number of the file in folder
-file_num = 32
+file_num = 34
 
 # Run Scrapper
 # You need to download and unpack compatible ChromeDriver
