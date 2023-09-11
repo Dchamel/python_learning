@@ -9,4 +9,4 @@ class HomeView(generic.TemplateView):
 
     :template:`core/index.html`
     """
-    template_name = "core/index.html"
+    template_name = "../templates/core/index.html"

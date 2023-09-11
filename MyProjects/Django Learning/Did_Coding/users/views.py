@@ -16,7 +16,7 @@ class SignUpView(generic.FormView):
 
     :template:`users/sign_up.html`
     """
-    template_name = "users/sign_up.html"
+    template_name = "../templates/users/sign_up.html"
     form_class = UserForm
     success_url = '/account/'
 
@@ -34,7 +34,7 @@ class SignInView(generic.FormView):
 
     :template:`users/sign_in.html`
     """
-    template_name = "users/sign_in.html"
+    template_name = "../templates/users/sign_in.html"
     form_class = AuthForm
     success_url = '/account/'
 
@@ -70,7 +70,7 @@ def AccountView(request):
             form.save()
             return redirect('/account/')
     else:
-        return render(request, 'users/account.html', context)
+        return render(request, '../templates/users/account.html', context)
 
 
 @login_required
@@ -92,4 +92,4 @@ def UserInfoView(request):
             form.save()
             return redirect('/user-info/')
     else:
-        return render(request, 'users/info.html', context)
+        return render(request, '../templates/users/info.html', context)
