@@ -1,0 +1,20 @@
+.logo {
+    width: 100px;
+    border-radius: 100%;
+}
+
+.category_list {
+    display: flex;
+    gap: 7px;
+    list-style: none;
+    padding: 0;
+}
+
+.category_list a {
+    text-decoration: none;
+    color: #6f94c6;
+}
+
+.footer {
+    min-height: 80px;
+}

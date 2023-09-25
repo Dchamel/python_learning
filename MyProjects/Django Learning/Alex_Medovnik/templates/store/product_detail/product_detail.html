@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" #}
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+    <title>Title</title>
+
+</head>
+<body>
+
+<header class="fixed-top">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Car Store</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            Categories
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Sport</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Crossover</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Minivan</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container mt-5 pt-3">
+    <main>
+        <div class="card">
+            <img src="https://i.pinimg.com/originals/94/18/a5/9418a5638b3bd7a92dc92d440a742150.jpg"
+                 class="card-img-top" alt="Range Rover">
+            <div class="card-body">
+                <h5 class="card-title">Range Rover</h5>
+                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam consectetur
+                    consequatur distinctio, eum, explicabo, ipsum laborum magnam perferendis praesentium quae quas quasi
+                    quia recusandae reiciendis totam. Amet consequuntur earum fugit harum illum placeat qui ratione,
+                    tenetur? A ab consequuntur cumque deleniti eos, id, illo impedit ipsa ipsum nostrum perferendis
+                    saepe temporibus tenetur! Accusamus at blanditiis commodi consequatur dicta dolore doloremque
+                    dolorum error expedita inventore ipsa minus nisi nobis odio, odit omnis quos, ratione, tenetur unde
+                    voluptatibus. Autem expedita ipsa ipsam laudantium magni maiores temporibus? Ea error est ipsam,
+                    iusto nesciunt sunt velit! Accusamus accusantium alias ducimus ex expedita fugiat id maxime porro?
+                    Accusamus aperiam asperiores commodi consequuntur culpa debitis dicta doloremque dolores doloribus
+                    eaque enim est eveniet illum ipsam iste iusto labore minima molestiae molestias natus nemo nisi
+                    numquam odit officiis perferendis placeat, possimus qui quia quis quod reprehenderit rerum soluta
+                    suscipit tempore ut vel voluptatum. Aspernatur cupiditate delectus eaque eum, illum laborum libero
+                    minus natus nesciunt numquam provident reprehenderit sapiente sed suscipit voluptas. Cum deserunt
+                    iste quod voluptates? Ab adipisci dicta dolore earum excepturi hic iure maiores quibusdam quos
+                    repellendus? Facere facilis hic maxime minus natus necessitatibus nisi possimus quas tempore totam?
+                    Labore quis, recusandae! Cupiditate dolorem inventore nihil porro quaerat repellat saepe voluptatem
+                    voluptat`es? Aliquid aspernatur assumenda cum debitis, dolor eum ex modi, non odio quo tempore ullam
+                    voluptas voluptatibus. Ab accusamus, ad aspernatur aut beatae blanditiis cumque debitis dolorum et
+                    eveniet facere illum inventore labore laudantium magni maiores minus modi molestias nam neque nihil
+                    nostrum odio omnis quam quidem quos reprehenderit similique soluta tempore totam unde vel voluptas
+                    voluptatum. Accusantium deleniti eaque praesentium rem rerum, sunt velit vitae. Accusantium alias
+                    asperiores, corporis cum dolore earum expedita, facere, impedit incidunt maiores maxime minima modi
+                    natus nisi perferendis provident qui quia repudiandae sequi similique suscipit ullam unde ut?
+                    Quia?</p>
+                <ul class="category_list">
+                    <li><a href="">Sport</a></li>
+                    <li><a href="">Crossover</a></li>
+                </ul>
+
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Buy now
+                </button>
+            </div>
+        </div>
+    </main>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Product title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form method="post" action="">
+                        <div class="mb-3">
+                            <label for="user_name" class="form-label">Your name</label>
+                            <input type="text" class="form-control" name="user_name" id="user_name" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="user_email" class="form-label">Email address</label>
+                            <input type="email" class="form-control" name="user_email" id="user_email"
+                                   aria-describedby="emailHelp"
+                                   required>
+                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Order</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="footer bg-dark text-info d-flex justify-content-center align-items-center">
+    <span>Tel: +123-456-789</span>
+</footer>
+
+</body>
+</html>
