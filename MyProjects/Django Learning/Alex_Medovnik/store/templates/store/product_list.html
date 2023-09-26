@@ -1,0 +1,21 @@
+{% extends 'store/index.html' %}
+
+{% block content %}
+<div class="card-group">
+    <div class="card">
+        <a href="product_detail.html">
+            <img src="https://i.pinimg.com/originals/94/18/a5/9418a5638b3bd7a92dc92d440a742150.jpg"
+                 class="card-img-top" alt="Range Rover">
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">{{ product_title }}</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                additional content. This content is a little bit longer.</p>
+            <ul class="category_list">
+                <li><a href="">Sport</a></li>
+                <li><a href="">Crossover</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
