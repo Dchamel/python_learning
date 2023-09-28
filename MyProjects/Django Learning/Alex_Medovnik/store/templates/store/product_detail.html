@@ -1,80 +1,55 @@
 {% extends 'store/index.html' %}
 
-{% block title %}Product detail{% endblock %}
+{% block title %}{{ product.title }}{% endblock %}
 
 {% block content %}
 
-<div class="container mt-5 pt-3">
-    <main>
-        <div class="card">
-            <img src="https://i.pinimg.com/originals/94/18/a5/9418a5638b3bd7a92dc92d440a742150.jpg"
-                 class="card-img-top" alt="Range Rover">
-            <div class="card-body">
-                <h5 class="card-title">Range Rover</h5>
-                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam consectetur
-                    consequatur distinctio, eum, explicabo, ipsum laborum magnam perferendis praesentium quae quas quasi
-                    quia recusandae reiciendis totam. Amet consequuntur earum fugit harum illum placeat qui ratione,
-                    tenetur? A ab consequuntur cumque deleniti eos, id, illo impedit ipsa ipsum nostrum perferendis
-                    saepe temporibus tenetur! Accusamus at blanditiis commodi consequatur dicta dolore doloremque
-                    dolorum error expedita inventore ipsa minus nisi nobis odio, odit omnis quos, ratione, tenetur unde
-                    voluptatibus. Autem expedita ipsa ipsam laudantium magni maiores temporibus? Ea error est ipsam,
-                    iusto nesciunt sunt velit! Accusamus accusantium alias ducimus ex expedita fugiat id maxime porro?
-                    Accusamus aperiam asperiores commodi consequuntur culpa debitis dicta doloremque dolores doloribus
-                    eaque enim est eveniet illum ipsam iste iusto labore minima molestiae molestias natus nemo nisi
-                    numquam odit officiis perferendis placeat, possimus qui quia quis quod reprehenderit rerum soluta
-                    suscipit tempore ut vel voluptatum. Aspernatur cupiditate delectus eaque eum, illum laborum libero
-                    minus natus nesciunt numquam provident reprehenderit sapiente sed suscipit voluptas. Cum deserunt
-                    iste quod voluptates? Ab adipisci dicta dolore earum excepturi hic iure maiores quibusdam quos
-                    repellendus? Facere facilis hic maxime minus natus necessitatibus nisi possimus quas tempore totam?
-                    Labore quis, recusandae! Cupiditate dolorem inventore nihil porro quaerat repellat saepe voluptatem
-                    voluptat`es? Aliquid aspernatur assumenda cum debitis, dolor eum ex modi, non odio quo tempore ullam
-                    voluptas voluptatibus. Ab accusamus, ad aspernatur aut beatae blanditiis cumque debitis dolorum et
-                    eveniet facere illum inventore labore laudantium magni maiores minus modi molestias nam neque nihil
-                    nostrum odio omnis quam quidem quos reprehenderit similique soluta tempore totam unde vel voluptas
-                    voluptatum. Accusantium deleniti eaque praesentium rem rerum, sunt velit vitae. Accusantium alias
-                    asperiores, corporis cum dolore earum expedita, facere, impedit incidunt maiores maxime minima modi
-                    natus nisi perferendis provident qui quia repudiandae sequi similique suscipit ullam unde ut?
-                    Quia?</p>
-                <ul class="category_list">
-                    <li><a href="">Sport</a></li>
-                    <li><a href="">Crossover</a></li>
-                </ul>
 
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Buy now
-                </button>
+<div class="card">
+    <img src="https://i.pinimg.com/originals/94/18/a5/9418a5638b3bd7a92dc92d440a742150.jpg"
+         class="card-img-top" alt="Range Rover">
+    <div class="card-body">
+        <h5 class="card-title">{{ product.title }}</h5>
+        <p class="card-text">{{ product.info }}</p>
+        <p class="card-text">Price: {{ product.price }}</p>
+        <ul class="category_list">
+            <li><a href="">Sport</a></li>
+            <li><a href="">Crossover</a></li>
+        </ul>
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Buy now
+        </button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Product title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-        </div>
-    </main>
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Product title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
 
-                <div class="modal-body">
-                    <form method="post" action="">
-                        <div class="mb-3">
-                            <label for="user_name" class="form-label">Your name</label>
-                            <input type="text" class="form-control" name="user_name" id="user_name" required>
-                        </div>
+            <div class="modal-body">
+                <form method="post" action="">
+                    <div class="mb-3">
+                        <label for="user_name" class="form-label">Your name</label>
+                        <input type="text" class="form-control" name="user_name" id="user_name" required>
+                    </div>
 
-                        <div class="mb-3">
-                            <label for="user_email" class="form-label">Email address</label>
-                            <input type="email" class="form-control" name="user_email" id="user_email"
-                                   aria-describedby="emailHelp"
-                                   required>
-                            <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                        </div>
+                    <div class="mb-3">
+                        <label for="user_email" class="form-label">Email address</label>
+                        <input type="email" class="form-control" name="user_email" id="user_email"
+                               aria-describedby="emailHelp"
+                               required>
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
 
-                        <button type="submit" class="btn btn-success">Order</button>
-                    </form>
-                </div>
-
+                    <button type="submit" class="btn btn-success">Order</button>
+                </form>
             </div>
         </div>
     </div>

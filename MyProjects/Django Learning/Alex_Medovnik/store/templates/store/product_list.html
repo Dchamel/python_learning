@@ -8,7 +8,7 @@
 <div class="card-group">
     {% for product in products %}
     <div class="card">
-        <a href="product_detail.html">
+        <a href="{% url 'product_detail' pk=product.pk %}">
             <img src="https://i.pinimg.com/originals/94/18/a5/9418a5638b3bd7a92dc92d440a742150.jpg"
                  class="card-img-top" alt="Range Rover">
         </a>
