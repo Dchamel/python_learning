@@ -3,6 +3,8 @@
 {% block title %}Product list{% endblock %}
 
 {% block content %}
+
+{% for products in product_list %}
 <div class="card-group">
     {% for product in products %}
     <div class="card">
@@ -22,4 +24,6 @@
     </div>
     {% endfor %}
 </div>
+{% endfor %}
+
 {% endblock %}
