@@ -12,4 +12,4 @@ def product_list(request):
     products = Product.objects.all()
 
     return render(request, 'store/product_list.html',
-                  context={'product_list': build_template(products, 2)})
+                  context={'product_list': build_template(products, 3)})

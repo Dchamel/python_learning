@@ -14,7 +14,7 @@
         </a>
         <div class="card-body">
             <h5 class="card-title">{{ product.title }}</h5>
-            <p class="card-text">{{ product.price }}</p>
+            <p class="card-text">{{ product.info|truncatewords:10 }}</p>
             <p class="card-text">Price: {{ product.price }}</p>
             <ul class="category_list">
                 <li><a href="">Sport</a></li>
