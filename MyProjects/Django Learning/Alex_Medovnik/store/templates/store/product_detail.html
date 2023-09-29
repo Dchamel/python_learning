@@ -4,18 +4,17 @@
 
 {% block content %}
 
-
 <div class="card">
-    <img src="https://i.pinimg.com/originals/94/18/a5/9418a5638b3bd7a92dc92d440a742150.jpg"
-         class="card-img-top" alt="Range Rover">
+    {% include 'store/includes/image.html' %}
     <div class="card-body">
         <h5 class="card-title">{{ product.title }}</h5>
         <p class="card-text">{{ product.info }}</p>
         <p class="card-text">Price: {{ product.price }}</p>
+        {% for category in product.categories.all %}
         <ul class="category_list">
-            <li><a href="">Sport</a></li>
-            <li><a href="">Crossover</a></li>
+            <li><a href="">{{ category.title }}</a></li>
         </ul>
+        {% endfor %}
 
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -29,7 +28,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Product title</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">{{ product.title }}</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -46,6 +45,10 @@
                                aria-describedby="emailHelp"
                                required>
                         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="hidden" name="product_id" value="{{ product.pk }}" readonly>
                     </div>
 
                     <button type="submit" class="btn btn-success">Order</button>
