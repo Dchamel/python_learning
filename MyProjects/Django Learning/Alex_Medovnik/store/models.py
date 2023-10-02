@@ -24,3 +24,12 @@ class Category(models.Model):
 
     def get_absolute_url(self):
         return reverse('category_detail', kwargs={'pk': self.pk})
+
+
+class Order(models.Model):
+    name = models.CharField(max_length=150)
+    email = models.EmailField(max_length=150)
+    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+
+    def __str__(self):
+        return self.name
