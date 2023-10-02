@@ -28,7 +28,7 @@ def product_list(request):
 def product_detail(request, pk):
     categories = Category.objects.all()
     product = Product.objects.get(pk=pk)
-
+    print(request.POST)
     return render(request, 'store/product_detail.html', context={
         'categories': categories,
         'product': product,
