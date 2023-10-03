@@ -1,6 +1,5 @@
-{% for products in product_list %}
 <div class="card-group">
-    {% for product in products %}
+    {% for product in product_list %}
     <div class="card">
         <a href="{{ product.get_absolute_url }}">
             {% include 'store/includes/image.html' %}
@@ -20,4 +19,3 @@
     </div>
     {% endfor %}
 </div>
-{% endfor %}
