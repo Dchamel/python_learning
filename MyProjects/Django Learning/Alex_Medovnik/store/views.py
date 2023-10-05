@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.db.models import Q
 from django.views.generic import ListView, DetailView
+from .utils import CategoriesMixin
 
 from .models import *
 
@@ -9,7 +10,8 @@ from .models import *
 # def build_template(lst: list, cols: int) -> list:
 #     return [lst[i:i + cols] for i in range(0, len(lst), cols)]
 
-class HomeView(ListView):
+
+class HomeView(ListView, CategoriesMixin):
     model = Product
 
     def get_queryset(self):
@@ -20,28 +22,13 @@ class HomeView(ListView):
             )
         return self.model.objects.all()
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        return context
 
-
-class ProductView(DetailView):
+class ProductView(DetailView, CategoriesMixin):
     model = Product
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        return context
 
-
-class CategoryView(DetailView):
+class CategoryView(DetailView, CategoriesMixin):
     model = Category
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()
-        return context
 
 
 def save_order(request):

@@ -15,6 +15,9 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse('product_detail', kwargs={'pk': self.pk})
 
+    class Meta:
+        ordering = ['-price']
+
 
 class Category(models.Model):
     title = models.CharField(max_length=50)
