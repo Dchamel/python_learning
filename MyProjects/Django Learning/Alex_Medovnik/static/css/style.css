@@ -18,3 +18,7 @@
 .footer {
     min-height: 80px;
 }
+
+.column-x {
+    column-count: 3;
+}
