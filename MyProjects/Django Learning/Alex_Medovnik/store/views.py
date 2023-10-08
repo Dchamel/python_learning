@@ -6,20 +6,6 @@ from .utils import CategoriesMixin
 
 from .models import *
 
-from django.http import HttpResponse
-
-
-def work(request):
-    # p = Product(title='Ford', price=2654)
-    # p.save()
-    # p = Product.objects.create(title='Lexux', price=348957)
-
-    p = Product.objects.get(title='Lexux')
-    p.price -= 100000
-    obj = Product.objects.all()
-    print(p.price)
-    return HttpResponse('Hello')
-
 
 # def build_template(lst: list, cols: int) -> list:
 #     return [lst[i:i + cols] for i in range(0, len(lst), cols)]

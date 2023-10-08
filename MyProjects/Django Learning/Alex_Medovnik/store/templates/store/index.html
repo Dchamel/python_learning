@@ -42,8 +42,10 @@
                         </a>
                         <ul class="dropdown-menu">
                             {% for category in categories %}
-                            <li><a class="dropdown-item" href="{{ category.get_absolute_url }}">
-                                {{ category.title }}</a>
+                            <li>
+                                <a class="dropdown-item" href="{{ category.get_absolute_url }}">
+                                    {{ category.title }}
+                                </a>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">
@@ -62,11 +64,13 @@
     </nav>
 </header>
 
-<div class="container mt-5 pt-3">
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-</div>
+<main>
+    <div class="container mt-5 pt-3">
+        <div class="row justify-content-center">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+</main>
 
 <footer class="footer bg-dark text-info d-flex justify-content-center align-items-center">
     <span>Tel: +123-456-789</span>

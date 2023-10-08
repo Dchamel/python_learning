@@ -3,9 +3,7 @@
 {% block title %}Product list{% endblock %}
 
 {% block content %}
-<div class="column-x">
-    {% for product in product_list %}
-    {% include 'store/includes/card_group.html' %}
-    {% endfor %}
-</div>
+{% for product in product_list %}
+{% include 'store/includes/card_group.html' %}
+{% endfor %}
 {% endblock %}

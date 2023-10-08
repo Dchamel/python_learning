@@ -22,3 +22,9 @@
 .column-x {
     column-count: 3;
 }
+
+@media (max-width: 768px) {
+    .column-x {
+        column-count: 1
+    }
+}
