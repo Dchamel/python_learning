@@ -46,10 +46,18 @@ df = pd.DataFrame(data=[
 ])
 
 df2 = pd.DataFrame()
-df2['Amount'] = df.groupby(['Employee', 'Shop', 'Type'])['Sum'].size()
-df2['Sum'] = df.groupby(['Employee', 'Shop', 'Type'])['Sum'].sum()
-df2['Avg'] = df.groupby(['Employee', 'Shop', 'Type'])['Sum'].mean()
-df2 = df2.reset_index()
-df = df2[['Shop', 'Employee', 'Type', 'Amount', 'Sum', 'Avg']]
-print(df.columns)
+
+# First Attempt
+# df2['Amount'] = df.groupby(['Employee', 'Shop', 'Type'])['Sum'].size()
+# df2['Sum'] = df.groupby(['Employee', 'Shop', 'Type'])['Sum'].sum()
+# df2['Avg'] = df.groupby(['Employee', 'Shop', 'Type'])['Sum'].mean()
+# df2 = df2.reset_index()
+# df = df2[['Shop', 'Employee', 'Type', 'Amount', 'Sum', 'Avg']]
+# print(df.columns)
+# print(df)
+
+# Second Attempt
+df2[['Amount', 'Sum', 'Avg']] = df.groupby(['Employee', 'Shop', 'Type'], as_index=True).agg(
+    {'Sum': ['size', 'sum', 'mean']})
+df = df2.reset_index()
 print(df)
