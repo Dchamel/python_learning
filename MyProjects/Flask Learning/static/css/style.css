@@ -1,5 +1,5 @@
 html, body {
-    font-family: 'Arial';
+    font-family: 'Arial', serif;
     margin: 0;
     padding: 0;
     height: 100%;
@@ -62,10 +62,20 @@ div.content {
     margin: 10px 0 10px 0;
 }
 
-.form-contact input[type=submit], texture {
+.form-contact input[type=submit], textarea {
     font-size: 16px;
 }
 
 .flash {
     padding: 10px;
+}
+
+.flash.success {
+    border: 1px solid #21DB56;
+    background: #AEFFC5;
+}
+
+.flash.error {
+    border: 1px solid #FF4343;
+    background: #FF9C9C;
 }

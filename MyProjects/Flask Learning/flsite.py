@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, request, flash, url_for
 
 app = Flask(__name__)
 
@@ -9,18 +9,33 @@ menu = [{"name": "Установка", "url": "install-flask"},
 
 @app.route("/")
 def index():
-    print(url_for('index'))
     return render_template('index.html', menu=menu)
 
 
 @app.route("/about")
 def about():
-    print(url_for('about'))
-    return render_template('about.html', title="О сайте", menu=menu)
+    return render_template('about.html', title="About", menu=menu)
 
 
-with app.test_request_context():
-    print(url_for('index'))
+@app.route("/profile/<int:username>")
+def profile(username):
+    return f"Пользователь: {username}"
+
+
+@app.route("/contact", methods=["POST", "GET"])
+def contact():
+    app.config['SECRET_KEY'] = 'sdfghwfghwsfghwsrthwarth'
+    if request.method == 'POST':
+        if len(request.form['username']) > 2:
+            flash('Сообщение отправлено')
+        else:
+            flash('Ошибка отправки')
+        print(request.form)
+    return render_template('contact.html', title="Feedback", menu=menu)
+
+
+# with app.test_request_context():
+#     print(url_for('index'))
 
 if __name__ == "__main__":
     app.run(debug=True)
