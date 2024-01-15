@@ -1,4 +1,5 @@
 import asyncio
+import json
 from time import perf_counter
 from aiohttp import ClientSession
 
@@ -8,11 +9,18 @@ t1 = perf_counter()
 async def get_weather(city):
     async with ClientSession() as session:
         url = f'http://api.openweathermap.org/data/2.5/weather'
-        params = {'q': city, 'APPID': '2a4ff86f9aaa70041ec8e82db64abf56'}
+        params = {
+            'q': city,
+            'APPID': '2a4ff86f9aaa70041ec8e82db64abf56',
+            'units': 'metric'
+        }
 
         async with session.get(url=url, params=params) as response:
             weather_json = await response.json()
-            print(f'{city}: {weather_json["weather"][0]["main"]}')
+            # {weather_json["weather"][0]["main"]}
+            print(f'{city}: {weather_json["weather"][0]["main"]}({weather_json["weather"][0]["description"]})')
+            print(f'Temperature: {weather_json["main"]["temp"]} Feels Like: ({weather_json["main"]["feels_like"]})')
+            print(json.dumps(weather_json, indent=4))
 
 
 async def main(cities_):
@@ -24,8 +32,8 @@ async def main(cities_):
         await task
 
 
-cities = ['Samara', 'Pskov', 'Moscow', 'St. Petersburg', 'Szczecin']
-
+# cities = ['Samara', 'Pskov', 'Moscow', 'St. Petersburg', 'Szczecin']
+cities = ['Samara']
 asyncio.run(main(cities))
 
 t2 = perf_counter()
