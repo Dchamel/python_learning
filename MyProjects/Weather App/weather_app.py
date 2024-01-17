@@ -17,10 +17,10 @@ async def get_weather(city):
 
         async with session.get(url=url, params=params) as response:
             weather_json = await response.json()
-            # {weather_json["weather"][0]["main"]}
             print(f'{city}: {weather_json["weather"][0]["main"]}({weather_json["weather"][0]["description"]})')
-            print(f'Temperature: {weather_json["main"]["temp"]} Feels Like: ({weather_json["main"]["feels_like"]})')
-            print(json.dumps(weather_json, indent=4))
+            print(
+                f'Temperature: {weather_json["main"]["temp"]:.1f}\N{DEGREE SIGN}c Feels Like: {weather_json["main"]["feels_like"]:.1f}\N{DEGREE SIGN}c\n')
+            # print(json.dumps(weather_json, indent=4))
 
 
 async def main(cities_):
@@ -32,8 +32,8 @@ async def main(cities_):
         await task
 
 
-# cities = ['Samara', 'Pskov', 'Moscow', 'St. Petersburg', 'Szczecin']
-cities = ['Samara']
+cities = ['Samara', 'Pskov', 'Moscow', 'St. Petersburg', 'Szczecin']
+# cities = ['Samara']
 asyncio.run(main(cities))
 
 t2 = perf_counter()
