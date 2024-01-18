@@ -1,5 +1,4 @@
 import asyncio
-import json
 from time import perf_counter
 from aiohttp import ClientSession
 
@@ -20,7 +19,6 @@ async def get_weather(city):
             print(f'{city}: {weather_json["weather"][0]["main"]}({weather_json["weather"][0]["description"]})')
             print(
                 f'Temperature: {weather_json["main"]["temp"]:.1f}\N{DEGREE SIGN}c Feels Like: {weather_json["main"]["feels_like"]:.1f}\N{DEGREE SIGN}c\n')
-            # print(json.dumps(weather_json, indent=4))
 
 
 async def main(cities_):
@@ -33,7 +31,6 @@ async def main(cities_):
 
 
 cities = ['Samara', 'Pskov', 'Moscow', 'St. Petersburg', 'Szczecin']
-# cities = ['Samara']
 asyncio.run(main(cities))
 
 t2 = perf_counter()
