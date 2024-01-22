@@ -1,9 +1,15 @@
 import asyncio
 import json
+import os
+from dotenv import load_dotenv
 from time import perf_counter
 from aiohttp import ClientSession, web
 
 t1 = perf_counter()
+
+load_dotenv()
+yapi_key = os.environ['YANDEX_API_KEY']
+print(yapi_key)
 
 
 async def get_weather(city):
@@ -23,13 +29,31 @@ async def get_weather(city):
                 city_weather = [city_main, city_temp]
                 return city_weather
             except KeyError:
-                'No data'
+                return 'No data'
             # print(json.dumps(weather_json, indent=4))
+
+
+async def get_translation(text, source, target):
+    async with ClientSession() as session:
+        url = 'https://libretranslate.com/translate'
+
+        data = {'q': text, 'source': source, 'target': target, 'format': 'text'}
+
+        async with session.post(url, json=data) as response:
+            translate_json = await response.json()
+
+            try:
+                return translate_json['translatedText']
+            except KeyError:
+                return text
 
 
 async def handle(request):
     city = request.rel_url.query['city']
-    result = await get_weather(city)
+    weather_en = await get_weather(city)
+    weather_ru = await get_translation(weather_en, 'en', 'ru')
+    weather_json = json.dumps(weather_ru, ensure_ascii=False)
+    result = web.Response(text=weather_json)
     return result
 
 
