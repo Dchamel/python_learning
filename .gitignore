@@ -1,0 +1,6 @@
+/venv/
+.idea/
+/AdventOfCode/2022/inputs/
+/MyProjects/VK Parser/auth_keys.py
+/MyProjects/VK Parser/wall_dumps/
+/Leetcode/tmp.html
