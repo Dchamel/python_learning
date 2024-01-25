@@ -33,6 +33,8 @@ async def get_weather(city):
             # print(json.dumps(weather_json, indent=4))
 
 
+# Not workong.
+# Still try to find new
 async def get_translation(text, source, target):
     async with ClientSession() as session:
         url = 'https://libretranslate.com/translate'
