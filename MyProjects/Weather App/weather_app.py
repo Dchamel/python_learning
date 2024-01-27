@@ -8,7 +8,7 @@ from aiohttp import ClientSession, web
 t1 = perf_counter()
 
 load_dotenv()
-yapi_key = os.environ['YANDEX_API_KEY']
+yapi_key = os.environ['']
 print(yapi_key)
 
 
@@ -33,7 +33,7 @@ async def get_weather(city):
             # print(json.dumps(weather_json, indent=4))
 
 
-# Not workong.
+# Not working.
 # Still try to find new
 async def get_translation(text, source, target):
     async with ClientSession() as session:
