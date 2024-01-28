@@ -5,11 +5,15 @@ from dotenv import load_dotenv
 from time import perf_counter
 from aiohttp import ClientSession, web
 
+from googletrans import Translator
+
 t1 = perf_counter()
 
 load_dotenv()
-yapi_key = os.environ['']
-print(yapi_key)
+yapi_key = os.environ['GOOGLE_API_KEY']
+
+
+# print(yapi_key)
 
 
 async def get_weather(city):
