@@ -41,6 +41,14 @@ async def get_weather(city):
 # Still try to find new
 async def get_translation(text, source, target):
     async with ClientSession() as session:
+
+        translator = Translator()
+        text = 'Hello World !'
+        main = 'en'
+        dest = 'ru'
+        translated_text = translator.translate(text, src=main, dest=dest).text
+        print(translated_text)
+
         url = 'https://libretranslate.com/translate'
 
         data = {'q': text, 'source': source, 'target': target, 'format': 'text'}
