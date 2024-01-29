@@ -16,7 +16,7 @@ yapi_key = os.environ['GOOGLE_API_KEY']
 # print(yapi_key)
 
 
-async def get_weather(city):
+async def get_weather(city: str) -> list:
     async with ClientSession() as session:
         url = f'http://api.openweathermap.org/data/2.5/weather'
         params = {
@@ -37,8 +37,7 @@ async def get_weather(city):
             # print(json.dumps(weather_json, indent=4))
 
 
-# Not working.
-# Still try to find new
+# Finally make it works but only with googletrans==3.1.0a0
 async def get_translation(text, source, target):
     async with ClientSession() as session:
 
@@ -48,10 +47,6 @@ async def get_translation(text, source, target):
         dest = 'ru'
         translated_text = translator.translate(text, src=main, dest=dest).text
         print(translated_text)
-
-        url = 'https://libretranslate.com/translate'
-
-        data = {'q': text, 'source': source, 'target': target, 'format': 'text'}
 
         async with session.post(url, json=data) as response:
             translate_json = await response.json()
