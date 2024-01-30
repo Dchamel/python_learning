@@ -1,19 +1,22 @@
 import asyncio
-import json
-import os
-from dotenv import load_dotenv
+# import json
+# import os
+# from dotenv import load_dotenv
 from time import perf_counter
 from aiohttp import ClientSession, web
+from aiologger.loggers.json import JsonLogger
 
 from googletrans import Translator
 
 t1 = perf_counter()
 
-load_dotenv()
-yapi_key = os.environ['GOOGLE_API_KEY']
+# load_dotenv()
+# yapi_key = os.environ['GOOGLE_API_KEY']
 
-
-# print(yapi_key)
+logger = JsonLogger.with_default_handlers(
+    level='DEBUG',
+    serializer_kwargs={'ensure_ascii': False},
+)
 
 
 async def get_weather(city: str) -> list:
@@ -38,31 +41,24 @@ async def get_weather(city: str) -> list:
 
 
 # Finally make it works but only with googletrans==3.1.0a0
-async def get_translation(text, source, target):
-    async with ClientSession() as session:
+def get_translation(text, main='en', dest='ru'):
+    translator = Translator()
+    try:
+        translated_list = translator.translate(text, src=main, dest=dest)
+        translated_text = '\n'.join([i.text for i in translated_list])
+    except KeyError:
+        logger.error(f"Can't translate: {text}")
+        return text
 
-        translator = Translator()
-        text = 'Hello World !'
-        main = 'en'
-        dest = 'ru'
-        translated_text = translator.translate(text, src=main, dest=dest).text
-        print(translated_text)
-
-        async with session.post(url, json=data) as response:
-            translate_json = await response.json()
-
-            try:
-                return translate_json['translatedText']
-            except KeyError:
-                return text
+    return translated_text
 
 
 async def handle(request):
     city = request.rel_url.query['city']
     weather_en = await get_weather(city)
-    weather_ru = await get_translation(weather_en, 'en', 'ru')
-    weather_json = json.dumps(weather_ru, ensure_ascii=False)
-    result = web.Response(text=weather_json)
+    weather_ru = get_translation(weather_en, 'en', 'ru')
+    # weather_json = json.dumps(weather_ru, ensure_ascii=False)
+    result = web.Response(text=weather_ru)
     return result
 
 
