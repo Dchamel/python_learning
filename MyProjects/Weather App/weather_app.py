@@ -83,14 +83,6 @@ async def main():
 if __name__ == '__main__':
     asyncio.run(main())
 
-    # tasks = []
-
-    # for city in cities_:
-    #     tasks.append(asyncio.create_task(get_weather(city)))
-    #
-    # for task in tasks:
-    #     await task
-
 # cities = ['Samara', 'Pskov', 'Moscow', 'St. Petersburg', 'Szczecin']
 # # cities = ['Samara']
 # asyncio.run(main(cities))
