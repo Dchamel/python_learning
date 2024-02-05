@@ -14,7 +14,7 @@ t1 = perf_counter()
 # yapi_key = os.environ['GOOGLE_API_KEY']
 
 
-async def get_weather(city: str) -> list:
+async def get_weather(city: str) -> list[str]:
     async with ClientSession() as session:
 
         url = f'http://api.openweathermap.org/data/2.5/weather'
@@ -37,7 +37,7 @@ async def get_weather(city: str) -> list:
 
 
 # Finally make it works but only with googletrans==3.1.0a0
-async def get_translation(text, main='en', dest='ru'):
+async def get_translation(text: list[str], main='en', dest='ru') -> list[str]:
     translator = Translator()
     try:
         translated_list = translator.translate(text, src=main, dest=dest)
