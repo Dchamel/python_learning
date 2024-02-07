@@ -4,6 +4,8 @@ import asyncio
 # from dotenv import load_dotenv
 from time import perf_counter
 from aiohttp import ClientSession, web
+import logging
+from aiohttp.abc import AbstractAccessLogger
 
 from googletrans import Translator
 
@@ -12,6 +14,14 @@ t1 = perf_counter()
 
 # load_dotenv()
 # yapi_key = os.environ['GOOGLE_API_KEY']
+
+class CustomAccessLogger(AbstractAccessLogger):
+
+    def log(self, request, response, time: float) -> None:
+        self.logger.info(f'{request.remote}\n'
+                         f'{request.method}\n'
+                         f'{request.path}\n'
+                         f'done in {time}s: {response.status}\n')
 
 
 async def get_weather(city: str) -> list:
@@ -59,8 +69,9 @@ async def handle(request):
 
 async def main():
     app = web.Application()
+    logging.basicConfig(level=logging.INFO)
     app.add_routes([web.get('/weather', handle)])
-    runner = web.AppRunner(app)
+    runner = web.AppRunner(app, access_log=CustomAccessLogger)
     await runner.setup()
     site = web.TCPSite(runner, 'localhost', 8000)
     await site.start()
