@@ -1,7 +1,4 @@
 import asyncio
-# import json
-# import os
-# from dotenv import load_dotenv
 from time import perf_counter
 from aiohttp import ClientSession, web
 import logging
@@ -48,7 +45,6 @@ async def get_weather(city: str) -> list[str]:
             except KeyError:
                 logger.info('Translator output - No data')
                 return 'No data'
-            # print(json.dumps(weather_json, indent=4))
 
 
 # Finally make it works but only with googletrans==3.1.0a0
@@ -67,7 +63,6 @@ async def handle(request):
     city = request.rel_url.query['city']
     weather_en = await get_weather(city)
     weather_ru = await get_translation(weather_en, 'en', 'ru')
-    # weather_json = json.dumps(weather_ru, ensure_ascii=False)
     result = web.Response(text=weather_ru)
     return result
 
