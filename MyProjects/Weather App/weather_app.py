@@ -32,28 +32,31 @@ async def get_weather(city: str) -> list[str]:
             'APPID': '2a4ff86f9aaa70041ec8e82db64abf56',
             'units': 'metric'
         }
-
+        logger.info('Send request to the weather Server')
         async with session.get(url=url, params=params) as response:
-            logger.info('Send request to translator')
+
             weather_json = await response.json()
             try:
                 city_main = f'{city}: {weather_json["weather"][0]["main"]}({weather_json["weather"][0]["description"]})'
                 city_temp = f'Temperature: {weather_json["main"]["temp"]:.1f}\N{DEGREE SIGN}c Feels Like: {weather_json["main"]["feels_like"]:.1f}\N{DEGREE SIGN}c\n'
                 city_weather = [city_main, city_temp]
-                logger.info('Data has been translated')
+                logger.info('Data has been received')
                 return city_weather
             except KeyError:
-                logger.info('Translator output - No data')
+                logger.info('No data')
                 return 'No data'
 
 
 # Finally make it works but only with googletrans==3.1.0a0
 async def get_translation(text: list[str], main='en', dest='ru') -> list[str]:
+    logger.info('Start translation')
     translator = Translator()
     try:
         translated_list = translator.translate(text, src=main, dest=dest)
         translated_text = '\n'.join([i.text for i in translated_list])
+        logger.info('Translation finished successfully')
     except KeyError:
+        logger.info('No translation')
         return text
 
     return translated_text
@@ -76,7 +79,7 @@ async def main():
     await runner.setup()
     site = web.TCPSite(runner, 'localhost', 8000)
     await site.start()
-
+    logger.info('Server started')
     while True:
         await asyncio.sleep(3000)
 
