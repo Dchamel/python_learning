@@ -14,13 +14,13 @@ logger = logging.getLogger('WeatherLog')
 # load_dotenv()
 # yapi_key = os.environ['GOOGLE_API_KEY']
 
-# class AccessLogger(AbstractAccessLogger):
-#
-#     def log(self, request, response, time: float) -> None:
-#         self.logger.info(f'{request.remote}\n'
-#                          f'{request.method}\n'
-#                          f'{request.path}\n'
-#                          f'done in {time}s: {response.status}\n')
+class AccessLogger(AbstractAccessLogger):
+
+    def log(self, request, response, time: float) -> None:
+        self.logger.info(f'{request.remote}\t'
+                         f'{request.method}'
+                         f'{request.path}\t'
+                         f'-- done in {time:.2f}s: {response.status}\n')
 
 
 async def get_weather(city: str) -> list[str]:
@@ -74,8 +74,9 @@ async def main():
     app = web.Application()
     logging.basicConfig(level=logging.INFO,
                         format='%(asctime)s %(name)-14s %(levelname)s: %(message)s')
+
     app.add_routes([web.get('/weather', handle)])
-    runner = web.AppRunner(app)
+    runner = web.AppRunner(app, access_log_class=AccessLogger)
     await runner.setup()
     site = web.TCPSite(runner, 'localhost', 8000)
     await site.start()
