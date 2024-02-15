@@ -94,3 +94,5 @@ if __name__ == '__main__':
 
 t2 = perf_counter()
 print(f'Working time: {t2 - t1:.5f} sec')
+
+print(1)
