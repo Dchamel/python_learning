@@ -1,9 +1,7 @@
-import asyncio
+import asyncio, logging, aiosqlite
 from time import perf_counter
 from aiohttp import ClientSession, web
-import logging
 from aiohttp.abc import AbstractAccessLogger
-
 from googletrans import Translator
 
 t1 = perf_counter()
@@ -21,6 +19,12 @@ class AccessLogger(AbstractAccessLogger):
                          f'{request.method}'
                          f'{request.path}\t'
                          f'-- done in {time:.2f}s: {response.status}\n')
+
+
+async def create_table():
+    async with aiosqlite.connect('weather.db') as db:
+        await db.execute('CREATE TABLE IF NOT EXIST requests'
+                         '(date, city text, weather text)')
 
 
 async def get_weather(city: str) -> list[str]:
@@ -93,6 +97,6 @@ if __name__ == '__main__':
 # asyncio.run(main(cities))
 
 t2 = perf_counter()
-print(f'Working time: {t2 - t1:.5f} sec')
+print(f'Working time: {t2 - t1:.2f} sec')
 
 print(1)
