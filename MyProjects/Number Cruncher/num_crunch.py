@@ -1,4 +1,4 @@
-import asyncio, time
+import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from time import perf_counter
 
