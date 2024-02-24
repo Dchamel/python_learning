@@ -13,6 +13,9 @@ logger = logging.getLogger('WeatherLog')
 app_storage = {}
 
 
+# Изменения
+
+
 # load_dotenv()
 # yapi_key = os.environ['GOOGLE_API_KEY']
 
