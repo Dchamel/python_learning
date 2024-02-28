@@ -2,6 +2,7 @@ from time import perf_counter
 
 t1 = perf_counter()
 
+
 # 20 recursion tasks
 # task 1 - factorial
 # def recurs_factor(n: int) -> int:
@@ -66,23 +67,21 @@ t1 = perf_counter()
 # print(recurs_factor4([1, 2, 3, 4]))
 # print(recurs_factor4([1, 2, 3, 4, 5]))
 
-# task 5 - Summ odd from a list
-# def recurs_factor4(n: list[int]) -> int:
-#     for i in n:
-#         if i % 2 != 0:
-#             n.remove(i)
-#             if len(n) >= 1:
-#                 return i + recurs_factor4(n)
-#             else:
-#                 return i
-#         else:
-#             n.remove(i)
-#             if len(n) >= 1:
-#                 return -i + recurs_factor4(n)
-#             else:
-#                 return -i
-#
-#
+# task 5 - palindrome
+def recurs_factor5(n: str) -> bool:
+    """Takes string and return True if str is a Palindrome"""
+    if n[0] == n[-1]:
+        n = n[1:-1]
+    else:
+        return False
+    if len(n) in [0, 1]:
+        return True
+
+    return recurs_factor5(n)
+
+
+print(recurs_factor5('aabcbaa'))
+
 # print(recurs_factor4([1, 2, 3, 4]))
 # print(recurs_factor4([1, 2, 3, 4, 5]))
 
