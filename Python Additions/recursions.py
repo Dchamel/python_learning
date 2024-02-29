@@ -68,23 +68,43 @@ t1 = perf_counter()
 # print(recurs_factor4([1, 2, 3, 4, 5]))
 
 # task 5 - palindrome
-def recurs_factor5(n: str) -> bool:
-    """Takes string and return True if str is a Palindrome"""
-    if n[0] == n[-1]:
-        n = n[1:-1]
+# def recurs_factor5(n: str) -> bool:
+#     """Takes string and return True if str is a Palindrome"""
+#     if n[0] == n[-1]:
+#         n = n[1:-1]
+#     else:
+#         return False
+#     if len(n) in [0, 1]:
+#         return True
+#
+#     return recurs_factor5(n)
+#
+#
+# print(recurs_factor5('aabcbaa'))
+
+# task 6 - palindrome without whitespaces
+def recurs_factor6(n: str) -> bool:
+    """Takes palindrome str with whitespaces and return True if str is a Palindrome"""
+    if n[0] != ' ':
+        if n[-1] != ' ':
+            if n[0] == n[-1]:
+                n = n[1:-1]
+            else:
+                return False
+            if len(n) in [0, 1]:
+                return True
+        else:
+            n = n[:-1]
+
+        return recurs_factor6(n)
     else:
-        return False
-    if len(n) in [0, 1]:
-        return True
-
-    return recurs_factor5(n)
+        n = n[1:]
+        return recurs_factor6(n)
 
 
-print(recurs_factor5('aabcbaa'))
-
-# print(recurs_factor4([1, 2, 3, 4]))
-# print(recurs_factor4([1, 2, 3, 4, 5]))
-
+print(recurs_factor6('ab     a'))
+print(recurs_factor6('a a  ba'))
+print(recurs_factor6('a z a a'))
 
 t2 = perf_counter()
 print(f'Working time: {t2 - t1:.2f}')
