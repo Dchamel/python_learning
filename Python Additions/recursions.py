@@ -83,28 +83,50 @@ t1 = perf_counter()
 # print(recurs_factor5('aabcbaa'))
 
 # task 6 - palindrome without whitespaces
-def recurs_factor6(n: str) -> bool:
-    """Takes palindrome str with whitespaces and return True if str is a Palindrome"""
-    if n[0] != ' ':
-        if n[-1] != ' ':
-            if n[0] == n[-1]:
-                n = n[1:-1]
-            else:
-                return False
-            if len(n) in [0, 1]:
-                return True
-        else:
-            n = n[:-1]
+# def recurs_factor6(n: str) -> bool:
+#     """Takes palindrome str with whitespaces and return True if str is a Palindrome"""
+#     if n[0] != ' ':
+#         if n[-1] != ' ':
+#             if n[0] == n[-1]:
+#                 n = n[1:-1]
+#             else:
+#                 return False
+#             if len(n) in [0, 1]:
+#                 return True
+#         else:
+#             n = n[:-1]
+#
+#         return recurs_factor6(n)
+#     else:
+#         return recurs_factor6(n[1:])
+#
+#
+# print(recurs_factor6('ab     a'))
+# print(recurs_factor6('a a  ba'))
+# print(recurs_factor6('a z a a'))
 
-        return recurs_factor6(n)
-    else:
-        n = n[1:]
-        return recurs_factor6(n)
+
+# task 7 - del vowels from a string
+# def recurs_factor7(n: str) -> str:
+#     """Takes a str, deleting all vowels from it and return this string without vowels"""
+#     VOWELS = ['a', 'e', 'i', 'o', 'u']
+#     for letter in n:
+#         if letter in VOWELS:
+#             return recurs_factor7(n.replace(letter, ''))
+#     return n
+#
+#
+# print(recurs_factor7('apple'))
+# print(recurs_factor7('pineapple'))
 
 
-print(recurs_factor6('ab     a'))
-print(recurs_factor6('a a  ba'))
-print(recurs_factor6('a z a a'))
+# task 8 - double letters
+def recurs_factor8(n: str) -> str:
+    """Takes a str, doubles each letter in it and return this new str"""
+
+
+print(recurs_factor8('apple'))
+print(recurs_factor8('peach'))
 
 t2 = perf_counter()
 print(f'Working time: {t2 - t1:.2f}')
