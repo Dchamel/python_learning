@@ -1,6 +1,7 @@
 from time import perf_counter
 
 t1 = perf_counter()
+# ------BOF------
 
 
 # 20 recursion tasks
@@ -120,13 +121,59 @@ t1 = perf_counter()
 # print(recurs_factor7('pineapple'))
 
 
-# task 8 - double letters
-def recurs_factor8(n: str) -> str:
-    """Takes a str, doubles each letter in it and return this new str"""
+# task 8 - double letters ------------------- UNFINISHED
+# def recurs_factor8(n: str) -> str:
+#     """Takes a str, doubles each letter in it and return this new str"""
+#
+#
+# print(recurs_factor8('apple'))
+# print(recurs_factor8('peach'))
+
+# task 8.1 from Ann ^_^
+# Merge all elements in one string by Recursion
+# list_data = ['a', ['b', 'c', 'd'], ['e', 'f', ['g', ['j', 'k']]]]
+# final_str = ''
+#
+#
+# def recurs_81(list_data: list[str, [list]]) -> str:
+#     """
+#     Recursion. Takes list of lists or strings, get all
+#     string elements from it and merge it to one string
+#     Use Global final_str: str --- !!!!
+#     """
+#     global final_str
+#     for each in list_data:
+#         if type(each) == str:
+#             final_str += each
+#         else:
+#             recurs_81(each)
+#     return final_str
+#
+#
+# recurs_81(list_data)
+# print(final_str)
 
 
-print(recurs_factor8('apple'))
-print(recurs_factor8('peach'))
+# task 8.2 from Ann ^_^
+# Square all elements of the list
+list_data = [1, [2, 7, 8], [3, 4], [5, [6, 7]]]
 
+
+def recurs_82(list_data: list[int | list]) -> list[int | list]:
+    """
+    Recursion. Takes elements of the list one by one and Square them.
+    """
+    for i, each in enumerate(list_data):
+        if type(each) == int:
+            list_data[i] = list_data[i] ** 2
+        else:
+            recurs_82(each)
+
+    return list_data
+
+
+print(recurs_82(list_data))
+
+# ------EOF------
 t2 = perf_counter()
 print(f'Working time: {t2 - t1:.2f}')
