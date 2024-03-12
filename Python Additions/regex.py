@@ -27,8 +27,14 @@ print(re.findall(f'^\w+', 'AV is largest Analytics community of India'))
 # last word in a string
 print(re.findall(f'\w+$', 'AV is largest Analytics community of India'))
 s = 'По всем вопросам пишите на vasiliy-pupkin@gmail.com, или на secondemail@yandex.ru, отвечу сразу. Или пишите моему ассистенту secretary@gmail.com!'
-emails = re.findall(r'', s)
-print(emails)
+# emails = re.findall(r'', s)
+# print(emails)
 
 print(re.findall(r'\s*(\w*(\w)\2\w*)\s*', 'a aa aaa abab bbbb')[2][0])
 print(re.findall(r'(\d{2})', '12:59:59'))
+
+date_list1 = re.findall(r'(\d{2})(\:\d{2}\:)(\d{2})', '12:59:59 12:50:12 09:45:09')
+list2 = [''.join(i) for i in date_list1 if i[0] == i[2]]
+print(list2)
+
+print(re.findall(r'(\w+)[$@]{1,}(\w+)', 'aaa$@bbb aaa$@$@bbb aaa$@$@$@bbb'))
