@@ -29,9 +29,9 @@ def about():
     return render_template('about.html')
 
 
-@app.route('/user/<string:name>/<int:id>')
-def user(name: str, id: int) -> str:
-    return f'User page: {name} - {id}'
+@app.route('/create-article')
+def create_article():
+    return render_template('create-article.html')
 
 
 if __name__ == '__main__':
