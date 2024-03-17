@@ -38,3 +38,6 @@ list2 = [''.join(i) for i in date_list1 if i[0] == i[2]]
 print(list2)
 
 print(re.findall(r'(\w+)[$@]{1,}(\w+)', 'aaa$@bbb aaa$@$@bbb aaa$@$@$@bbb'))
+print(re.search(r'(?P<karman1>\w+)[$@]{1,}(\w+)', 'aaa$@bbb aaa$@$@bbb aaa$@$@$@bbb'))
+match = re.search(r'(?P<karman1>\w+)[$@]{1,}(\w+)', 'aaa$@bbb aaa$@$@bbb aaa$@$@$@bbb')
+print(match.group('karman1'))
