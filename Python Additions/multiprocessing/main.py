@@ -7,7 +7,7 @@ import multiprocessing
 width = 800
 height = 600
 img_mode = 'RGB'
-img_quantity = 10
+img_quantity = 1000
 
 
 def create_img(filename, img_mode: str, size=(width, height)) -> None:
@@ -57,10 +57,9 @@ if __name__ == '__main__':
         if not os.path.exists('images/thumbs'):
             os.makedirs('images/thumbs')
             print(all_files)
-            for file in all_files:
-                process_list = [multiprocessing.Process(
-                    target=create_thmb, args=[file]
-                )]
+            process_list = [multiprocessing.Process(
+                target=create_thmb, args=[file]
+            ) for file in all_files]
             # start and wait all processes
             for process in process_list:
                 process.start()
