@@ -1,4 +1,5 @@
 import os
+import platform
 from time import perf_counter
 from PIL import Image, ImageFilter, ImageDraw, ImageFont
 import multiprocessing
@@ -7,7 +8,7 @@ import multiprocessing
 width = 800
 height = 600
 img_mode = 'RGB'
-img_quantity = 1000
+img_quantity = 1
 
 
 def create_img(filename, img_mode: str, size=(width, height)) -> None:
@@ -18,7 +19,10 @@ def create_img(filename, img_mode: str, size=(width, height)) -> None:
     img = Image.new(mode=img_mode, size=size, color='white')
     idraw = ImageDraw.Draw(img)
     idraw.rectangle((width / 2 - 60, height / 2 - 60, width / 2 + 120, height / 2 + 120), fill='red')
-    font = ImageFont.truetype('arial.ttf', size=22)
+    if platform.system() == 'Linux':
+        font = ImageFont.truetype('DejaVuSans.ttf', size=22)
+    else:
+        font = ImageFont.truetype('arial.ttf', size=22)
     idraw.text((width / 2, height / 2), f'{filename}', font=font)
     # img.show() Open Each image after creation
     print(f'Image {os.path.basename(filename)} has been created. \n')
