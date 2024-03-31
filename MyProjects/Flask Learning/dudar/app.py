@@ -20,17 +20,29 @@ class Article(db.Model):
 
 @app.route('/')
 @app.route('/home')
-def index():
+def index() -> None:
     return render_template('index.html')
 
 
 @app.route('/about')
-def about():
+def about() -> None:
     return render_template('about.html')
 
 
+@app.route('/posts')
+def posts() -> None:
+    articles = Article.query.order_by(Article.date.desc()).all()
+    return render_template('posts.html', articles=articles)
+
+
+@app.route('/posts/<int:id>')
+def post(id: int) -> None:
+    article = Article.query.get(id)
+    return render_template('post_detail.html', article=article)
+
+
 @app.route('/create-article', methods=['POST', 'GET'])
-def create_article():
+def create_article() -> None:
     if request.method == 'POST':
         title = request.form['title']
         intro = request.form['intro']

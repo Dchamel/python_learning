@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+All Articles
+{% endblock %}
+
+{% block body %}
+<h1>All Articles</h1>
+{% for article in articles %}
+<div class="alert alert-info">
+    <h2>{{ article.title }}</h2>
+    <p>{{ article.intro }}</p>
+    <p><b>Date: {{ article.date.date() }}</b></p>
+    <a href="/posts/{{ article.id }}" class="btn btn-warning">Read more</a>
+</div>
+{% endfor %}
+{% endblock %}
