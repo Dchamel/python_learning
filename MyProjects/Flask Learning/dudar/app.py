@@ -2,6 +2,8 @@ from flask import Flask, render_template, url_for, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
+from werkzeug import Response
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///daduda.db'
 db = SQLAlchemy(app)
@@ -41,6 +43,17 @@ def post(id: int) -> None:
     return render_template('post_detail.html', article=article)
 
 
+@app.route('/posts/<int:id>/del')
+def post_delete(id: int) -> None:
+    article = Article.query.get_or_404(id)
+    try:
+        db.session.delete(article)
+        db.session.commit()
+        return redirect('/posts')
+    except:
+        return 'Failure deleting article from the DB'
+
+
 @app.route('/create-article', methods=['POST', 'GET'])
 def create_article() -> None:
     if request.method == 'POST':
@@ -62,6 +75,25 @@ def create_article() -> None:
 
     else:
         return render_template('create-article.html')
+
+
+@app.route('/posts/<int:id>/update', methods=['POST', 'GET'])
+def post_update(id) -> Response | str:
+    article = Article.query.get(id)
+    if request.method == 'POST':
+        article.title = request.form['title']
+        article.intro = request.form['intro']
+        article.text = request.form['text']
+
+        try:
+            db.session.commit()
+            return redirect('/posts')
+        except:
+            return 'Failure refreshing article`s data'
+
+    else:
+
+        return render_template('post_update.html', article=article)
 
 
 if __name__ == '__main__':

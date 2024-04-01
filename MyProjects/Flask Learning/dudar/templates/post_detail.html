@@ -9,5 +9,7 @@ Article - {{ article.title }}
 <div class="alert alert-info">
     <p>{{ article.text }}</p>
     <p><b>Date: {{ article.date.date() }}</b></p>
+    <a href="/posts/{{ article.id }}/del" class="btn btn-danger">Delete</a>
+    <a href="/posts/{{ article.id }}/update" class="btn btn-success">Edit</a>
 </div>
 {% endblock %}
