@@ -54,7 +54,7 @@ if __name__ == '__main__':
 
     services = (
         # service('ipify', 'https://api.ipify.org?format=json', 'ip'),
-        service('ip-api', 'http://ip-api.com/json', 'query')
+        service('ip-api', 'http://ip-api.com/json', 'query'),
     )
     ioloop = asyncio.get_event_loop()
     ioloop.run_until_complete(asynchronous())
