@@ -153,9 +153,11 @@
 import asyncio
 from asyncio import Semaphore
 from time import perf_counter
+# for types
+from typing import Callable
 
 
-def working_time(func):
+def working_time(func: Callable) -> Callable:
     async def wrapper():
         t1 = perf_counter()
         wr_fun = await func()
