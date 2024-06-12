@@ -78,7 +78,7 @@ def create_article() -> None:
 
 
 @app.route('/posts/<int:id>/update', methods=['POST', 'GET'])
-def post_update(id) -> Response | str:
+def post_update(id):
     article = Article.query.get(id)
     if request.method == 'POST':
         article.title = request.form['title']
