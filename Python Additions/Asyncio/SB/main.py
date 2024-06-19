@@ -149,37 +149,66 @@
 #     asyncio.run(main())
 
 # Working with Semaphore
-# --------------------------------------------------------------------------------
-import asyncio
-from asyncio import Semaphore
-from time import perf_counter
-# for types
-from typing import Callable
-
-
-def working_time(func: Callable) -> Callable:
-    async def wrapper():
-        t1 = perf_counter()
-        wr_fun = await func()
-        t2 = perf_counter()
-        print(f'Working time: {t2 - t1:.2f} seconds')
-        return wr_fun
-
-    return wrapper
-
-
-async def delay(delay_seconds: int) -> int:
-    print(f"Delaying {delay_seconds}")
-    await asyncio.sleep(delay_seconds)
-    print('continue after "call_later"')
-    print(f"Delayed {delay_seconds}")
-    return delay_seconds
-
-
-@working_time
-async def main() -> None:
-    pass
-
-
-if __name__ == '__main__':
-    asyncio.run(main())
+# # --------------------------------------------------------------------------------
+# import asyncio
+# from asyncio import Semaphore
+# from time import perf_counter
+# # for types
+# from typing import Callable
+#
+#
+# def working_time(func: Callable) -> Callable:
+#     async def wrapper():
+#         t1 = perf_counter()
+#         wr_fun = await func()
+#         t2 = perf_counter()
+#         print(f'Working time: {t2 - t1:.2f} seconds')
+#         return wr_fun
+#
+#     return wrapper
+#
+#
+# async def delay(delay_seconds: int) -> int:
+#     print(f"Delaying {delay_seconds}")
+#     await asyncio.sleep(delay_seconds)
+#     print('continue after "call_later"')
+#     print(f"Delayed {delay_seconds}")
+#     return delay_seconds
+#
+#
+# @working_time
+# async def main() -> None:
+#     pass
+#
+#
+# if __name__ == '__main__':
+#     asyncio.run(main())
+# Asyncio Running Err code without lock
+# # --------------------------------------------------------------------------------
+# import asyncio
+# from asyncio import Lock
+#
+# counter: int = 0
+#
+#
+# async def increment(lock: Lock) -> None:
+#     global counter
+#     async with lock:
+#         temp_count = counter
+#         temp_count = temp_count + 1
+#         await asyncio.sleep(0.01)
+#         counter = temp_count
+#
+#
+# async def main() -> None:
+#     global counter
+#     lock = Lock()
+#     for _ in range(1000):
+#         tasks = [asyncio.create_task(increment(lock)) for _ in range(100)]
+#         await asyncio.gather(*tasks)
+#         print(f"{counter} tasks completed")
+#         assert counter == 100
+#         counter = 0
+#
+#
+# asyncio.run(main())
