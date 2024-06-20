@@ -212,3 +212,40 @@
 #
 #
 # asyncio.run(main())
+# Subprocess
+# # --------------------------------------------------------------------------------
+# import asyncio
+# import locale
+# from asyncio.subprocess import Process
+#
+#
+# async def main():
+#     process: Process = await asyncio.create_subprocess_exec('cmd', 'dir')
+#     print(f'Process ID: {process.pid}')
+#     status_code = await process.wait()
+#     print(f'Process status code: {status_code}')
+#
+#
+# if __name__ == '__main__':
+#     asyncio.run(main())
+
+# # --------------------------------------------------------------------------------
+import asyncio, aiohttp
+from aiohttp import ClientSession
+
+
+async def fetch_status(session: ClientSession, url: str) -> int:
+    async with session.get(url) as result:
+        return result.status
+
+
+async def main():
+    async with aiohttp.ClientSession() as session:
+        urls = ['http://python.org' for _ in range(1000)]
+        requests = [fetch_status(session, url) for url in urls]
+        status_codes = await asyncio.gather(*requests)
+        print(status_codes)
+
+
+if __name__ == '__main__':
+    asyncio.run(main())
