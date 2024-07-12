@@ -43,3 +43,19 @@
 
 # --------------------------------------------------------------------------
 # Алгоритмы поиска
+
+# --------------------------------------------------------------------------
+# Алгоритмы сортировки
+
+def selection_sort(array) -> list:
+    for i, item1 in enumerate(array):
+        for j, item2 in enumerate(array):
+            if array[i] > item2:
+                array[i], array[j] = array[j], array[i]
+
+    return array
+
+
+arr = [21, 11, 45, 5, 76, 34, 18, 77]
+
+print(selection_sort(arr))
