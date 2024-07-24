@@ -14,13 +14,48 @@ def working_time_prec(prec=2):
 
     return working_time
 
-# Here i only notice that we have this algorithms
-def linear_regression ():
+
+# Here I only notice that we have this algorithms
+# Изучить. Проверить сочетание со скользящими средними и как это использовать для предсказаний.
+def linear_regression():
     pass
+
+
+def logistic_regression():
+    pass
+
+
+def decision_tree():
+    pass
+
+
+def random_forest():
+    pass
+
+
+def knn_classifier():
+    """
+    Алгоритм k-ближайших соседей. Алгоритм классификации и регрессииб
+    использует информацию о ближайших соседях для принятия решений.
+    """
+    pass
+
+
+def svm_classifier():
+    """
+    Support Vector Machines (SVM)
+
+    """
+    pass
+
+
+def naive_bayes_classifier():
+    pass
+
 
 @working_time_prec()
 def main():
-
+    pass
 
 
 if __name__ == '__main__':
