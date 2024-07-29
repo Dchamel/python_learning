@@ -1,7 +1,10 @@
 from abc import ABC, abstractmethod
 
 
-# Strategy Pattern from SB
+# Behavioral Patterns from SB
+
+
+# Pattern Strategy
 class Strategy(ABC):
     """Abstract base class for Strategies."""
 
@@ -45,6 +48,4 @@ class Courier:
         """Calculate effective path"""
         return self._strategy.calc_effective_path(data)
 
-# -----------------------------------------------------------------
-
-# Strategy Pattern from Internet
+# Pattern Observer
