@@ -100,3 +100,81 @@ from pip._internal.resolution.resolvelib import factory
 # if __name__ == '__main__':
 #     some_business_logic(TeaFactory())
 #     some_business_logic(CoffeeFactory())
+
+# Pattern Builder
+
+# class AbstractBuilder(ABC):
+#     """Abstract Builder Class"""
+#
+#     @abstractmethod
+#     def product(self):
+#         pass
+#
+#     @abstractmethod
+#     def build_part_1(self):
+#         pass
+#
+#     @abstractmethod
+#     def build_part_2(self):
+#         pass
+#
+#     @abstractmethod
+#     def build_part_3(self):
+#         pass
+#
+#
+# class HouseBuilder(AbstractBuilder):
+#     """House Builder Class"""
+#
+#     def __init__(self):
+#         self.reset()
+#
+#     def reset(self):
+#         self._house = House()
+#
+#     @property
+#     def product(self):
+#         """Get instance of object"""
+#         house = self._house
+#         self.reset()
+#         return house
+#
+#     def build_part_1(self):
+#         self._house.add('Walls')
+#
+#     def build_part_2(self):
+#         self._house.add('Roof')
+#
+#     def build_part_3(self):
+#         self._house.add('Flat')
+#
+#
+# class House():
+#     def __init__(self):
+#         self.parts = []
+#
+#     def add(self, part):
+#         self.parts.append(part)
+#
+#     def list_parts(self):
+#         print(self.parts)
+#
+#
+# class Director:
+#     """Director Class that manage building stages"""
+#
+#     def __init__(self):
+#         self._builder = None
+#
+#     @property
+#     def builder(self):
+#         return self._builder
+#
+#     @builder.setter
+#     def builder(self, builder):
+#         self._builder = builder
+#
+#     def build_product(self):
+#         self.builder.build_part_1()
+#         self.builder.build_part_2()
+#         self.builder.build_part_3()
