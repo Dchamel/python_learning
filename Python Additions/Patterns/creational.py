@@ -1,7 +1,8 @@
 from __future__ import annotations
-from abc import ABC, abstractmethod, abstractproperty
+from abc import ABC, abstractmethod, abstractproperty, ABCMeta
 
 from pip._internal.resolution.resolvelib import factory
+
 
 # Creational Patterns from SB
 
@@ -178,3 +179,45 @@ from pip._internal.resolution.resolvelib import factory
 #         self.builder.build_part_1()
 #         self.builder.build_part_2()
 #         self.builder.build_part_3()
+
+# Pattern Factory
+
+class Worker(metaclass=ABCMeta):
+    @abstractmethod
+    def who_i_am(self):
+        pass
+
+
+class SimpleWorker(Worker):
+    def who_i_am(self):
+        print('I am a worker')
+
+
+class Developer(Worker):
+    def who_i_am(self):
+        print('I am a developer')
+
+
+class DevOpsMan(Worker):
+    def who_i_am(self):
+        print('I am a DevOpsMan')
+
+
+class WorkersFactory:
+    registred_workers = {
+        None: SimpleWorker,
+        'developer': Developer,
+        'dev_ops': DevOpsMan
+    }
+
+    @classmethod
+    def create_worker(cls, worker_type=None):
+        worker_cls = cls.registred_workers[worker_type]
+        return worker_cls()
+
+
+if __name__ == '__main__':
+    w1 = WorkersFactory.create_worker()
+    w1.who_i_am()
+    w2 = WorkersFactory.create_worker('dev_ops')
+    w2.who_i_am()
