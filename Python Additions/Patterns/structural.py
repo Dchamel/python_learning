@@ -1,6 +1,8 @@
 import time
 
 
+# Pattern Decorator
+
 # def func_time_decorator(function):
 #     def wrapper(*args, **kwargs):
 #         start = time.time()
@@ -11,6 +13,7 @@ import time
 #
 #     return wrapper
 
+# Pattern Facade
 class FileAdapterFacade:
     """Facade for accessing files that hides system where file is located."""
 
