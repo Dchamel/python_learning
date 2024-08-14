@@ -1,4 +1,5 @@
 import time, requests
+from abc import ABC, abstractmethod
 
 # Pattern Decorator
 
@@ -47,46 +48,116 @@ import time, requests
 
 # Pattern Adapter
 
-CORRELATION_ID = 'correlation_id'
+# CORRELATION_ID = 'correlation_id'
+#
+#
+# class HttpRequests:
+#     def __init__(self, url):
+#         self.url = url
+#
+#     def request(self, obj):
+#         try:
+#             if CORRELATION_ID not in obj.headers.keys():
+#                 raise AttributeError
+#             else:
+#                 response = requests.get(self.url, params=obj.params, headers=obj.headers)
+#         except AttributeError:
+#             print("not correlation_id in headers")
+#
+#
+# class OldClass:
+#     def __init__(self, headers, params):
+#         self.headers = headers
+#         self.params = params
+#
+#
+# class OldClassHttpRequestAdapter:
+#     def __init__(self, obj):
+#         self.obj = obj
+#
+#     @property
+#     def headers(self):
+#         if CORRELATION_ID not in self.obj.headers.keys():
+#             self.obj.headers[CORRELATION_ID] = '1232-1112-3333'
+#         return self.obj.headers
+#
+#     @property
+#     def params(self):
+#         return self.obj.params
+#
+#
+# http_requests = HttpRequests('htpps://github.com')
+# old_class_obj = OldClass({'test': '111'}, {'params1': 'value1'})
+# adapter_obj = OldClassHttpRequestAdapter(old_class_obj)
+# http_requests.request(old_class_obj)
+# http_requests.request(adapter_obj)
 
+# Pattern Composite
 
-class HttpRequests:
-    def __init__(self, url):
-        self.url = url
+# class GUIAbstractComponent(ABC):
+#     """
+#     Base class for all GUI components
+#     """
+#
+#     @property
+#     def parent(self):
+#         return self._parent
+#
+#     @parent.setter
+#     def parent(self, parent):
+#         self._parent = parent
+#
+#     def add(self, component):
+#         pass
+#
+#     def remove(self, component):
+#         pass
+#
+#     @abstractmethod
+#     def action(self):
+#         return 'Button'
+#
+#
+# class Button(GUIAbstractComponent):
+#     """Have no nested components"""
+#
+#     def action(self):
+#         return 'Button'
+#
+#
+# class EditBox(GUIAbstractComponent):
+#     def action(self):
+#         return 'Leaf'
+#
+#
+# class Window(GUIAbstractComponent):
+#     """Container for simple objects"""
+#
+#     def __init__(self):
+#         self._children = []
+#
+#     def add(self, component):
+#         self._children.append(component)
+#         component.parent = self
+#
+#     def remove(self, component):
+#         self._children.remove(component)
+#         component.parent = None
+#
+#     def is_composite(self):
+#         return True
+#
+#     def action(self):
+#         """Container passageway trough children and run their actions"""
+#         results = []
+#         for child in self._children:
+#             results.append(child.action())
+#         return f'Branch({'+'.join(results)}'
+#
+#
+# if __name__ == '__main__':
+#     window = Window()
+#     window.add(Button())
+#     branch1.add(EditBox())
 
-    def request(self, obj):
-        try:
-            if CORRELATION_ID not in obj.headers.keys():
-                raise AttributeError
-            else:
-                response = requests.get(self.url, params=obj.params, headers=obj.headers)
-        except AttributeError:
-            print("not correlation_id in headers")
-
-
-class OldClass:
-    def __init__(self, headers, params):
-        self.headers = headers
-        self.params = params
-
-
-class OldClassHttpRequestAdapter:
-    def __init__(self, obj):
-        self.obj = obj
-
-    @property
-    def headers(self):
-        if CORRELATION_ID not in self.obj.headers.keys():
-            self.obj.headers[CORRELATION_ID] = '1232-1112-3333'
-        return self.obj.headers
-
-    @property
-    def params(self):
-        return self.obj.params
-
-
-http_requests = HttpRequests('htpps://github.com')
-old_class_obj = OldClass({'test': '111'}, {'params1': 'value1'})
-adapter_obj = OldClassHttpRequestAdapter(old_class_obj)
-http_requests.request(old_class_obj)
-http_requests.request(adapter_obj)
+# Pattern Proxy
