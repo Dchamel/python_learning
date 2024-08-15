@@ -1,6 +1,7 @@
 import time, requests
 from abc import ABC, abstractmethod
 
+
 # Pattern Decorator
 
 # def func_time_decorator(function):
@@ -161,3 +162,21 @@ from abc import ABC, abstractmethod
 #     branch1.add(EditBox())
 
 # Pattern Proxy
+
+class LocalWeb():
+    def request(self):
+        print('request to localweb')
+
+
+class Proxy(LocalWeb):
+    """Child from a lib class"""
+
+    def __init__(self, local_web):
+        self._local_web = local_web
+
+    def request(self):
+        if self.check_access():
+            self._local_web.request()
+
+    def check_access(self) -> bool:
+        return True
