@@ -99,23 +99,47 @@
 # poped_element = heapq.heappop(a)
 # print(poped_element)
 # #
-# # # -----------------------------
+# # -----------------------------
 
 # copy
 # For light and deep copy of object
 
-import copy
+# import copy
 
-data = {1: 5, 2: 6, 3: 7, 4: 8, 5: {10: 11}}
-new_data = copy.copy(data)
-data[7] = 99
-data[8] = 101
-data[5][10] = 111
-print(data)
-print(new_data)
-
-new_data_deep = copy.deepcopy(data)
-data[5][10] = 112
-print(new_data_deep)
+# data = {1: 5, 2: 6, 3: 7, 4: 8, 5: {10: 11}}
+# new_data = copy.copy(data)
+# data[7] = 99
+# data[8] = 101
+# data[5][10] = 111
+# print(data)
+# print(new_data)
 #
-# # -----------------------------
+# new_data_deep = copy.deepcopy(data)
+# data[5][10] = 112
+# print(new_data_deep)
+#
+# -----------------------------
+
+# queue
+# Implements queues with some
+
+# Regular Queue FIFO (First In - First Out)
+from queue import Queue, LifoQueue
+
+q = Queue()
+for i in range(10):
+    q.put(i)
+
+while not q.empty():
+    print(q.get(), end=' ')
+
+print('')
+
+# Queue LIFO (Last In - First Out)
+q = LifoQueue()
+for i in range(10):
+    q.put(i)
+while not q.empty():
+    print(q.get(), end=' ')
+
+# -----------------------------
