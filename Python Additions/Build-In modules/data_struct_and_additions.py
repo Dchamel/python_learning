@@ -120,26 +120,15 @@
 #
 # -----------------------------
 
-# queue
-# Implements queues with some
+# collections
+# Containers for handy work with data
 
-# Regular Queue FIFO (First In - First Out)
-from queue import Queue, LifoQueue
+import collections
 
-q = Queue()
-for i in range(10):
-    q.put(i)
+first = {'two': 22, 'three': 33, 'four': 44}
+last = {'one': 1, 'two': 2, 'three': 3, 'four': 4}
 
-while not q.empty():
-    print(q.get(), end=' ')
-
-print('')
-
-# Queue LIFO (Last In - First Out)
-q = LifoQueue()
-for i in range(10):
-    q.put(i)
-while not q.empty():
-    print(q.get(), end=' ')
+d = collections.ChainMap(first, last)
+print(d)
 
 # -----------------------------
