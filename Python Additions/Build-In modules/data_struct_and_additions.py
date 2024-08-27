@@ -132,29 +132,50 @@
 # print(d)
 #
 # # -----------------------------
+#
+# # itertools
+# # Itertools creates iterators and works fast with sufficient use of memory
+#
+# import itertools
+#
+# lst = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+# for list_obj in itertools.repeat(lst, 2):
+#     for i in list_obj:
+#         print(i)
+#
+# l1 = list(itertools.accumulate(range(10)))
+# print(l1)
+#
+# lst = ['foo', 'bar', ['baz', 'qux']]
+# new_lst = list(itertools.chain(lst, range(5)))
+# print(new_lst)
+#
+# vehicles = [('Ford', 'Taurus'), ('Dodge', 'Business'), ('Ford', 'F150'), ('Chevrolet', 'Cobalt')]
+# for key, group in itertools.groupby(vehicles, key=lambda x: x[0]):
+#     print(key, list(group))
+#
+# l2 = list(itertools.combinations('WXYZ', 2))
+# print(l2)
+#
+# # -----------------------------
 
-# itertools
-# Itertools creates iterators and works fast with sufficient use of memory
+# traceback
+# Traceback interface for extraction and formatting and print stack of programs
+# Mimics the behavior of the Python interpreter
 
-import itertools
+import traceback
 
-lst = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-for list_obj in itertools.repeat(lst, 2):
-    for i in list_obj:
-        print(i)
 
-l1 = list(itertools.accumulate(range(10)))
-print(l1)
+def another_function():
+    lumberstack()
 
-lst = ['foo', 'bar', ['baz', 'qux']]
-new_lst = list(itertools.chain(lst, range(5)))
-print(new_lst)
 
-vehicles = [('Ford', 'Taurus'), ('Dodge', 'Business'), ('Ford', 'F150'), ('Chevrolet', 'Cobalt')]
-for key, group in itertools.groupby(vehicles, key=lambda x: x[0]):
-    print(key, list(group))
+def lumberstack():
+    traceback.print_stack()
+    print(repr(traceback.extract_stack()))
+    print(repr(traceback.format_stack()))
 
-l2 = list(itertools.combinations('WXYZ', 2))
-print(l2)
+
+another_function()
 
 # -----------------------------
