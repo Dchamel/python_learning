@@ -120,15 +120,41 @@
 #
 # -----------------------------
 
-# collections
-# Containers for handy work with data
+# # collections
+# # Containers for handy work with data
+#
+# import collections
+#
+# first = {'two': 22, 'three': 33, 'four': 44}
+# last = {'one': 1, 'two': 2, 'three': 3, 'four': 4}
+#
+# d = collections.ChainMap(first, last)
+# print(d)
+#
+# # -----------------------------
 
-import collections
+# itertools
+# Itertools creates iterators and works fast with sufficient use of memory
 
-first = {'two': 22, 'three': 33, 'four': 44}
-last = {'one': 1, 'two': 2, 'three': 3, 'four': 4}
+import itertools
 
-d = collections.ChainMap(first, last)
-print(d)
+lst = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+for list_obj in itertools.repeat(lst, 2):
+    for i in list_obj:
+        print(i)
+
+l1 = list(itertools.accumulate(range(10)))
+print(l1)
+
+lst = ['foo', 'bar', ['baz', 'qux']]
+new_lst = list(itertools.chain(lst, range(5)))
+print(new_lst)
+
+vehicles = [('Ford', 'Taurus'), ('Dodge', 'Business'), ('Ford', 'F150'), ('Chevrolet', 'Cobalt')]
+for key, group in itertools.groupby(vehicles, key=lambda x: x[0]):
+    print(key, list(group))
+
+l2 = list(itertools.combinations('WXYZ', 2))
+print(l2)
 
 # -----------------------------
