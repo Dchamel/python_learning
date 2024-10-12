@@ -1,6 +1,6 @@
 <div align="center"><h1>Repository Structure</h1></div>
 
-[AdventOfCode](AdventOfCode)
+<div align="center"><h3>[AdventOfCode](AdventOfCode)</h3></div>
 
 
 [Leetcode](Leetcode)
