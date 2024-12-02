@@ -26,18 +26,18 @@ def basics() -> None:
     n1 = np.array([1, 2, 3])  # Массив из списка
     n2 = np.zeros(3)  # Массив нулей
     n3 = np.ones(3)  # Массив единиц
-    n4 = np.empty(3)  # Массив произвольных данных
+    n4 = np.empty([3, 2], dtype=int)  # Массив произвольных данных
     n5 = np.arange(3)  # Массив из диапазона чисел
     n6 = np.arange(0, 12, 3)  # Массив из диапазона чисел
     n7 = np.linspace(0, 21, 8)  # Массив интервалов
 
     print(f'n1 shape: {n1}', f'n2 shape: {n2}', f'n3 shape: {n3}', f'n4 shape: {n4}', f'n5 shape: {n5}',
           f'n6 shape: {n6}', f'n7 shape: {n7}', sep='\n')
-    print(f'type(n1) shape: {type(n1)}', f'dtype: {n6.dtype}', f'size: {n6.size}', f'nbytes: {n6.nbytes}',
+    print(f'type(n1) shape: {type(n1)}', f'dtype(n6): {n6.dtype}', f'size: {n6.size}', f'nbytes: {n6.nbytes}',
           f'ndim: {n6.ndim}', f'shape: {n6.shape}', sep='\n')
 
-    n8 = np.arange(21).reshape(3, 7)
-    print(n8)
+    n8 = np.arange(32).reshape(4, 8)
+    print(n8, n8.ndim, n8.shape, sep='\n')
 
 
 @working_time_prec()
