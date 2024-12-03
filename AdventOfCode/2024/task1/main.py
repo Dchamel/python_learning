@@ -14,7 +14,7 @@ def read_data_line(path_to_input_file: str) -> str:
         print(f'File open error: {err}')
 
 
-def data_preparation(path_to_input_file: str) -> tuple:
+def data_preparation(path_to_input_file: str) -> tuple[list, list]:
     """Takes line from a file trough Generator function and returns two sorted lists"""
 
     left_list, right_list = [], []
@@ -40,12 +40,26 @@ def calculate_distance(sorted_datalists: tuple) -> int:
     return distance
 
 
+def calculate_similarity(sorted_datalists: tuple[list, list]) -> int:
+    """
+    Calculates similarity between left and right lists
+    Element from left list multiplies on count of it from right list and sums result of this operation
+    """
+
+    left_list, right_list = sorted_datalists
+    similarity = 0
+    for element in left_list:
+        similarity += right_list.count(element) * element
+
+    return similarity
+
+
 @working_time_prec(8)
 def main() -> None:
     """Func for run other funcs"""
 
     print(calculate_distance(data_preparation(INPUT_FILE)))
-
+    print(calculate_similarity(data_preparation(INPUT_FILE)))
     pass
 
 
