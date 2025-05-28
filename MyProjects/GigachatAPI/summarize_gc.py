@@ -5,6 +5,7 @@ from langchain.chains.summarize import load_summarize_chain
 from langchain_community.chat_models import GigaChat
 from langchain.document_loaders import TextLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+# from gigachat import GigaChat
 from dotenv import load_dotenv
 import os, requests, uuid, base64
 
@@ -38,9 +39,10 @@ ACCESS_TOKEN = get_access_token(AUTH)
 
 GIGA = GigaChat(
     credentials=AUTH,
-    model='GigaChat-Pro',
+    # model='GigaChat-Pro',
     verify_ssl_certs=False,
-    # profanity_check=False
+    # profanity_check=False,
+    scope="GIGACHAT_API_PERS"
 )
 
 
@@ -82,9 +84,31 @@ def del_file_by_id(access_token: str, id: str) -> bool:
     return response.json().get('deleted')
 
 
+def processing_by_gc(file_id: str):
+    """Summarize book or other txt by Gigachat"""
+
+    result = GIGA.chat(
+        {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "Напиши краткое содержание книги объёмом в 1000 символов",
+                    "attachments": [file_id],
+                }
+            ],
+            "temperature": 0.1
+        }
+    )
+
+    print(result.choices[0].message.content)
+
+
 def main():
     # load file to GC
     file_id_4_processing = put_file_to_gigachat('input/Толстой Лев. Война и мир. Книга 1 - royallib.ru.txt')
+
+    # process txt by GC
+    processing_by_gc(file_id_4_processing)
 
     # get all files from GC
     all_gc_files = get_file_list(ACCESS_TOKEN)
