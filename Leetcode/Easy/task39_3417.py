@@ -17,8 +17,11 @@ from typing import List
 
 class Solution:
     def zigzagTraversal(self, grid: List[List[int]]) -> List[int]:
-        """Zigzag Traversal"""
-
+        """
+        Zigzag Traversal
+        We can do it by two alg: one_by_one+1 and alg even_odd
+        """
+        # even_odd alg
         for i, line in enumerate(grid):
             if i % 2 != 0:
                 print(i)
