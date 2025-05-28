@@ -33,4 +33,4 @@ headers = {
 # chain.pem - path to mincifra root cert
 response = requests.request('POST', url, headers=headers, data=payload, verify='chain.pem')
 
-print(response.text)
+print(response.json().get('access_token'))
