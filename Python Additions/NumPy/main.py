@@ -1,50 +1,122 @@
+from MyProjects.MyModules.time_additional import working_time_prec
 import numpy as np
+import matplotlib.pyplot as plt
+from numpy import poly1d
 
-from time import perf_counter
+
+def basic_funcs_from_book():
+    """Just some basic functions from the Book"""
+
+    np.array([1, 2, 3])  # Массив из списка
+    np.zeros(3)  # Массив нулей
+    np.ones(3)  # Массив единиц
+    np.empty(3)  # Массив произвольных данных
+    np.arange(3)  # Массив из диапазона чисел
+    np.arange(0, 12, 3)  # Массив из диапазона чисел
+    np.linspace(0, 21, 7)  # Массив интервалов
 
 
-def working_time_prec(prec: int = 2):
-    """Function for calculating working time of the methood in seconds"""
+def basic_funcs_from_array():
+    """Array functions from the book"""
 
-    def working_time(func):
-        def wrapper(*args, **kargs):
-            t1 = perf_counter()
-            res = func(*args, **kargs)
-            t2 = perf_counter()
-            print(f'Working time: {t2 - t1:.{prec}f} sec, func: {func.__name__}')
-            return res
+    arr = np.arange(20)
+    print(arr)
+    print(arr.dtype)
+    print(arr.size)
+    print(arr.nbytes)
+    print(arr.shape)
+    print(arr.ndim)
+    print(type(arr))
 
-        return wrapper
 
-    return working_time
+def basic_funcs_of_create_array():
+    """Create array functions from the book"""
+
+    list_o_lists = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+    arr = np.array(list_o_lists)
+    print(arr)
+    print(arr.shape)
+    print(arr.ndim)
+    img = np.random.rand(2, 3, 3)
+    shape = img.shape
+    dtype = img.dtype
+    ndim = img.ndim
+    x = np.array([[[1, 2, 3]]])  # shape: (1, 1, 3)
+    x = x.squeeze()  # shape: (3,)
+    # x = x.squeeze(axis=0)  # shape: (1, 3)
+    arr = np.arange(20)
+    arr = arr.reshape(2, 2, -1)
+    print(arr)
+
+
+def using_zip_with_matplotlib():
+    """Using zip with matplotlib"""
+
+    categories = ['A', 'B', 'C', 'D']
+    values = [10, 25, 15, 30]
+    colors = ['red', 'blue', 'green', 'orange']
+
+    plt.bar(categories, values, color=colors)
+
+    # Добавим подписи значений над столбцами
+    for x, y, c in zip(categories, values, colors):
+        plt.text(x, y + 0.5, str(y), ha='center', color=c, weight='bold')
+
+    plt.show()
+
+
+def matrix_operations():
+    """Matrix operations"""
+
+    A1 = np.arange(9).reshape(3, 3)
+    # A1 = A1.T
+    A2 = np.ones(9).reshape(3, 3)
+    A12 = A1 @ A2
+    A121 = A1.dot(A2)
+
+
+def array_broadcasting():
+    """Array Broadcasting"""
+
+    darr = np.arange(9, dtype=np.int8)
+    print(darr)
+    darr = darr.reshape(3, -1)
+    print(darr)
+    darr_ones = np.ones((3, 3), dtype=np.int8)
+    print(darr_ones)
+    darr_summ = darr + darr_ones
+    print(darr_summ)
+    print(darr + 1)
+
+
+def numpy_math():
+    """Numpy Math"""
+
+    months = np.arange(1, 13)  # 1–12
+    volume = np.array([102, 105, 110, 112, 118, 125, 130, 138, 142, 150, 155, 160])
+
+    # Подбираем полином 2-й степени
+    coeffs = np.polyfit(months, volume, deg=2)
+    poly = np.poly1d(coeffs)
+
+    # Визуализация
+    plt.scatter(months, volume, label='Данные')
+    plt.plot(months, poly(months), color='red', label='Тренд (полином)')
+    plt.legend();
+    plt.show()
 
 
 @working_time_prec(6)
-def basics() -> None:
-    """Basic"""
+def main():
+    """Main class for NumPy calculations"""
 
-    n1 = np.array([1, 2, 3])  # Массив из списка
-    n2 = np.zeros(3)  # Массив нулей
-    n3 = np.ones(3)  # Массив единиц
-    n4 = np.empty([3, 2], dtype=int)  # Массив произвольных данных
-    n5 = np.arange(3)  # Массив из диапазона чисел
-    n6 = np.arange(0, 12, 3)  # Массив из диапазона чисел
-    n7 = np.linspace(0, 21, 8)  # Массив интервалов
-
-    print(f'n1 shape: {n1}', f'n2 shape: {n2}', f'n3 shape: {n3}', f'n4 shape: {n4}', f'n5 shape: {n5}',
-          f'n6 shape: {n6}', f'n7 shape: {n7}', sep='\n')
-    print(f'type(n1) shape: {type(n1)}', f'dtype(n6): {n6.dtype}', f'size: {n6.size}', f'nbytes: {n6.nbytes}',
-          f'ndim: {n6.ndim}', f'shape: {n6.shape}', sep='\n')
-
-    n8 = np.arange(32).reshape(4, 8)
-    print(n8, n8.ndim, n8.shape, sep='\n')
-
-
-@working_time_prec()
-def main() -> None:
-    """Function only for run other program funcs"""
-
-    basics()
+    # basic_funcs_from_book()
+    # basic_funcs_from_array()
+    # basic_funcs_of_create_array()
+    # using_zip_with_matplotlib()
+    # matrix_operations()
+    # array_broadcasting()
+    numpy_math()
 
 
 if __name__ == '__main__':
